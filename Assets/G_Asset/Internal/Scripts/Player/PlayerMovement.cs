@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 1f;
     private Animator animator;
+
+    private PlayerInteract playerInteract;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -18,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        playerInteract = GetComponent<PlayerInteract>();
     }
     public void Movement(Vector2 dir)
     {
@@ -29,19 +32,23 @@ public class PlayerMovement : MonoBehaviour
             if (dir.x > 0f)
             {
                 nextIdle_state = 3;
+                playerInteract.ChangePlayerToward(PlayerToward.Right);
             }
             else if (dir.x < 0f)
             {
                 nextIdle_state = 2;
+                playerInteract.ChangePlayerToward(PlayerToward.Left);
             }
 
             if (dir.y > 0f)
             {
                 nextIdle_state = 1;
+                playerInteract.ChangePlayerToward(PlayerToward.Top);
             }
             else if (dir.y < 0f)
             {
                 nextIdle_state = 0;
+                playerInteract.ChangePlayerToward(PlayerToward.Bottom);
             }
 
             animator.SetFloat("Horizontal", dir.x);

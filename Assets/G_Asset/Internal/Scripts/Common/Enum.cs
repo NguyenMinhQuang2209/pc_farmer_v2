@@ -9,7 +9,13 @@ public enum BuildingPositionName
     Bottom_Right,
     Bottom_Center
 }
-
+public enum PlayerToward
+{
+    Top,
+    Bottom,
+    Left,
+    Right
+}
 public enum ItemName
 {
 

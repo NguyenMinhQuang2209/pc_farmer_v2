@@ -21,11 +21,14 @@ public class InteractTarget : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         interactTarget = collision.gameObject.GetComponent<Interactible>();
-        InteractController.instance.Interactible(interactTarget);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         interactTarget = null;
-        InteractController.instance.Interactible(null);
+    }
+
+    public void Interact()
+    {
+
     }
 }

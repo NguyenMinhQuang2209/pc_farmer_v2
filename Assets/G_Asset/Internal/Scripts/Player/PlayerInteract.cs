@@ -4,28 +4,54 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    private Transform interactTarget;
+    private InteractTarget interactTarget;
     private PlayerInput playerInput;
+
+    [SerializeField] private Vector2 offset = new(0.45f, 0.45f);
+    private Vector2 interactOffset = Vector2.zero;
+
     private void Start()
     {
-        interactTarget = InteractController.instance.GetInteractTarget();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.TryGetComponent<InteractTarget>(out interactTarget))
+            {
+                break;
+            }
+        }
         playerInput = GetComponent<PlayerInput>();
+        interactOffset = new(0f, offset.y);
     }
     private void Update()
     {
-        Vector2 mousePostion = Input.mousePosition;
+        Vector2 targetPosition = new(transform.position.x + interactOffset.x, transform.position.y + interactOffset.y);
+        targetPosition.x = Mathf.Round(targetPosition.x / 0.16f) * 0.16f;
+        targetPosition.y = Mathf.Round(targetPosition.y / 0.16f) * 0.16f;
 
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePostion);
+        interactTarget.transform.position = targetPosition;
 
-        worldPosition.x = Mathf.Round(worldPosition.x / 0.16f) * 0.16f;
-        worldPosition.y = Mathf.Round(worldPosition.y / 0.16f) * 0.16f;
-
-        interactTarget.position = worldPosition;
-
-        if (playerInput.onFoot.Build.triggered)
+        if (playerInput.onFoot.Interact.triggered)
         {
-            InteractController.instance.Interact();
+            interactTarget.Interact();
         }
 
+    }
+    public void ChangePlayerToward(PlayerToward toward)
+    {
+        switch (toward)
+        {
+            case PlayerToward.Top:
+                interactOffset = new(0f, offset.y);
+                break;
+            case PlayerToward.Bottom:
+                interactOffset = new(0f, offset.y * -1f);
+                break;
+            case PlayerToward.Left:
+                interactOffset = new(offset.x * -1f, 0f);
+                break;
+            case PlayerToward.Right:
+                interactOffset = new(offset.x, 0f);
+                break;
+        }
     }
 }
