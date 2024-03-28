@@ -33,6 +33,11 @@ public class BuildingItem : MonoBehaviour
         gameObject.layer = buildMask;
         SetupCache();
 
+        if (TryGetComponent<Interactible>(out var interact))
+        {
+            interact.enabled = true;
+        }
+
         ReloadSpineMain();
     }
 

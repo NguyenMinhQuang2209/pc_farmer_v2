@@ -14,11 +14,9 @@ public class PlayerBuilding : MonoBehaviour
     private Dictionary<string, BuildingItem> building_item_poolings = new();
     private BuildingItem store_item = null;
 
-    [SerializeField] private BuildingItem testItem;
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        ChangeBuildingItem(testItem);
     }
     private void Update()
     {
@@ -63,6 +61,10 @@ public class PlayerBuilding : MonoBehaviour
             else
             {
                 BuildingItem tempItem = Instantiate(item, pos, Quaternion.Euler(rot));
+                if (tempItem.TryGetComponent<Interactible>(out var interactible))
+                {
+                    interactible.enabled = false;
+                }
                 building_item = tempItem;
                 building_item_poolings[name] = tempItem;
             }

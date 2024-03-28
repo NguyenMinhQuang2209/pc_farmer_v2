@@ -600,6 +600,7 @@ GameObject:
   - component: {fileID: 5721459342366326805}
   - component: {fileID: 2063046430732762187}
   - component: {fileID: -1484870868807889892}
+  - component: {fileID: -1487247474101575841}
   m_Layer: 0
   m_Name: plan_land
   m_TagString: Untagged
@@ -745,6 +746,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14752421, y: 0.14804399}
   m_EdgeRadius: 0
+--- !u!114 &-1487247474101575841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721459342366326806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1363914fe0bcd4bbc741503b6e5b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptMessage: Plant
 --- !u!1 &5721459342953033155
 GameObject:
   m_ObjectHideFlags: 0
