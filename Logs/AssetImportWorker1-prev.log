@@ -15,7 +15,7 @@ F:/Unity_Project/Editor/PC/Offline/2D/Famer v2
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-52055
+50452
 Successfully changed project path to: F:/Unity_Project/Editor/PC/Offline/2D/Famer v2
 F:/Unity_Project/Editor/PC/Offline/2D/Famer v2
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,12 +47,12 @@ F:/Unity_Project/Editor/PC/Offline/2D/Famer v2
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [16580] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 927363498 [EditorId] 927363498 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [15452] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 3696958224 [EditorId] 3696958224 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [16580] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 927363498 [EditorId] 927363498 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15452] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 3696958224 [EditorId] 3696958224 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
-Refreshing native plugins compatible for Editor in 103.16 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 103.18 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.33f1 (ee5a2aa03ab2)
 [Subsystems] Discovering subsystems at path E:/UnityEditor/2021.3.33f1/Editor/Data/Resources/UnitySubsystems
@@ -68,42 +68,42 @@ Initialize mono
 Mono path[0] = 'E:/UnityEditor/2021.3.33f1/Editor/Data/Managed'
 Mono path[1] = 'E:/UnityEditor/2021.3.33f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/UnityEditor/2021.3.33f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56248
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56620
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001584 seconds.
+Registered in 0.002017 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 242 ms
+Android Extension - Scanning For ADB Devices 204 ms
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 102.45 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 102.13 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.830 seconds
+- Completed reload, in  0.794 seconds
 Domain Reload Profiling:
-	ReloadAssembly (830ms)
-		BeginReloadAssembly (72ms)
+	ReloadAssembly (794ms)
+		BeginReloadAssembly (76ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (686ms)
-			LoadAssemblies (71ms)
+		EndReloadAssembly (647ms)
+			LoadAssemblies (75ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (95ms)
+			SetupTypeCache (90ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (23ms)
-			SetupLoadedEditorAssemblies (536ms)
+			SetupLoadedEditorAssemblies (502ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (317ms)
+				InitializePlatformSupportModulesInManaged (280ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (103ms)
+				RefreshPlugins (102ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (80ms)
+				ProcessInitializeOnLoadAttributes (83ms)
 				ProcessInitializeOnLoadMethodAttributes (35ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
@@ -111,54 +111,54 @@ Domain Reload Profiling:
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.003040 seconds.
+Registered in 0.003368 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 101.00 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 118.63 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Completed reload, in  1.497 seconds
+- Completed reload, in  1.656 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1498ms)
-		BeginReloadAssembly (98ms)
+	ReloadAssembly (1657ms)
+		BeginReloadAssembly (130ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (5ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (18ms)
-		EndReloadAssembly (1313ms)
-			LoadAssemblies (76ms)
+			CreateAndSetChildDomain (23ms)
+		EndReloadAssembly (1439ms)
+			LoadAssemblies (101ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (250ms)
+			SetupTypeCache (280ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (63ms)
-			SetupLoadedEditorAssemblies (901ms)
+			RebuildScriptCaches (67ms)
+			SetupLoadedEditorAssemblies (975ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (15ms)
+				InitializePlatformSupportModulesInManaged (20ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (101ms)
-				BeforeProcessingInitializeOnLoad (92ms)
-				ProcessInitializeOnLoadAttributes (613ms)
-				ProcessInitializeOnLoadMethodAttributes (78ms)
+				RefreshPlugins (119ms)
+				BeforeProcessingInitializeOnLoad (100ms)
+				ProcessInitializeOnLoadAttributes (645ms)
+				ProcessInitializeOnLoadMethodAttributes (89ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 0.99 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.07 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5838 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 57 unused Assets / (0.8 MB). Loaded Objects now: 6292.
-Memory consumption went from 234.3 MB to 233.5 MB.
-Total: 4.004300 ms (FindLiveObjects: 0.469800 ms CreateObjectMapping: 0.291600 ms MarkObjects: 2.937300 ms  DeleteObjects: 0.304400 ms)
+Unloading 5844 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 57 unused Assets / (0.8 MB). Loaded Objects now: 6299.
+Memory consumption went from 234.6 MB to 233.8 MB.
+Total: 3.649400 ms (FindLiveObjects: 0.477200 ms CreateObjectMapping: 0.280600 ms MarkObjects: 2.587100 ms  DeleteObjects: 0.303400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -173,67 +173,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 8123.202913 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png
-  artifactKey: Guid(31d3204774b5e3448a052f2fd7ee3f6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png using Guid(31d3204774b5e3448a052f2fd7ee3f6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b13a71fa4fed8d091155510d32bc0f4') in 0.104307 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Tools.png
-  artifactKey: Guid(b5b0662d31a1e554d8a7ea33beeab73e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Tools.png using Guid(b5b0662d31a1e554d8a7ea33beeab73e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dee410579745d32a6d80e329dbb7829a') in 0.020366 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000049 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Egg_And_Nest.png
-  artifactKey: Guid(85b6295be7bf0164a8377c19a1f304cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Characters/Egg_And_Nest.png using Guid(85b6295be7bf0164a8377c19a1f304cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47c183097c2b76f1bd9f39e8d29b7ba7') in 0.019985 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 1.786726 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png
-  artifactKey: Guid(e90e6a93a4182b24b856a6a1ab079226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png using Guid(e90e6a93a4182b24b856a6a1ab079226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e011cb86ad0eefbe23cc530911edb5ad') in 0.019836 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Simple_Milk_and_grass_item.png
-  artifactKey: Guid(6f5059c70385a0748b13df77f7ac4cd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Simple_Milk_and_grass_item.png using Guid(6f5059c70385a0748b13df77f7ac4cd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8d2aa76bf50c789540d49dbab196953') in 0.017605 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000073 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Wood_Bridge.png
-  artifactKey: Guid(7b6444bee81ad604db6fb051d35c1658) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Wood_Bridge.png using Guid(7b6444bee81ad604db6fb051d35c1658) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8919a490f48234d5fb5450844ae841ea') in 0.017524 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Chest.png
-  artifactKey: Guid(67e94f89c2dff1f45b563d99e0de0a45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Chest.png using Guid(67e94f89c2dff1f45b563d99e0de0a45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2100c0f8c0b3cb01973e3d44fd720d0') in 0.023678 seconds 
-Number of asset objects unloaded after import = 3
-========================================================================
-Received Import Request.
-  Time since last request: 0.000037 seconds.
-  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Paths.png
-  artifactKey: Guid(baa4ce80042f0dc41ab19898dc3871f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Number of updated assets reloaded before import = 0
-Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Paths.png using Guid(baa4ce80042f0dc41ab19898dc3871f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdc206a32f01735dd7e2ecd64be6239b') in 0.018779 seconds 
-Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
