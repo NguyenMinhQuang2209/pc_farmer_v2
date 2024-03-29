@@ -13,6 +13,13 @@ public class PlayerInput : MonoBehaviour
         onFoot = action.onFoot;
         playerMovement = GetComponent<PlayerMovement>();
     }
+    private void Update()
+    {
+        if (onFoot.UI.triggered)
+        {
+            InventoryController.instance.InteractWithInventory();
+        }
+    }
     private void FixedUpdate()
     {
         playerMovement.Movement(onFoot.Movement.ReadValue<Vector2>().normalized);

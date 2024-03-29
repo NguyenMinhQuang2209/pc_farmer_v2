@@ -7,6 +7,13 @@ public class InteractTarget : MonoBehaviour
 {
     private Interactible interactTarget;
     [SerializeField] private TextMeshProUGUI interactTxt;
+    private void Start()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
     private void Update()
     {
         if (interactTarget != null)
@@ -29,6 +36,9 @@ public class InteractTarget : MonoBehaviour
 
     public void Interact()
     {
-
+        if (interactTarget != null)
+        {
+            interactTarget.BaseInteract();
+        }
     }
 }
