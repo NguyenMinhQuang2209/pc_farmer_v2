@@ -35,4 +35,20 @@ public class Item
     {
         return itemName.ToString();
     }
+
+    public int Add(int value)
+    {
+        int next = currentQuantity + value;
+        if (next > maxQuantity)
+        {
+            currentQuantity = maxQuantity;
+            return next - maxQuantity;
+        }
+        currentQuantity = next;
+        return 0;
+    }
+    public void ChangeItemQuantity(int next)
+    {
+        currentQuantity = next;
+    }
 }

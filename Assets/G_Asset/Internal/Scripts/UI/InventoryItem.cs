@@ -13,16 +13,25 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     [SerializeField] private Image img;
     [SerializeField] private TextMeshProUGUI quantityTxt;
 
+    bool areDrag = false;
+
     private void Start()
     {
         rootParent = transform.parent;
+    }
+
+    private void Update()
+    {
+        if (item != null && !areDrag)
+        {
+            quantityTxt.text = item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
+        }
     }
 
     public void InventoryItemInit(Item item)
     {
         this.item = item;
         img.sprite = item.sprite;
-        quantityTxt.text = item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -33,6 +42,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         transform.SetAsLastSibling();
         quantityTxt.text = "";
         img.raycastTarget = false;
+        areDrag = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,9 +52,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        quantityTxt.text = item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
         img.raycastTarget = true;
         transform.SetParent(rootParent);
+        areDrag = false;
     }
 
     public string GetItemName()
@@ -54,5 +64,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             return item.itemName.ToString();
         }
         return null;
+    }
+    public Item GetItem()
+    {
+        return item;
     }
 }

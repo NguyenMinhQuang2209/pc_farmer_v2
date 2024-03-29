@@ -72,9 +72,15 @@ public class InventoryController : MonoBehaviour
             InventorySlot currentSlot = inventorySlotStores[i];
             if (currentSlot.ExistItem())
             {
-                if (item.GetItemName() == currentSlot.GetItemName())
+                Item currentItem = currentSlot.GetInventoryItem();
+                if (item.GetItemName() == currentItem.GetItemName())
                 {
-                    Debug.Log("Got item");
+                    int remain = currentItem.Add(item.GetCurrentQuantity());
+                    if (remain == 0)
+                    {
+                        return true;
+                    }
+                    item.ChangeItemQuantity(remain);
                 }
             }
             else

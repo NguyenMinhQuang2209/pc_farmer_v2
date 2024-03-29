@@ -22,17 +22,31 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         GameObject target = eventData.pointerDrag;
         if (target.TryGetComponent<InventoryItem>(out var item))
         {
-            if (container.transform.childCount == 0)
+            Item currentItem = GetInventoryItem();
+            Item nextItem = item.GetItem();
+            if (currentItem == null)
             {
                 item.rootParent = container;
             }
+            else
+            {
+                int remain = currentItem.Add(nextItem.GetCurrentQuantity());
+                if (remain == 0)
+                {
+                    Destroy(target);
+                }
+                else
+                {
+                    nextItem.ChangeItemQuantity(remain);
+                }
+            }
         }
     }
-    public string GetItemName()
+    public Item GetInventoryItem()
     {
         if (container.transform.childCount > 0 && container.transform.GetChild(0).gameObject.TryGetComponent<InventoryItem>(out var inventoryItem))
         {
-            return inventoryItem.GetItemName();
+            return inventoryItem.GetItem();
         }
         return null;
     }
@@ -49,4 +63,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         return container;
     }
+
+
 }
