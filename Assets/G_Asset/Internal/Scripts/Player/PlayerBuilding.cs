@@ -14,6 +14,7 @@ public class PlayerBuilding : MonoBehaviour
     private Dictionary<string, BuildingItem> building_item_poolings = new();
     private BuildingItem store_item = null;
 
+
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();

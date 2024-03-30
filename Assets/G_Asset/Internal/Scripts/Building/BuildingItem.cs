@@ -11,27 +11,40 @@ public class BuildingItem : MonoBehaviour
     public static string Down = "Down";
 
     [SerializeField] private List<Building_Position_Item> position_items = new();
+    [SerializeField] private List<Building_Position_Center_Item> center_positions_item = new();
     [SerializeField] private float raycastDistance = 0.12f;
 
     [SerializeField] private LayerMask checkMask;
-    [SerializeField] private int buildMask;
+    [SerializeField] private int buildMask = 7;
     [SerializeField] private LayerMask colliderMask;
 
     Dictionary<string, bool> raycastChecks = new();
     Dictionary<BuildingPositionName, GameObject> dic_positionItems = new();
+    Dictionary<BuildingCenterPositionName, Sprite> dic_centerpositionItems = new();
 
     bool canBuild = true;
+
+    SpriteRenderer spriteRender;
 
 
     private void Start()
     {
         SetupCache();
+        if (TryGetComponent<SpriteRenderer>(out spriteRender))
+        {
+
+        }
     }
 
     public void BuildingInit()
     {
         gameObject.layer = buildMask;
         SetupCache();
+
+        if (TryGetComponent<SpriteRenderer>(out spriteRender))
+        {
+
+        }
 
         if (TryGetComponent<Interactible>(out var interact))
         {
@@ -49,10 +62,22 @@ public class BuildingItem : MonoBehaviour
 
     public void SetupCache()
     {
-        for (int i = 0; i < position_items.Count; i++)
+        if (position_items != null && position_items.Count > 0)
         {
-            Building_Position_Item item = position_items[i];
-            dic_positionItems[item.name] = item.item;
+            for (int i = 0; i < position_items.Count; i++)
+            {
+                Building_Position_Item item = position_items[i];
+                dic_positionItems[item.name] = item.item;
+            }
+        }
+
+        if (center_positions_item != null && center_positions_item.Count > 0)
+        {
+            for (int i = 0; i < center_positions_item.Count; i++)
+            {
+                Building_Position_Center_Item item = center_positions_item[i];
+                dic_centerpositionItems[item.name] = item.sprite;
+            }
         }
     }
 
@@ -109,27 +134,98 @@ public class BuildingItem : MonoBehaviour
 
     public void CheckActivePosition()
     {
-        dic_positionItems[BuildingPositionName.Top_Left].SetActive(!raycastChecks[Top]);
-        dic_positionItems[BuildingPositionName.Top_Right].SetActive(!raycastChecks[Top]);
-        dic_positionItems[BuildingPositionName.Top_Center].SetActive(!raycastChecks[Top]);
-
-        dic_positionItems[BuildingPositionName.Bottom_Left].SetActive(!raycastChecks[Down]);
-        dic_positionItems[BuildingPositionName.Bottom_Center].SetActive(!raycastChecks[Down]);
-        dic_positionItems[BuildingPositionName.Bottom_Right].SetActive(!raycastChecks[Down]);
-
-        dic_positionItems[BuildingPositionName.Left_Center].SetActive(!raycastChecks[Left]);
-        dic_positionItems[BuildingPositionName.Right_Center].SetActive(!raycastChecks[Right]);
-
-        if (raycastChecks[Left])
+        if (position_items != null && position_items.Count > 0)
         {
-            dic_positionItems[BuildingPositionName.Top_Left].SetActive(false);
-            dic_positionItems[BuildingPositionName.Bottom_Left].SetActive(false);
+            dic_positionItems[BuildingPositionName.Top_Left].SetActive(!raycastChecks[Top]);
+            dic_positionItems[BuildingPositionName.Top_Right].SetActive(!raycastChecks[Top]);
+            dic_positionItems[BuildingPositionName.Top_Center].SetActive(!raycastChecks[Top]);
+
+            dic_positionItems[BuildingPositionName.Bottom_Left].SetActive(!raycastChecks[Down]);
+            dic_positionItems[BuildingPositionName.Bottom_Center].SetActive(!raycastChecks[Down]);
+            dic_positionItems[BuildingPositionName.Bottom_Right].SetActive(!raycastChecks[Down]);
+
+            dic_positionItems[BuildingPositionName.Left_Center].SetActive(!raycastChecks[Left]);
+            dic_positionItems[BuildingPositionName.Right_Center].SetActive(!raycastChecks[Right]);
+
+            if (raycastChecks[Left])
+            {
+                dic_positionItems[BuildingPositionName.Top_Left].SetActive(false);
+                dic_positionItems[BuildingPositionName.Bottom_Left].SetActive(false);
+            }
+
+            if (raycastChecks[Right])
+            {
+                dic_positionItems[BuildingPositionName.Top_Right].SetActive(false);
+                dic_positionItems[BuildingPositionName.Bottom_Right].SetActive(false);
+            }
         }
 
-        if (raycastChecks[Right])
+
+        if (center_positions_item != null && center_positions_item.Count > 0)
         {
-            dic_positionItems[BuildingPositionName.Top_Right].SetActive(false);
-            dic_positionItems[BuildingPositionName.Bottom_Right].SetActive(false);
+            int positionIndex = 0;
+
+            if (raycastChecks[Left])
+                positionIndex += 1;
+            if (raycastChecks[Right])
+                positionIndex += 2;
+            if (raycastChecks[Top])
+                positionIndex += 4;
+            if (raycastChecks[Down])
+                positionIndex += 8;
+
+            switch (positionIndex)
+            {
+                case 0:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Not_All];
+                    break;
+                case 1:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Left];
+                    break;
+                case 2:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Right];
+                    break;
+                case 3:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Left_Right];
+                    break;
+                case 4:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top];
+                    break;
+                case 5:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Left];
+                    break;
+                case 6:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Right];
+                    break;
+                case 7:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Left_Right];
+                    break;
+                case 8:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Bottom];
+                    break;
+                case 9:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Bottom_Left];
+                    break;
+                case 10:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Bottom_Right];
+                    break;
+                case 11:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Bottom_Left_Right];
+                    break;
+                case 12:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Bottom];
+                    break;
+                case 13:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Left_Bottom];
+                    break;
+                case 14:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.Top_Right_Bottom];
+                    break;
+                case 15:
+                    spriteRender.sprite = dic_centerpositionItems[BuildingCenterPositionName.All];
+                    break;
+            }
+
         }
     }
 
@@ -139,4 +235,10 @@ public class Building_Position_Item
 {
     public GameObject item;
     public BuildingPositionName name;
+}
+[System.Serializable]
+public class Building_Position_Center_Item
+{
+    public Sprite sprite;
+    public BuildingCenterPositionName name;
 }
