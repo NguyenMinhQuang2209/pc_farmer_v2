@@ -37,6 +37,8 @@ public class InventoryController : MonoBehaviour
 
     private Chest currentChest = null;
 
+    private List<InventoryItem> twoSideChestItems = new();
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -55,6 +57,11 @@ public class InventoryController : MonoBehaviour
         SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores);
         SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores);
         SpawnItem(currentChestSlot, maxChestSlot, cheskslot_container, false, chestSlotStores);
+
+        for (int i = 0; i < maxChestSlot; i++)
+        {
+            twoSideChestItems.Add(null);
+        }
 
         ui_container.SetActive(false);
         b_inventory.SetActive(false);
@@ -127,11 +134,18 @@ public class InventoryController : MonoBehaviour
         }
         if (currentChest != null)
         {
-            currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
+            if (currentChest.OneSideChest())
+            {
+                currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
+            }
+            else
+            {
+                StoringTwoSideChest(currentChest.GetCurrentSlot());
+            }
         }
         currentChest = current;
         slot = Mathf.Min(slot, maxSlot);
-        List<InventoryItem> listItems = currentChest.GetListItems();
+        List<InventoryItem> listItems = currentChest.OneSideChest() ? currentChest.GetListItems() : twoSideChestItems;
         for (int i = 0; i < maxSlot; i++)
         {
             InventorySlot currentSlot = stores[i];
@@ -162,5 +176,20 @@ public class InventoryController : MonoBehaviour
             list.Add(currentItem);
         }
         return list;
+    }
+
+    public void StoringTwoSideChest(int slot)
+    {
+        for (int i = 0; i < slot; i++)
+        {
+            InventorySlot current_slot = chestSlotStores[i];
+            InventoryItem currentItem = current_slot.GetInventory();
+            if (currentItem != null)
+            {
+                currentItem.transform.SetParent(trash_store.transform);
+                currentItem.gameObject.SetActive(false);
+            }
+            twoSideChestItems[i] = currentItem;
+        }
     }
 }
