@@ -7,6 +7,7 @@ public class Chest : Interactible
     private Animator animator;
     [SerializeField]
     private int currentSlot = 1;
+    private List<InventoryItem> items = new();
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -15,10 +16,11 @@ public class Chest : Interactible
     {
         animator.SetBool("Open", true);
         InteractController.instance.InteractItem(this);
-        InventoryController.instance.InteractWithChest(currentSlot);
+        InventoryController.instance.InteractWithChest(this, currentSlot);
     }
     public override void CancelInteract()
     {
         animator.SetBool("Open", false);
+        items = InventoryController.instance.GetChestListItem(currentSlot);
     }
 }

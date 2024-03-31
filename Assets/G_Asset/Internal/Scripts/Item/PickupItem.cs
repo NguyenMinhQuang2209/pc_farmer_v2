@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PickupItem : Interactible
 {
+    [SerializeField] private bool useThisSprite = false;
     [SerializeField] private Item item;
+    private void Start()
+    {
+        if (useThisSprite)
+        {
+            item.sprite = GetComponent<SpriteRenderer>().sprite;
+        }
+    }
 
     public override void Interact()
     {
@@ -12,6 +20,16 @@ public class PickupItem : Interactible
         if (canPickup)
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (useTrigger)
+        {
+            if (collision.gameObject.GetComponent<PlayerMovement>() != null)
+            {
+                BaseInteract();
+            }
         }
     }
 }

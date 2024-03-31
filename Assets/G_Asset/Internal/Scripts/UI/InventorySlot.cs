@@ -50,6 +50,14 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         }
         return null;
     }
+    public InventoryItem GetInventory()
+    {
+        if (container.transform.childCount > 0 && container.transform.GetChild(0).gameObject.TryGetComponent<InventoryItem>(out var inventoryItem))
+        {
+            return inventoryItem;
+        }
+        return null;
+    }
 
     public bool ExistItem()
     {

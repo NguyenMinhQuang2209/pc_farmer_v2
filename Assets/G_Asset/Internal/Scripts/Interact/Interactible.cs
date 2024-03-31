@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Interactible : MonoBehaviour
 {
     public string promptMessage = "";
-
+    [SerializeField] protected bool useTrigger = false;
     public void BaseInteract()
     {
         Interact();

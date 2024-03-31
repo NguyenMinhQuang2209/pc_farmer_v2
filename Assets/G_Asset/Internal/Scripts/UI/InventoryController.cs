@@ -35,6 +35,8 @@ public class InventoryController : MonoBehaviour
     private Dictionary<int, InventorySlot> quickSlotStores = new();
     private Dictionary<int, InventorySlot> chestSlotStores = new();
 
+    private Chest currentChest = null;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -108,18 +110,34 @@ public class InventoryController : MonoBehaviour
     {
         CursorController.instance.ChangeCursor("Inventory", new() { ui_container, b_inventory });
     }
-    public void InteractWithChest(int slot)
+    public void InteractWithChest(Chest current, int slot)
     {
-        InteractWithSlot(slot, maxChestSlot, chestSlotStores);
+        InteractWithSlot(current, slot, maxChestSlot, chestSlotStores);
         CursorController.instance.ChangeCursor("Interact_Chest", new() { ui_container, b_inventory, ui_chest });
     }
 
-    public void InteractWithSlot(int slot, int maxSlot, Dictionary<int, InventorySlot> stores)
+    public void InteractWithSlot(Chest current, int slot, int maxSlot, Dictionary<int, InventorySlot> stores)
     {
+        if (currentChest == current)
+        {
+            Debug.Log("The same object");
+            return;
+        }
+        currentChest = current;
         slot = Mathf.Min(slot, maxSlot);
         for (int i = 0; i < maxSlot; i++)
         {
             stores[i].gameObject.SetActive(i < slot);
         }
+    }
+    public List<InventoryItem> GetChestListItem(int slot)
+    {
+        List<InventoryItem> list = new();
+        for (int i = 0; i < slot; i++)
+        {
+            InventorySlot current_slot = chestSlotStores[i];
+            list.Add(current_slot.GetInventory());
+        }
+        return list;
     }
 }

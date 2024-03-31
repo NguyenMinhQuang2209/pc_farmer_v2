@@ -38,5 +38,7 @@ public enum PlayerToward
 }
 public enum ItemName
 {
-    Fence
+    Fence,
+    Egg,
+    Other
 }
