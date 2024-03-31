@@ -6,6 +6,8 @@ public class CursorController : MonoBehaviour
 {
     public static CursorController instance;
 
+    public static string Interactible_Str = "Interact";
+
     [HideInInspector] public string currentCursor = "";
     private List<GameObject> currents = new();
     private void Awake()
@@ -20,6 +22,11 @@ public class CursorController : MonoBehaviour
 
     public void ChangeCursor(string newCursor, List<GameObject> newList)
     {
+        if (currentCursor.Contains(Interactible_Str))
+        {
+            InteractController.instance.CancelInteractItem();
+        }
+
         if (currents != null)
         {
             for (int i = 0; i < currents.Count; i++)
@@ -42,5 +49,9 @@ public class CursorController : MonoBehaviour
                 currents[i].SetActive(true);
             }
         }
+    }
+    public string CurrentCursor()
+    {
+        return currentCursor;
     }
 }

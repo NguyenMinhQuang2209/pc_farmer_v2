@@ -8,8 +8,11 @@ public class InventoryController : MonoBehaviour
 
     public Transform drag_parent;
 
+    [SerializeField] private Transform trash_store;
+    [SerializeField] private InventoryItem inventory_item;
     [SerializeField] private GameObject ui_container;
     [SerializeField] private GameObject b_inventory;
+    [SerializeField] private GameObject ui_chest;
 
     [Header("Inventory Setup")]
     [SerializeField] private int currentInventorySlot = 10;
@@ -22,10 +25,15 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private int maxQuickSlot = 10;
     [SerializeField] private Transform quickslot_container;
 
-    [SerializeField] private InventoryItem inventory_item;
+    [Header("Chest UI")]
+    [SerializeField] private int currentChestSlot = 1;
+    [SerializeField] private int maxChestSlot = 16;
+    [SerializeField] private Transform cheskslot_container;
+
 
     private Dictionary<int, InventorySlot> inventorySlotStores = new();
     private Dictionary<int, InventorySlot> quickSlotStores = new();
+    private Dictionary<int, InventorySlot> chestSlotStores = new();
 
     private void Awake()
     {
@@ -40,12 +48,15 @@ public class InventoryController : MonoBehaviour
     {
         ui_container.SetActive(true);
         b_inventory.SetActive(true);
+        ui_chest.SetActive(true);
 
         SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores);
         SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores);
+        SpawnItem(currentChestSlot, maxChestSlot, cheskslot_container, false, chestSlotStores);
 
         ui_container.SetActive(false);
         b_inventory.SetActive(false);
+        ui_chest.SetActive(false);
     }
 
     public void SpawnItem(int current, int max, Transform spawnPosition, bool show, Dictionary<int, InventorySlot> store)
@@ -96,5 +107,19 @@ public class InventoryController : MonoBehaviour
     public void InteractWithInventory()
     {
         CursorController.instance.ChangeCursor("Inventory", new() { ui_container, b_inventory });
+    }
+    public void InteractWithChest(int slot)
+    {
+        InteractWithSlot(slot, maxChestSlot, chestSlotStores);
+        CursorController.instance.ChangeCursor("Interact_Chest", new() { ui_container, b_inventory, ui_chest });
+    }
+
+    public void InteractWithSlot(int slot, int maxSlot, Dictionary<int, InventorySlot> stores)
+    {
+        slot = Mathf.Min(slot, maxSlot);
+        for (int i = 0; i < maxSlot; i++)
+        {
+            stores[i].gameObject.SetActive(i < slot);
+        }
     }
 }

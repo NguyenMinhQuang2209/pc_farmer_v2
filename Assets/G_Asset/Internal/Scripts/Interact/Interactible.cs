@@ -15,4 +15,8 @@ public abstract class Interactible : MonoBehaviour
     {
 
     }
+    public virtual void CancelInteract()
+    {
+
+    }
 }
