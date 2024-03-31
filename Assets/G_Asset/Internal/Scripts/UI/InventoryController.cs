@@ -110,9 +110,12 @@ public class InventoryController : MonoBehaviour
     {
         CursorController.instance.ChangeCursor("Inventory", new() { ui_container, b_inventory });
     }
-    public void InteractWithChest(Chest current, int slot)
+    public void InteractWithChest(Chest current)
     {
-        InteractWithSlot(current, slot, maxChestSlot, chestSlotStores);
+        if (currentChest != current)
+        {
+            InteractWithSlot(current, current.GetCurrentSlot(), maxChestSlot, chestSlotStores);
+        }
         CursorController.instance.ChangeCursor("Interact_Chest", new() { ui_container, b_inventory, ui_chest });
     }
 
@@ -120,14 +123,28 @@ public class InventoryController : MonoBehaviour
     {
         if (currentChest == current)
         {
-            Debug.Log("The same object");
             return;
+        }
+        if (currentChest != null)
+        {
+            currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
         }
         currentChest = current;
         slot = Mathf.Min(slot, maxSlot);
+        List<InventoryItem> listItems = currentChest.GetListItems();
         for (int i = 0; i < maxSlot; i++)
         {
-            stores[i].gameObject.SetActive(i < slot);
+            InventorySlot currentSlot = stores[i];
+            currentSlot.gameObject.SetActive(i < slot);
+            if (listItems.Count > i)
+            {
+                InventoryItem tempItem = listItems[i];
+                if (tempItem != null)
+                {
+                    tempItem.gameObject.SetActive(true);
+                    tempItem.transform.SetParent(currentSlot.GetItemContainer());
+                }
+            }
         }
     }
     public List<InventoryItem> GetChestListItem(int slot)
@@ -136,7 +153,13 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < slot; i++)
         {
             InventorySlot current_slot = chestSlotStores[i];
-            list.Add(current_slot.GetInventory());
+            InventoryItem currentItem = current_slot.GetInventory();
+            if (currentItem != null)
+            {
+                currentItem.transform.SetParent(trash_store.transform);
+                currentItem.gameObject.SetActive(false);
+            }
+            list.Add(currentItem);
         }
         return list;
     }

@@ -16,11 +16,23 @@ public class Chest : Interactible
     {
         animator.SetBool("Open", true);
         InteractController.instance.InteractItem(this);
-        InventoryController.instance.InteractWithChest(this, currentSlot);
+        InventoryController.instance.InteractWithChest(this);
     }
     public override void CancelInteract()
     {
         animator.SetBool("Open", false);
-        items = InventoryController.instance.GetChestListItem(currentSlot);
+    }
+
+    public void SetListItems(List<InventoryItem> list)
+    {
+        items = list;
+    }
+    public int GetCurrentSlot()
+    {
+        return currentSlot;
+    }
+    public List<InventoryItem> GetListItems()
+    {
+        return items;
     }
 }
