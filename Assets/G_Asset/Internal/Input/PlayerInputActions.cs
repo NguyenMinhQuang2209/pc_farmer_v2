@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hit"",
+                    ""type"": ""Button"",
+                    ""id"": ""a94c3145-f16d-4daa-bedc-8fc5bb821459"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -189,7 +198,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2239138c-f16a-4722-9b96-21707a602731"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -205,6 +214,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92b2ced3-acbd-4611-9174-9f23d3f08a97"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -735,6 +755,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_onFoot_Build = m_onFoot.FindAction("Build", throwIfNotFound: true);
         m_onFoot_Interact = m_onFoot.FindAction("Interact", throwIfNotFound: true);
         m_onFoot_UI = m_onFoot.FindAction("UI", throwIfNotFound: true);
+        m_onFoot_Hit = m_onFoot.FindAction("Hit", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -812,6 +833,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_onFoot_Build;
     private readonly InputAction m_onFoot_Interact;
     private readonly InputAction m_onFoot_UI;
+    private readonly InputAction m_onFoot_Hit;
     public struct OnFootActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -820,6 +842,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Build => m_Wrapper.m_onFoot_Build;
         public InputAction @Interact => m_Wrapper.m_onFoot_Interact;
         public InputAction @UI => m_Wrapper.m_onFoot_UI;
+        public InputAction @Hit => m_Wrapper.m_onFoot_Hit;
         public InputActionMap Get() { return m_Wrapper.m_onFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -841,6 +864,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started += instance.OnUI;
             @UI.performed += instance.OnUI;
             @UI.canceled += instance.OnUI;
+            @Hit.started += instance.OnHit;
+            @Hit.performed += instance.OnHit;
+            @Hit.canceled += instance.OnHit;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -857,6 +883,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UI.started -= instance.OnUI;
             @UI.performed -= instance.OnUI;
             @UI.canceled -= instance.OnUI;
+            @Hit.started -= instance.OnHit;
+            @Hit.performed -= instance.OnHit;
+            @Hit.canceled -= instance.OnHit;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -998,6 +1027,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnUI(InputAction.CallbackContext context);
+        void OnHit(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

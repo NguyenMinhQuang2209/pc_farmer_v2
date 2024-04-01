@@ -7,6 +7,9 @@ public class PlayerInput : MonoBehaviour
     private PlayerInputActions action;
     public PlayerInputActions.OnFootActions onFoot;
     private PlayerMovement playerMovement;
+
+    private Animator toolAnimator;
+
     private void Awake()
     {
         action = new PlayerInputActions();
@@ -18,6 +21,16 @@ public class PlayerInput : MonoBehaviour
         if (onFoot.UI.triggered)
         {
             InventoryController.instance.InteractWithInventory();
+        }
+
+        if (onFoot.Hit.IsPressed())
+        {
+            if (toolAnimator == null)
+            {
+                toolAnimator = playerMovement.ToolAnimator();
+            }
+
+            toolAnimator.SetTrigger("Hit");
         }
     }
     private void FixedUpdate()

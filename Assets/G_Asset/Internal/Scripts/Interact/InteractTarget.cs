@@ -28,21 +28,20 @@ public class InteractTarget : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        interactTarget = collision.gameObject.GetComponent<Interactible>();
+        if (collision.gameObject.TryGetComponent<Interactible>(out var interactible))
+        {
+            interactTarget = interactible;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         interactTarget = null;
     }
 
-    public void Interact(Animator animator)
+    public void Interact()
     {
         if (interactTarget != null)
         {
-            if (interactTarget.useAnimator)
-            {
-                animator.SetTrigger("Hit");
-            }
             interactTarget.BaseInteract();
         }
     }

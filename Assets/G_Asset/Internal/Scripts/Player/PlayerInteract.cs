@@ -12,9 +12,6 @@ public class PlayerInteract : MonoBehaviour
 
     private PlayerToward playerToward = PlayerToward.Bottom;
 
-    private Animator toolAnimator;
-    private PlayerMovement playerMovement;
-
     [SerializeField] private Transform check_pos;
     private void Start()
     {
@@ -26,7 +23,6 @@ public class PlayerInteract : MonoBehaviour
             }
         }
         playerInput = GetComponent<PlayerInput>();
-        playerMovement = GetComponent<PlayerMovement>();
         interactOffset = new(0f, offset.y);
     }
     private void Update()
@@ -48,11 +44,7 @@ public class PlayerInteract : MonoBehaviour
 
         if (playerInput.onFoot.Interact.triggered)
         {
-            if (toolAnimator == null)
-            {
-                toolAnimator = playerMovement.ToolAnimator();
-            }
-            interactTarget.Interact(toolAnimator);
+            interactTarget.Interact();
         }
 
     }
