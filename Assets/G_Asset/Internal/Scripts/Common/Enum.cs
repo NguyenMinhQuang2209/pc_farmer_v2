@@ -36,6 +36,16 @@ public enum PlayerToward
     Left,
     Right
 }
+
+public enum PetMode
+{
+    Protect,
+    StayInPosition,
+    Patrol,
+    Follow,
+    Other
+}
+
 public enum ItemName
 {
     Fence,

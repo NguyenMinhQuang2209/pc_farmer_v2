@@ -25,12 +25,16 @@ public class PlayerInput : MonoBehaviour
 
         if (onFoot.Hit.IsPressed())
         {
-            if (toolAnimator == null)
+            string cursor = CursorController.instance.CurrentCursor();
+            if(cursor == "")
             {
-                toolAnimator = playerMovement.ToolAnimator();
-            }
+                if (toolAnimator == null)
+                {
+                    toolAnimator = playerMovement.ToolAnimator();
+                }
 
-            toolAnimator.SetTrigger("Hit");
+                toolAnimator.SetTrigger("Hit");
+            }
         }
     }
     private void FixedUpdate()
