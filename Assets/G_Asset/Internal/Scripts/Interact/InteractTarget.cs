@@ -7,6 +7,7 @@ public class InteractTarget : MonoBehaviour
 {
     private Interactible interactTarget;
     [SerializeField] private TextMeshProUGUI interactTxt;
+
     private void Start()
     {
         foreach (Transform child in transform)
@@ -34,10 +35,14 @@ public class InteractTarget : MonoBehaviour
         interactTarget = null;
     }
 
-    public void Interact()
+    public void Interact(Animator animator)
     {
         if (interactTarget != null)
         {
+            if (interactTarget.useAnimator)
+            {
+                animator.SetTrigger("Hit");
+            }
             interactTarget.BaseInteract();
         }
     }

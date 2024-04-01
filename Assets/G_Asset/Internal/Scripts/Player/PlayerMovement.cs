@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,8 +8,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 1f;
     private Animator animator;
+    private Animator toolAnimator;
 
     private PlayerInteract playerInteract;
+
+    [SerializeField] private Transform tool_store;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,24 +24,34 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
+        if (tool_store.GetChild(0).gameObject != null)
+        {
+            if (tool_store.GetChild(0).gameObject.TryGetComponent<Animator>(out toolAnimator))
+            {
+
+            }
+        }
         playerInteract = GetComponent<PlayerInteract>();
     }
     public void Movement(Vector2 dir)
     {
         if (dir.sqrMagnitude >= 0.1f)
         {
-
             int nextIdle_state = 0;
+
+            float rot = 0f;
 
             if (dir.x > 0f)
             {
                 nextIdle_state = 3;
                 playerInteract.ChangePlayerToward(PlayerToward.Right);
+
             }
             else if (dir.x < 0f)
             {
                 nextIdle_state = 2;
                 playerInteract.ChangePlayerToward(PlayerToward.Left);
+                rot = 180f;
             }
 
             if (dir.y > 0f)
@@ -51,11 +65,17 @@ public class PlayerMovement : MonoBehaviour
                 playerInteract.ChangePlayerToward(PlayerToward.Bottom);
             }
 
+            tool_store.transform.rotation = Quaternion.Euler(0f, rot, 0f);
             animator.SetFloat("Horizontal", dir.x);
             animator.SetFloat("Vertical", dir.y);
             animator.SetFloat("Idle_State", nextIdle_state);
             rb.MovePosition(rb.position + moveSpeed * dir * Time.deltaTime);
         }
         animator.SetFloat("Speed", dir.sqrMagnitude >= 0.1f ? 1f : 0f);
+    }
+
+    public Animator ToolAnimator()
+    {
+        return toolAnimator;
     }
 }

@@ -11,6 +11,11 @@ public class PlayerInteract : MonoBehaviour
     private Vector2 interactOffset = Vector2.zero;
 
     private PlayerToward playerToward = PlayerToward.Bottom;
+
+    private Animator toolAnimator;
+    private PlayerMovement playerMovement;
+
+    [SerializeField] private Transform check_pos;
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -21,11 +26,12 @@ public class PlayerInteract : MonoBehaviour
             }
         }
         playerInput = GetComponent<PlayerInput>();
+        playerMovement = GetComponent<PlayerMovement>();
         interactOffset = new(0f, offset.y);
     }
     private void Update()
     {
-        Vector2 targetPosition = new(transform.position.x + interactOffset.x, transform.position.y + interactOffset.y);
+        Vector2 targetPosition = new(check_pos.position.x + interactOffset.x, check_pos.position.y + interactOffset.y);
         targetPosition.x = Mathf.Floor(targetPosition.x / 0.16f) * 0.16f;
         targetPosition.y = Mathf.Floor(targetPosition.y / 0.16f) * 0.16f;
 
@@ -42,7 +48,11 @@ public class PlayerInteract : MonoBehaviour
 
         if (playerInput.onFoot.Interact.triggered)
         {
-            interactTarget.Interact();
+            if (toolAnimator == null)
+            {
+                toolAnimator = playerMovement.ToolAnimator();
+            }
+            interactTarget.Interact(toolAnimator);
         }
 
     }
