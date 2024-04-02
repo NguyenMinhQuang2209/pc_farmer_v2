@@ -25,42 +25,58 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         GameObject target = eventData.pointerDrag;
         if (target.TryGetComponent<InventoryItem>(out var item))
         {
-            ItemInit currentItem = GetInventoryItem();
-            ItemInit nextItem = item.GetItem();
+            ItemInit currentItem = GetInventoryItemInit();
+            ItemInit nextItem = item.GetItemInit();
+            Item nextItemRoot = item.GetItem();
             if (currentItem == null)
             {
-                if (isShop)
-                {
-
-                }
-                else
+                if (!isShop)
                 {
                     if (item.IsShopItem())
                     {
                         int buyPrice = item.GetSellPrice();
-                        InventoryController.instance.PickupItem(nextItem, 1);
+                        bool isEnough = CoinController.instance.IsEnough(buyPrice);
+                        if (isEnough)
+                        {
+                            CoinController.instance.MinusCoin(buyPrice);
+                            InventoryController.instance.PickupItem(nextItemRoot, 1);
+                        }
+                        else
+                        {
+                            LogController.instance.Log(LogMode.Lack_Coin);
+                        }
                     }
                     else
                     {
                         item.rootParent = container;
                     }
                 }
+                else
+                {
+                    int sell = nextItem.GetTotalPrice();
+                    CoinController.instance.AddCoin(sell);
+                    Destroy(target);
+                }
             }
             else
             {
-                if (isShop)
-                {
-
-                }
-                else
+                if (!isShop)
                 {
                     if (item.IsShopItem())
                     {
                         if (currentItem.CanAdd())
                         {
                             int buyPrice = item.GetSellPrice();
-                            Debug.Log(buyPrice);
-                            currentItem.Add(1);
+                            bool isEnough = CoinController.instance.IsEnough(buyPrice);
+                            if (isEnough)
+                            {
+                                CoinController.instance.MinusCoin(buyPrice);
+                                currentItem.Add(1);
+                            }
+                            else
+                            {
+                                LogController.instance.Log(LogMode.Lack_Coin);
+                            }
                         }
                     }
                     else
@@ -75,12 +91,25 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                             nextItem.ChangeItemQuantity(remain);
                         }
                     }
-
+                }
+                else
+                {
+                    int sell = nextItem.GetTotalPrice();
+                    CoinController.instance.AddCoin(sell);
+                    Destroy(target);
                 }
             }
         }
     }
-    public ItemInit GetInventoryItem()
+    public ItemInit GetInventoryItemInit()
+    {
+        if (container.transform.childCount > 0 && container.transform.GetChild(0).gameObject.TryGetComponent<InventoryItem>(out var inventoryItem))
+        {
+            return inventoryItem.GetItemInit();
+        }
+        return null;
+    }
+    public Item GetInventoryItem()
     {
         if (container.transform.childCount > 0 && container.transform.GetChild(0).gameObject.TryGetComponent<InventoryItem>(out var inventoryItem))
         {

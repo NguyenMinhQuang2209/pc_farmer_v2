@@ -10,6 +10,8 @@ public class BuildingItem : MonoBehaviour
     public static string Top = "Top";
     public static string Down = "Down";
 
+    [SerializeField] private ItemName itemName;
+
     [SerializeField] private List<Building_Position_Item> position_items = new();
     [SerializeField] private List<Building_Position_Center_Item> center_positions_item = new();
     [SerializeField] private float raycastDistance = 0.12f;
@@ -52,6 +54,10 @@ public class BuildingItem : MonoBehaviour
         }
 
         ReloadSpineMain();
+    }
+    public ItemName GetItemName()
+    {
+        return itemName;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

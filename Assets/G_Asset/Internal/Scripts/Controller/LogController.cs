@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,5 +17,15 @@ public class LogController : MonoBehaviour
     public void Log(string message)
     {
         Debug.Log(message);
+    }
+    public void Log(LogMode log)
+    {
+        switch (log)
+        {
+            case LogMode.Lack_Coin:
+                Log("Thiếu vàng.");
+                break;
+
+        }
     }
 }

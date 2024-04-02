@@ -103,7 +103,7 @@ public class InventoryController : MonoBehaviour
             InventorySlot currentSlot = inventorySlotStores[i];
             if (currentSlot.ExistItem())
             {
-                ItemInit currentItem = currentSlot.GetInventoryItem();
+                ItemInit currentItem = currentSlot.GetInventoryItemInit();
                 if (itemInit.GetItemName() == currentItem.GetItemName())
                 {
                     int remain = currentItem.Add(quantity);
@@ -118,43 +118,9 @@ public class InventoryController : MonoBehaviour
             {
                 int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
                 InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
-                tempItem.InventoryItemInit(itemInit, nextQuantity, false);
+                tempItem.InventoryItemInit(item, nextQuantity, false);
                 quantity -= nextQuantity;
                 if (quantity <= 0)
-                {
-                    return 0;
-                }
-            }
-        }
-        return quantity;
-    }
-
-    public int PickupItem(ItemInit item, int quantity)
-    {
-        ItemInit itemInit = item.Clone();
-        for (int i = 0; i < currentInventorySlot; i++)
-        {
-            InventorySlot currentSlot = inventorySlotStores[i];
-            if (currentSlot.ExistItem())
-            {
-                ItemInit currentItem = currentSlot.GetInventoryItem();
-                if (itemInit.GetItemName() == currentItem.GetItemName())
-                {
-                    int remain = currentItem.Add(quantity);
-                    if (remain == 0)
-                    {
-                        return 0;
-                    }
-                    quantity = remain;
-                }
-            }
-            else
-            {
-                int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
-                InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
-                tempItem.InventoryItemInit(itemInit, nextQuantity, false);
-                quantity -= nextQuantity;
-                if (quantity == 0)
                 {
                     return 0;
                 }

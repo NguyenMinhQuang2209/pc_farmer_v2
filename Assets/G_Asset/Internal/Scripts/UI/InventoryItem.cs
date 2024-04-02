@@ -10,6 +10,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 {
     [HideInInspector] public Transform rootParent;
     private ItemInit item = null;
+    private Item rootItem = null;
 
     [SerializeField] private Image img;
     [SerializeField] private TextMeshProUGUI quantityTxt;
@@ -36,6 +37,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
 
     public void InventoryItemInit(Item item, int quantity, bool isShopItem)
     {
+        rootItem = item;
         this.item = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
         img.sprite = item.sprite;
         this.isShopItem = isShopItem;
@@ -107,8 +109,21 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         return null;
     }
-    public ItemInit GetItem()
+    public ItemInit GetItemInit()
     {
         return item;
+    }
+
+    public Item GetItem()
+    {
+        return rootItem;
+    }
+
+    public void UseItem()
+    {
+        if (rootItem != null)
+        {
+            rootItem.UseItem();
+        }
     }
 }

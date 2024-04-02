@@ -54,6 +54,10 @@ public enum UpgradeName
     TimeBwtAttack,
     PatrolDistance
 }
+public enum LogMode
+{
+    Lack_Coin
+}
 public enum ItemName
 {
     Fence,
