@@ -53,9 +53,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 }
                 else
                 {
-                    int sell = nextItem.GetTotalPrice();
-                    CoinController.instance.AddCoin(sell);
-                    Destroy(target);
+                    bool isSellItem = item.IsShopItem();
+                    if (!isSellItem)
+                    {
+                        int sell = nextItem.GetTotalPrice();
+                        CoinController.instance.AddCoin(sell);
+                        Destroy(target);
+                    }
                 }
             }
             else
@@ -94,9 +98,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 }
                 else
                 {
-                    int sell = nextItem.GetTotalPrice();
-                    CoinController.instance.AddCoin(sell);
-                    Destroy(target);
+                    bool isSellItem = item.IsShopItem();
+                    if (!isSellItem)
+                    {
+                        int sell = nextItem.GetTotalPrice();
+                        CoinController.instance.AddCoin(sell);
+                        Destroy(target);
+                    }
                 }
             }
         }

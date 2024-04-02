@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d308d08a4b033d9449bcc7c12788ca29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 0
   position_items: []
   center_positions_item:
   - sprite: {fileID: -913395805, guid: 20e2e955c748d294aae07f62944a0ced, type: 3}
