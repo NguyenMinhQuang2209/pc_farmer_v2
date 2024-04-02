@@ -41,6 +41,8 @@ public class InventoryController : MonoBehaviour
     private Dictionary<int, InventorySlot> shopSlotStores = new();
 
     private Chest currentChest = null;
+    private Shop currentShop = null;
+
 
     private List<InventoryItem> twoSideChestItems = new();
 
@@ -116,7 +118,41 @@ public class InventoryController : MonoBehaviour
             {
                 int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
                 InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
-                tempItem.InventoryItemInit(item, nextQuantity, false);
+                tempItem.InventoryItemInit(itemInit, nextQuantity, false);
+                quantity -= nextQuantity;
+                if (quantity <= 0)
+                {
+                    return 0;
+                }
+            }
+        }
+        return quantity;
+    }
+
+    public int PickupItem(ItemInit item, int quantity)
+    {
+        ItemInit itemInit = item.Clone();
+        for (int i = 0; i < currentInventorySlot; i++)
+        {
+            InventorySlot currentSlot = inventorySlotStores[i];
+            if (currentSlot.ExistItem())
+            {
+                ItemInit currentItem = currentSlot.GetInventoryItem();
+                if (itemInit.GetItemName() == currentItem.GetItemName())
+                {
+                    int remain = currentItem.Add(quantity);
+                    if (remain == 0)
+                    {
+                        return 0;
+                    }
+                    quantity = remain;
+                }
+            }
+            else
+            {
+                int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
+                InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
+                tempItem.InventoryItemInit(itemInit, nextQuantity, false);
                 quantity -= nextQuantity;
                 if (quantity == 0)
                 {
@@ -138,6 +174,65 @@ public class InventoryController : MonoBehaviour
             InteractWithSlot(current, current.GetCurrentSlot(), maxChestSlot, chestSlotStores);
         }
         CursorController.instance.ChangeCursor("Interact_Chest", new() { ui_container, b_inventory, ui_chest });
+    }
+
+    public void InteractWithShop(Shop shop)
+    {
+        if (currentShop != shop)
+        {
+            InteractWithSlotShop(shop, maxShopSlot, shopSlotStores);
+        }
+        CursorController.instance.ChangeCursor("Interact_Shop", new() { ui_container, b_inventory, ui_shop });
+    }
+
+    public List<InventoryItem> InventoryShopInitItem(List<Item> items)
+    {
+        List<InventoryItem> tempItems = new();
+        for (int i = 0; i < items.Count; i++)
+        {
+            Item item = items[i];
+            InventoryItem tempItem = Instantiate(inventory_item, trash_store.transform);
+            tempItem.InventoryItemInit(item, 1, true);
+            tempItems.Add(tempItem);
+        }
+        return tempItems;
+    }
+
+    public void InteractWithSlotShop(Shop shop, int slot, Dictionary<int, InventorySlot> stores)
+    {
+        if (currentShop == shop)
+        {
+            return;
+        }
+        if (currentChest != null)
+        {
+            if (currentChest.OneSideChest())
+            {
+                currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
+            }
+            else
+            {
+                StoringTwoSideChest(currentChest.GetCurrentSlot());
+            }
+        }
+        currentShop = shop;
+
+        currentShop.InitInventory();
+
+        List<InventoryItem> listItems = currentShop.GetListInventoryItems();
+        for (int i = 0; i < slot; i++)
+        {
+            InventorySlot currentSlot = stores[i];
+            if (listItems.Count > i)
+            {
+                InventoryItem tempItem = listItems[i];
+                if (tempItem != null)
+                {
+                    tempItem.gameObject.SetActive(true);
+                    tempItem.transform.SetParent(currentSlot.GetItemContainer());
+                }
+            }
+        }
     }
 
     public void InteractWithSlot(Chest current, int slot, int maxSlot, Dictionary<int, InventorySlot> stores)

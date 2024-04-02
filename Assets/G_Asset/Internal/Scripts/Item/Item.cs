@@ -79,4 +79,9 @@ public class ItemInit
         currentQuantity = next;
     }
 
+    public ItemInit Clone()
+    {
+        return new(sprite, itemName, currentQuantity, maxQuantity, price, buyRate);
+    }
+
 }

@@ -38,7 +38,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                     if (item.IsShopItem())
                     {
                         int buyPrice = item.GetSellPrice();
-                        Debug.Log(buyPrice);
+                        InventoryController.instance.PickupItem(nextItem, 1);
                     }
                     else
                     {

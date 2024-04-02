@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -36,6 +37,21 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     public void InventoryItemInit(Item item, int quantity, bool isShopItem)
     {
         this.item = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
+        img.sprite = item.sprite;
+        this.isShopItem = isShopItem;
+        buy_ui.SetActive(isShopItem);
+        this.item.ChangeItemQuantity(quantity);
+        if (this.isShopItem)
+        {
+            sellPrice = this.item.GetBuyPricePerUnit();
+            priceTxt.text = sellPrice.ToString();
+        }
+    }
+
+    public void InventoryItemInit(ItemInit item, int quantity, bool isShopItem)
+    {
+        this.item = item.Clone();
+        this.item.ChangeItemQuantity(quantity);
         img.sprite = item.sprite;
         this.isShopItem = isShopItem;
         buy_ui.SetActive(isShopItem);
