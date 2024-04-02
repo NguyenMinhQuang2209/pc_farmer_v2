@@ -13,6 +13,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private GameObject ui_container;
     [SerializeField] private GameObject b_inventory;
     [SerializeField] private GameObject ui_chest;
+    [SerializeField] private GameObject ui_shop;
 
     [Header("Inventory Setup")]
     [SerializeField] private int currentInventorySlot = 10;
@@ -28,12 +29,16 @@ public class InventoryController : MonoBehaviour
     [Header("Chest UI")]
     [SerializeField] private int currentChestSlot = 1;
     [SerializeField] private int maxChestSlot = 16;
-    [SerializeField] private Transform cheskslot_container;
+    [SerializeField] private Transform chestslot_container;
 
+    [Header("Shop UI")]
+    [SerializeField] private int maxShopSlot = 16;
+    [SerializeField] private Transform shopslot_container;
 
     private Dictionary<int, InventorySlot> inventorySlotStores = new();
     private Dictionary<int, InventorySlot> quickSlotStores = new();
     private Dictionary<int, InventorySlot> chestSlotStores = new();
+    private Dictionary<int, InventorySlot> shopSlotStores = new();
 
     private Chest currentChest = null;
 
@@ -53,10 +58,12 @@ public class InventoryController : MonoBehaviour
         ui_container.SetActive(true);
         b_inventory.SetActive(true);
         ui_chest.SetActive(true);
+        ui_shop.SetActive(true);
 
-        SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores);
-        SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores);
-        SpawnItem(currentChestSlot, maxChestSlot, cheskslot_container, false, chestSlotStores);
+        SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores, false);
+        SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores, false);
+        SpawnItem(currentChestSlot, maxChestSlot, chestslot_container, false, chestSlotStores, false);
+        SpawnItem(maxShopSlot, maxShopSlot, shopslot_container, false, shopSlotStores, true);
 
         for (int i = 0; i < maxChestSlot; i++)
         {
@@ -66,9 +73,10 @@ public class InventoryController : MonoBehaviour
         ui_container.SetActive(false);
         b_inventory.SetActive(false);
         ui_chest.SetActive(false);
+        ui_shop.SetActive(false);
     }
 
-    public void SpawnItem(int current, int max, Transform spawnPosition, bool show, Dictionary<int, InventorySlot> store)
+    public void SpawnItem(int current, int max, Transform spawnPosition, bool showQuickslot, Dictionary<int, InventorySlot> store, bool isShop)
     {
         foreach (Transform child in spawnPosition)
         {
@@ -77,7 +85,7 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < max; i++)
         {
             InventorySlot tempSlot = Instantiate(slot, spawnPosition.transform);
-            tempSlot.InventorySlotInit(show ? (i + 1).ToString() : "");
+            tempSlot.InventorySlotInit(showQuickslot ? (i + 1).ToString() : "", isShop);
             store[i] = tempSlot;
             if (i >= current)
             {
@@ -85,32 +93,38 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
-    public bool PickupItem(Item item)
+    public int PickupItem(Item item, int quantity)
     {
+        ItemInit itemInit = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
         for (int i = 0; i < currentInventorySlot; i++)
         {
             InventorySlot currentSlot = inventorySlotStores[i];
             if (currentSlot.ExistItem())
             {
-                Item currentItem = currentSlot.GetInventoryItem();
-                if (item.GetItemName() == currentItem.GetItemName())
+                ItemInit currentItem = currentSlot.GetInventoryItem();
+                if (itemInit.GetItemName() == currentItem.GetItemName())
                 {
-                    int remain = currentItem.Add(item.GetCurrentQuantity());
+                    int remain = currentItem.Add(quantity);
                     if (remain == 0)
                     {
-                        return true;
+                        return 0;
                     }
-                    item.ChangeItemQuantity(remain);
+                    quantity = remain;
                 }
             }
             else
             {
+                int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
                 InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
-                tempItem.InventoryItemInit(item);
-                return true;
+                tempItem.InventoryItemInit(item, nextQuantity, false);
+                quantity -= nextQuantity;
+                if (quantity == 0)
+                {
+                    return 0;
+                }
             }
         }
-        return false;
+        return quantity;
     }
 
     public void InteractWithInventory()

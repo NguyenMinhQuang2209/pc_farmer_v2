@@ -8,10 +8,15 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [HideInInspector] public Transform rootParent;
-    private Item item = null;
+    private ItemInit item = null;
 
     [SerializeField] private Image img;
     [SerializeField] private TextMeshProUGUI quantityTxt;
+    [SerializeField] private TextMeshProUGUI priceTxt;
+    [SerializeField] private GameObject buy_ui;
+    [SerializeField] private int sellPrice = 0;
+    [SerializeField] private bool isShopItem = false;
+
 
     bool areDrag = false;
 
@@ -24,14 +29,26 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (item != null && !areDrag)
         {
-            quantityTxt.text = item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
+            quantityTxt.text = isShopItem ? "" : item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
         }
     }
 
-    public void InventoryItemInit(Item item)
+    public void InventoryItemInit(Item item, int quantity, bool isShopItem)
     {
-        this.item = item;
+        this.item = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
         img.sprite = item.sprite;
+        this.isShopItem = isShopItem;
+        buy_ui.SetActive(isShopItem);
+        this.item.ChangeItemQuantity(quantity);
+        if (this.isShopItem)
+        {
+            sellPrice = this.item.GetBuyPricePerUnit();
+            priceTxt.text = sellPrice.ToString();
+        }
+    }
+    public int GetSellPrice()
+    {
+        return sellPrice;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -43,6 +60,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         quantityTxt.text = "";
         img.raycastTarget = false;
         areDrag = true;
+        buy_ui.SetActive(false);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -55,6 +73,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         img.raycastTarget = true;
         transform.SetParent(rootParent);
         areDrag = false;
+        if (isShopItem)
+        {
+            buy_ui.SetActive(true);
+        }
+    }
+    public bool IsShopItem()
+    {
+        return isShopItem;
     }
 
     public string GetItemName()
@@ -65,7 +91,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         return null;
     }
-    public Item GetItem()
+    public ItemInit GetItem()
     {
         return item;
     }

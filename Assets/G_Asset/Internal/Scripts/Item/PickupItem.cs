@@ -6,6 +6,7 @@ public class PickupItem : Interactible
 {
     [SerializeField] private bool useThisSprite = false;
     [SerializeField] private Item item;
+    [SerializeField] private int quantity = 1;
     private void Start()
     {
         if (useThisSprite)
@@ -16,10 +17,14 @@ public class PickupItem : Interactible
 
     public override void Interact()
     {
-        bool canPickup = InventoryController.instance.PickupItem(item);
-        if (canPickup)
+        int remain = InventoryController.instance.PickupItem(item, quantity);
+        if (remain == 0)
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            quantity = remain;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,42 +36,5 @@ public class PickupItem : Interactible
                 BaseInteract();
             }
         }
-    }
-}
-[System.Serializable]
-public class Item
-{
-    public Sprite sprite;
-    public ItemName itemName;
-    [SerializeField] private int currentQuantity = 1;
-    [SerializeField] private int maxQuantity = 1;
-
-    public bool UseStack()
-    {
-        return maxQuantity > 1;
-    }
-    public int GetCurrentQuantity()
-    {
-        return currentQuantity;
-    }
-    public string GetItemName()
-    {
-        return itemName.ToString();
-    }
-
-    public int Add(int value)
-    {
-        int next = currentQuantity + value;
-        if (next > maxQuantity)
-        {
-            currentQuantity = maxQuantity;
-            return next - maxQuantity;
-        }
-        currentQuantity = next;
-        return 0;
-    }
-    public void ChangeItemQuantity(int next)
-    {
-        currentQuantity = next;
     }
 }

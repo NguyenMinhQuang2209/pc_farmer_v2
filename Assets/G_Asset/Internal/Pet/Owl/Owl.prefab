@@ -277,7 +277,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hasFarAttack: 1
-  useFarAttackInDefault: 1
+  useFarAttackInDefault: 0
   farAttackDistance: 0.5
   farAttackIndex: {x: 2, y: 2}
   bullet: {fileID: 4947400914834318588, guid: 65784c2bb91b66c4f8313621f3b655fb, type: 3}
@@ -301,12 +301,14 @@ MonoBehaviour:
     upgrades:
     - upgradeName: 0
       updateValue: 2
-    - upgradeName: 1
+    - upgradeName: 0
       updateValue: 1
   - price: 20
     upgrades:
     - upgradeName: 3
       updateValue: 2
+    - upgradeName: 1
+      updateValue: 1
 --- !u!50 &107476291
 Rigidbody2D:
   serializedVersion: 4

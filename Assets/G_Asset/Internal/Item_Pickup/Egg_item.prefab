@@ -126,9 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptMessage: "Tr\u1EE9ng"
   useTrigger: 1
+  useAnimator: 0
   useThisSprite: 1
-  item:
-    sprite: {fileID: 0}
-    itemName: 1
-    currentQuantity: 1
-    maxQuantity: 3
+  item: {fileID: 3485965799608517480, guid: 6ef2ee992cfb29e46a69d6ffe5b59503, type: 3}

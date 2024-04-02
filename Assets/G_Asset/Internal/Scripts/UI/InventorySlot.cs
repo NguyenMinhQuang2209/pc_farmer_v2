@@ -10,9 +10,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     [SerializeField] private Transform container;
     [SerializeField] private TextMeshProUGUI quickslotTxt;
 
-    public void InventorySlotInit(string quickslot)
+    [SerializeField] private bool isShop = false;
+
+    public void InventorySlotInit(string quickslot, bool isShop = false)
     {
         quickslotTxt.text = quickslot;
+        this.isShop = isShop;
     }
 
 
@@ -22,27 +25,62 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         GameObject target = eventData.pointerDrag;
         if (target.TryGetComponent<InventoryItem>(out var item))
         {
-            Item currentItem = GetInventoryItem();
-            Item nextItem = item.GetItem();
+            ItemInit currentItem = GetInventoryItem();
+            ItemInit nextItem = item.GetItem();
             if (currentItem == null)
             {
-                item.rootParent = container;
-            }
-            else
-            {
-                int remain = currentItem.Add(nextItem.GetCurrentQuantity());
-                if (remain == 0)
+                if (isShop)
                 {
-                    Destroy(target);
+
                 }
                 else
                 {
-                    nextItem.ChangeItemQuantity(remain);
+                    if (item.IsShopItem())
+                    {
+                        int buyPrice = item.GetSellPrice();
+                        Debug.Log(buyPrice);
+                    }
+                    else
+                    {
+                        item.rootParent = container;
+                    }
+                }
+            }
+            else
+            {
+                if (isShop)
+                {
+
+                }
+                else
+                {
+                    if (item.IsShopItem())
+                    {
+                        if (currentItem.CanAdd())
+                        {
+                            int buyPrice = item.GetSellPrice();
+                            Debug.Log(buyPrice);
+                            currentItem.Add(1);
+                        }
+                    }
+                    else
+                    {
+                        int remain = currentItem.Add(nextItem.GetCurrentQuantity());
+                        if (remain == 0)
+                        {
+                            Destroy(target);
+                        }
+                        else
+                        {
+                            nextItem.ChangeItemQuantity(remain);
+                        }
+                    }
+
                 }
             }
         }
     }
-    public Item GetInventoryItem()
+    public ItemInit GetInventoryItem()
     {
         if (container.transform.childCount > 0 && container.transform.GetChild(0).gameObject.TryGetComponent<InventoryItem>(out var inventoryItem))
         {
