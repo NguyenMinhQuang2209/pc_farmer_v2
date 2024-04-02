@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,7 +23,6 @@ public class Pet : Health
     [SerializeField] private PetMode petMode;
 
     [Header("Attack")]
-    [SerializeField] private float timeBwtAttack = 1f;
     [SerializeField] private int maxAttackIndex = 1;
     [SerializeField] private LayerMask enemyMask;
     float currentTimeBwtAttack = 0f;
@@ -40,6 +40,32 @@ public class Pet : Health
     private Vector3 watchPosition;
     private Vector3 target;
     private Transform enemy;
+
+    [Space(5)]
+    [Header("Pet upgrade")]
+    [SerializeField] private string pet_name = "";
+    [SerializeField] private int maxFood = 100;
+    int plusFood = 0;
+    int currentFood = 0;
+    [SerializeField] private int near_damage = 1;
+    int plusNearDamage = 0;
+    [SerializeField] private int far_damage = 1;
+    int plusFarDamage = 0;
+    [SerializeField] private float timeBwtAttack = 1f;
+    float plusTimeBwtAttack = 0f;
+
+    float plusPatrolDistance = 0f;
+    [SerializeField] private int recoverHealthPricePerUnit = 1;
+    [SerializeField] private float firstExe = 10f;
+    [SerializeField] private float nextLevelRate = 1.2f;
+    public Sprite mainSprite;
+
+    [SerializeField] private List<Pet_Level_Item> levels = new();
+    int current = 0;
+
+    float currentExe = 0f;
+    float nextExe = 0f;
+
     private void Start()
     {
         /*agent = GetComponent<NavMeshAgent>();
@@ -58,9 +84,18 @@ public class Pet : Health
         rb = GetComponent<Rigidbody2D>();
         check.SetActive(false);
         check.transform.localScale = new(radiousCheck, radiousCheck, 1);
+
+        nextExe = firstExe;
+        currentExe = 0f;
+
+        HealthInit();
     }
     private void Update()
     {
+        if (player == null)
+        {
+            player = PreferenceController.instance.player;
+        }
         currentTimeBwtAttack = Mathf.Min(currentTimeBwtAttack + Time.deltaTime, timeBwtAttack);
         StateMachine();
     }
@@ -261,5 +296,184 @@ public class Pet : Health
         animator.SetTrigger(HURT);
         base.TakeDamage(damage);
     }
+    public string PetName()
+    {
+        return pet_name;
+    }
 
+    public string GetPetMode()
+    {
+        switch (petMode)
+        {
+            case PetMode.Protect:
+                return "Bảo vệ";
+            case PetMode.StayInPosition:
+                return "Đứng im";
+            case PetMode.Patrol:
+                return "Tuần tra";
+            case PetMode.Follow:
+                return "Đi theo";
+        }
+        return "";
+    }
+    public Sprite GetSprite()
+    {
+        return mainSprite;
+    }
+    public int GetCurrentFood()
+    {
+        return currentFood;
+    }
+    public int GetMaxFood()
+    {
+        return maxFood + plusFood;
+    }
+    public float GetMaxTimeBwtAttack()
+    {
+        return timeBwtAttack + plusTimeBwtAttack;
+    }
+    public float GetPatrolDistance()
+    {
+        return radiousCheck + plusPatrolDistance;
+    }
+
+    public int RecoverCoin()
+    {
+        return RecoverCoin(GetMaxHealth() - GetCurrentHealth());
+    }
+
+    public int RecoverCoin(int v)
+    {
+        return recoverHealthPricePerUnit * v;
+    }
+    public int GetNearDamage()
+    {
+        return near_damage + plusNearDamage;
+    }
+    public int GetFarDamage()
+    {
+        return far_damage + plusFarDamage;
+    }
+    public string GetPetDetail()
+    {
+        StringBuilder builder = new();
+
+        builder.Append("Sức mạnh đánh gần: ").Append(GetNearDamage()).AppendLine();
+        builder.Append("Sức mạnh đánh xa: ").Append(GetFarDamage()).AppendLine();
+        builder.Append("Đói: ").Append(currentFood).Append("/").Append(GetMaxFood()).AppendLine();
+        builder.Append("Máu: ").Append(GetCurrentHealth()).Append("/").Append(GetMaxHealth()).AppendLine();
+        builder.Append("Thời gian tấn công: ").Append(GetMaxTimeBwtAttack()).AppendLine();
+        builder.Append("Khoảng cách tuần tra: ").Append(GetPatrolDistance()).AppendLine();
+
+        return builder.ToString();
+    }
+    public string GetLevel()
+    {
+        return current < levels.Count ? (current + 1).ToString() : "Max";
+    }
+
+    public bool IsMaxLevel()
+    {
+        return current < levels.Count;
+    }
+    public void Upgrade()
+    {
+        if (IsMaxLevel())
+        {
+            LogController.instance.Log("Is Max level now");
+            return;
+        }
+        current += 1;
+        int current_level = current < levels.Count ? (current + 1) : levels.Count;
+        nextExe = firstExe * current_level * nextLevelRate;
+
+        LoadUpgradeDetail();
+    }
+    public void AddExe(float v)
+    {
+        currentExe += v;
+        if (currentExe >= nextExe)
+        {
+            Upgrade();
+        }
+    }
+    public float GetCurrentExe()
+    {
+        return currentExe;
+    }
+    public float GetNextExe()
+    {
+        return nextExe;
+    }
+
+    public int GetNextPrice()
+    {
+        return levels[current].price;
+    }
+
+    public void LoadUpgradeDetail()
+    {
+        if (current == 0)
+        {
+            return;
+        }
+
+        int p_nearDamage = 0;
+        int p_farDamage = 0;
+        int p_food = 0;
+        float p_timeBwtAttack = 0;
+        int p_health = 0;
+        float p_patrolDistance = 0f;
+        int current_level = current < levels.Count ? current : levels.Count;
+
+        for (int i = 0; i < current_level; i++)
+        {
+            Pet_Level_Item item = levels[current];
+            for (int j = 0; j < item.upgrades.Count; j++)
+            {
+                Pet_Level_Item_Upgrade upgradeItem = item.upgrades[j];
+                switch (upgradeItem.upgradeName)
+                {
+                    case UpgradeName.NearDamage:
+                        p_nearDamage += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.FarDamage:
+                        p_farDamage += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.Food:
+                        p_food += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.TimeBwtAttack:
+                        p_timeBwtAttack += upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.Health:
+                        p_health += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.PatrolDistance:
+                        p_patrolDistance += upgradeItem.updateValue;
+                        break;
+                }
+            }
+        }
+
+        plusFarDamage = p_farDamage;
+        plusNearDamage = p_nearDamage;
+        plusFood = p_food;
+        plusTimeBwtAttack = p_timeBwtAttack;
+        plusPatrolDistance = p_patrolDistance;
+        plusHealth = p_health;
+    }
+
+}
+[System.Serializable]
+public class Pet_Level_Item
+{
+    public int price = 1;
+    public List<Pet_Level_Item_Upgrade> upgrades = new();
+}
+[System.Serializable]
+public class Pet_Level_Item_Upgrade
+{
+    public UpgradeName upgradeName;
+    public float updateValue = 1;
 }

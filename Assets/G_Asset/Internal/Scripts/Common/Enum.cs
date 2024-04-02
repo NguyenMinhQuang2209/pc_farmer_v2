@@ -1,4 +1,4 @@
-public enum BuildingPositionName
+﻿public enum BuildingPositionName
 {
     Top_Left,
     Top_Right,
@@ -45,7 +45,15 @@ public enum PetMode
     Follow,
     Other
 }
-
+public enum UpgradeName
+{
+    NearDamage,
+    FarDamage,
+    Food,
+    Health,
+    TimeBwtAttack,
+    PatrolDistance
+}
 public enum ItemName
 {
     Fence,

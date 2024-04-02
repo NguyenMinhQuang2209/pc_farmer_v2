@@ -237,7 +237,6 @@ MonoBehaviour:
   radiousCheck: 0.5
   check: {fileID: 41777827}
   petMode: 3
-  timeBwtAttack: 1
   maxAttackIndex: 2
   enemyMask:
     serializedVersion: 2
@@ -245,6 +244,24 @@ MonoBehaviour:
   wanderTime: 2
   wanderXAxis: {x: -1, y: 1}
   wanderYAxis: {x: -1, y: 1}
+  pet_name: "V\u1EB9t"
+  maxFood: 100
+  near_damage: 1
+  far_damage: 0
+  timeBwtAttack: 1
+  recoverHealthPricePerUnit: 1
+  firstExe: 10
+  nextLevelRate: 1.2
+  levels:
+  - price: 20
+    upgrades:
+    - upgradeName: 0
+      updateValue: 2
+  - price: 20
+    upgrades:
+    - upgradeName: 3
+      updateValue: 2
+  mainSprite: {fileID: 21300000, guid: ffab8c588138ad64f8c460086975e203, type: 3}
 --- !u!50 &107476291
 Rigidbody2D:
   serializedVersion: 4

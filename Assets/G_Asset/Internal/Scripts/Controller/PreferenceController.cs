@@ -8,7 +8,7 @@ public class PreferenceController : MonoBehaviour
 
     public static string PLAYER_TAG = "Player";
 
-    public Transform player;
+    [HideInInspector] public Transform player;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -22,5 +22,8 @@ public class PreferenceController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag(PLAYER_TAG).transform;
     }
-
+    public Transform GetPlayer()
+    {
+        return GameObject.FindGameObjectWithTag(PLAYER_TAG).transform;
+    }
 }

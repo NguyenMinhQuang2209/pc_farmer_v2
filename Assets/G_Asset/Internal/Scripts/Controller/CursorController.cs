@@ -22,6 +22,7 @@ public class CursorController : MonoBehaviour
 
     public void ChangeCursor(string newCursor, List<GameObject> newList)
     {
+        UIController.instance.ChangeCursor.Invoke(null, null);
         if (currentCursor.Contains(Interactible_Str))
         {
             InteractController.instance.CancelInteractItem();
