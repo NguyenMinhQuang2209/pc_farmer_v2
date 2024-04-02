@@ -38,6 +38,10 @@ public class Pet : Health
     private bool farAttack = false;
     [SerializeField] private float farAttackDistance = 0.2f;
     [SerializeField] private Vector2Int farAttackIndex = new();
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private float bulletSpeed = 2f;
+    [SerializeField] private float bulletDelayDieTime = 1f;
+    [SerializeField] private Transform bullet_shoot;
 
     [Header("Wander")]
     [SerializeField] private float wanderTime = 1f;
@@ -282,6 +286,16 @@ public class Pet : Health
         float distance = Vector2.Distance(enemy.position, transform.position);
         float yAxis = enemy.position.x - transform.position.x;
         transform.rotation = Quaternion.Euler(new(0f, yAxis < 0 ? 180f : 0f, 0f));
+
+        Vector2 dir = enemy.position - transform.position;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        if (bullet_shoot != null)
+        {
+            bullet_shoot.transform.rotation = Quaternion.Euler(new(0f, 0f, angle - 90f));
+        }
+
         if (distance > stopDistance)
         {
             if (distance > stopChasingDistance)
@@ -294,7 +308,7 @@ public class Pet : Health
                 {
                     if (distance <= farAttackDistance)
                     {
-                        PlayerAttack(farAttackIndex);
+                        PlayerAttack(farAttackIndex, false);
                         rb.velocity = new(0f, 0f);
                         isStop = true;
                     }
@@ -317,13 +331,14 @@ public class Pet : Health
             {
                 attackIndex = farAttackIndex;
             }
-            PlayerAttack(attackIndex);
+            PlayerAttack(attackIndex, attackIndex == nearAttackIndex);
             rb.velocity = new(0f, 0f);
             isStop = true;
+
         }
         animator.SetFloat("Speed", isStop ? 0f : 2f);
     }
-    private void PlayerAttack(Vector2Int attackIndex)
+    private void PlayerAttack(Vector2Int attackIndex, bool nearAttack)
     {
         currentTimeBwtAttack = Mathf.Min(currentTimeBwtAttack + Time.deltaTime, timeBwtAttack);
         if (currentTimeBwtAttack >= timeBwtAttack)
@@ -333,6 +348,11 @@ public class Pet : Health
             int next = Random.Range(attackIndex.x, attackIndex.y + 1);
             animator.SetFloat(ATTACK_INDEX, next);
             animator.SetTrigger(ATTACK);
+
+            if (!nearAttack)
+            {
+                Shoot();
+            }
         }
     }
 
@@ -592,6 +612,12 @@ public class Pet : Health
         }
 
         check.transform.localScale = new(GetPatrolDistance(), GetPatrolDistance(), 1);
+    }
+
+    public void Shoot()
+    {
+        Bullet tempBullet = Instantiate(bullet, bullet_shoot.transform.position, Quaternion.identity);
+        tempBullet.BulletInit(transform, bullet_shoot.up, bulletSpeed, GetFarDamage(), bulletDelayDieTime);
     }
 
 }
