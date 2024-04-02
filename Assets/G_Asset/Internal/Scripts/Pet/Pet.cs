@@ -23,13 +23,21 @@ public class Pet : Health
     [SerializeField] private PetMode petMode;
 
     [Header("Attack")]
-    [SerializeField] private int maxAttackIndex = 1;
+    [SerializeField] private bool hasNearAttack = false;
+    [SerializeField] private bool useNearAttackInDefault = false;
+    private bool nearAttack = false;
+    [SerializeField] private Vector2Int nearAttackIndex = new();
+    [SerializeField] private float stopChasingDistance = 0.2f;
     [SerializeField] private LayerMask enemyMask;
     float currentTimeBwtAttack = 0f;
 
     [Space(5)]
     [Header("Far attack")]
     [SerializeField] private bool hasFarAttack = false;
+    [SerializeField] private bool useFarAttackInDefault = false;
+    private bool farAttack = false;
+    [SerializeField] private float farAttackDistance = 0.2f;
+    [SerializeField] private Vector2Int farAttackIndex = new();
 
     [Header("Wander")]
     [SerializeField] private float wanderTime = 1f;
@@ -95,6 +103,9 @@ public class Pet : Health
         HealthInit();
 
         currentFood = GetMaxFood();
+
+        farAttack = hasFarAttack && useFarAttackInDefault;
+        nearAttack = hasNearAttack && useNearAttackInDefault;
     }
     private void Update()
     {
@@ -273,25 +284,53 @@ public class Pet : Health
         transform.rotation = Quaternion.Euler(new(0f, yAxis < 0 ? 180f : 0f, 0f));
         if (distance > stopDistance)
         {
-            Vector2 targetDir = enemy.position - transform.position;
-            rb.velocity = targetDir * runSpeed;
+            if (distance > stopChasingDistance)
+            {
+                enemy = null;
+            }
+            else
+            {
+                if (farAttack)
+                {
+                    if (distance <= farAttackDistance)
+                    {
+                        PlayerAttack(farAttackIndex);
+                        rb.velocity = new(0f, 0f);
+                        isStop = true;
+                    }
+                }
+                else
+                {
+                    Vector2 targetDir = enemy.position - transform.position;
+                    rb.velocity = targetDir * runSpeed;
+                }
+            }
         }
         else
         {
-            PlayerAttack();
+            Vector2Int attackIndex;
+            if (nearAttack)
+            {
+                attackIndex = nearAttackIndex;
+            }
+            else
+            {
+                attackIndex = farAttackIndex;
+            }
+            PlayerAttack(attackIndex);
             rb.velocity = new(0f, 0f);
             isStop = true;
         }
         animator.SetFloat("Speed", isStop ? 0f : 2f);
     }
-    private void PlayerAttack()
+    private void PlayerAttack(Vector2Int attackIndex)
     {
         currentTimeBwtAttack = Mathf.Min(currentTimeBwtAttack + Time.deltaTime, timeBwtAttack);
         if (currentTimeBwtAttack >= timeBwtAttack)
         {
             currentTimeBwtAttack = 0f;
 
-            int next = Random.Range(0, maxAttackIndex);
+            int next = Random.Range(attackIndex.x, attackIndex.y + 1);
             animator.SetFloat(ATTACK_INDEX, next);
             animator.SetTrigger(ATTACK);
         }
@@ -541,6 +580,16 @@ public class Pet : Health
         plusTimeBwtAttack = p_timeBwtAttack;
         plusPatrolDistance = p_patrolDistance;
         plusHealth = p_health;
+
+        if (plusNearDamage > 0 && hasNearAttack)
+        {
+            nearAttack = true;
+        }
+
+        if (plusFarDamage > 0 && hasFarAttack)
+        {
+            farAttack = true;
+        }
 
         check.transform.localScale = new(GetPatrolDistance(), GetPatrolDistance(), 1);
     }

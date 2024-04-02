@@ -237,10 +237,17 @@ MonoBehaviour:
   radiousCheck: 0.5
   check: {fileID: 41777827}
   petMode: 3
-  maxAttackIndex: 2
+  hasNearAttack: 1
+  useNearAttackInDefault: 1
+  nearAttackIndex: {x: 0, y: 1}
+  stopChasingDistance: 3
   enemyMask:
     serializedVersion: 2
     m_Bits: 256
+  hasFarAttack: 1
+  useFarAttackInDefault: 1
+  farAttackDistance: 0.5
+  farAttackIndex: {x: 2, y: 2}
   wanderTime: 2
   wanderXAxis: {x: -1, y: 1}
   wanderYAxis: {x: -1, y: 1}
