@@ -25,7 +25,7 @@ public class Pet_Detail : MonoBehaviour
 
         recover_btn.onClick.AddListener(() =>
         {
-            RecoverFood();
+            RecoverHealth();
         });
 
         release_btn.onClick.AddListener(() =>

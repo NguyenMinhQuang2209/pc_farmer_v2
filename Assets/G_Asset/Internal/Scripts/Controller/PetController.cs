@@ -82,15 +82,18 @@ public class PetController : MonoBehaviour
 
     public void RecoverFood()
     {
+        current_pet.RecoverAllFood();
+        ChoosePet(current_pet);
     }
     public void RecoverHealth()
     {
-
+        current_pet.RecoverAllHealth();
+        ChoosePet(current_pet);
     }
     public void ReleasePet()
     {
         Destroy(current_pet.gameObject);
-        current_pet = null;
+        ChoosePet(null);
         CheckCurrentPet();
         CheckPet();
     }
@@ -101,7 +104,8 @@ public class PetController : MonoBehaviour
     }
     public void UpgradePet()
     {
-
+        current_pet.Upgrade();
+        ChoosePet(current_pet);
     }
 
     public void ChangetPetMode(PetMode mode)

@@ -27,6 +27,10 @@ public class Pet : Health
     [SerializeField] private LayerMask enemyMask;
     float currentTimeBwtAttack = 0f;
 
+    [Space(5)]
+    [Header("Far attack")]
+    [SerializeField] private bool hasFarAttack = false;
+
     [Header("Wander")]
     [SerializeField] private float wanderTime = 1f;
     [SerializeField] private Vector2 wanderXAxis = Vector2.one;
@@ -83,7 +87,7 @@ public class Pet : Health
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         check.SetActive(false);
-        check.transform.localScale = new(radiousCheck, radiousCheck, 1);
+        check.transform.localScale = new(GetPatrolDistance(), GetPatrolDistance(), 1);
 
         nextExe = firstExe;
         currentExe = 0f;
@@ -254,7 +258,7 @@ public class Pet : Health
     }
     public void FindEnemy()
     {
-        Collider2D hits = Physics2D.OverlapCircle(check.transform.position, radiousCheck, enemyMask);
+        Collider2D hits = Physics2D.OverlapCircle(check.transform.position, GetPatrolDistance(), enemyMask);
         if (hits != null)
         {
             enemy = hits.transform;
@@ -360,12 +364,81 @@ public class Pet : Health
     {
         StringBuilder builder = new();
 
-        builder.Append("Sức mạnh đánh gần: ").Append(GetNearDamage()).AppendLine();
-        builder.Append("Sức mạnh đánh xa: ").Append(GetFarDamage()).AppendLine();
-        builder.Append("Đói: ").Append(currentFood).Append("/").Append(GetMaxFood()).AppendLine();
-        builder.Append("Máu: ").Append(GetCurrentHealth()).Append("/").Append(GetMaxHealth()).AppendLine();
-        builder.Append("Thời gian tấn công: ").Append(GetMaxTimeBwtAttack()).AppendLine();
-        builder.Append("Khoảng cách tuần tra: ").Append(GetPatrolDistance()).AppendLine();
+        string nextNearDamage = "";
+        string nextFarDamage = "";
+        string nextFood = "";
+        string nextHealth = "";
+        string nextTimeBwtAttack = "";
+        string nextPatrolDistance = "";
+
+        if (!IsMaxLevel())
+        {
+            int p_nearDamage = 0;
+            int p_farDamage = 0;
+            int p_food = 0;
+            float p_timeBwtAttack = 0;
+            int p_health = 0;
+            float p_patrolDistance = 0f;
+            Pet_Level_Item item = levels[current];
+            for (int j = 0; j < item.upgrades.Count; j++)
+            {
+                Pet_Level_Item_Upgrade upgradeItem = item.upgrades[j];
+                switch (upgradeItem.upgradeName)
+                {
+                    case UpgradeName.NearDamage:
+                        p_nearDamage += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.FarDamage:
+                        p_farDamage += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.Food:
+                        p_food += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.TimeBwtAttack:
+                        p_timeBwtAttack += upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.Health:
+                        p_health += (int)upgradeItem.updateValue;
+                        break;
+                    case UpgradeName.PatrolDistance:
+                        p_patrolDistance += upgradeItem.updateValue;
+                        break;
+                }
+            }
+
+            if (p_nearDamage > 0)
+            {
+                nextNearDamage = " ( +" + p_nearDamage + " cấp kế tiếp )";
+            }
+            if (p_farDamage > 0)
+            {
+                nextFarDamage = " ( +" + p_farDamage + " cấp kế tiếp )";
+            }
+            if (p_food > 0)
+            {
+                nextFood = " ( +" + p_food + " cấp kế tiếp )";
+            }
+            if (p_health > 0)
+            {
+                nextHealth = " ( +" + p_health + " cấp kế tiếp )";
+            }
+            if (p_timeBwtAttack > 0)
+            {
+                nextTimeBwtAttack = " ( +" + p_timeBwtAttack + "  cấp kế tiếp )";
+            }
+            if (p_patrolDistance > 0)
+            {
+                nextPatrolDistance = " ( +" + p_patrolDistance + " cấp kế tiếp )";
+            }
+        }
+
+
+        builder.Append("Sức mạnh đánh gần: ").Append(GetNearDamage()).Append(nextNearDamage).AppendLine();
+        builder.Append("Sức mạnh đánh xa: ").Append(GetFarDamage()).Append(nextFarDamage).AppendLine();
+        builder.Append("Đói: ").Append(currentFood).Append("/").Append(GetMaxFood()).Append(nextFood).AppendLine();
+        builder.Append("Máu: ").Append(GetCurrentHealth()).Append("/").Append(GetMaxHealth()).Append(nextHealth).AppendLine();
+        builder.Append("Thời gian tấn công: ").Append(GetMaxTimeBwtAttack()).Append(nextTimeBwtAttack).AppendLine();
+        builder.Append("Khoảng cách tuần tra: ").Append(GetPatrolDistance()).Append(nextPatrolDistance).AppendLine();
 
         return builder.ToString();
     }
@@ -373,10 +446,13 @@ public class Pet : Health
     {
         return current < levels.Count ? (current + 1).ToString() : "Max";
     }
-
+    public void RecoverAllFood()
+    {
+        current = GetMaxFood();
+    }
     public bool IsMaxLevel()
     {
-        return current < levels.Count;
+        return current >= levels.Count;
     }
     public void Upgrade()
     {
@@ -386,6 +462,7 @@ public class Pet : Health
             return;
         }
         current += 1;
+        currentExe = nextExe;
         int current_level = current < levels.Count ? (current + 1) : levels.Count;
         nextExe = firstExe * current_level * nextLevelRate;
 
@@ -430,7 +507,7 @@ public class Pet : Health
 
         for (int i = 0; i < current_level; i++)
         {
-            Pet_Level_Item item = levels[current];
+            Pet_Level_Item item = levels[i];
             for (int j = 0; j < item.upgrades.Count; j++)
             {
                 Pet_Level_Item_Upgrade upgradeItem = item.upgrades[j];
@@ -464,6 +541,8 @@ public class Pet : Health
         plusTimeBwtAttack = p_timeBwtAttack;
         plusPatrolDistance = p_patrolDistance;
         plusHealth = p_health;
+
+        check.transform.localScale = new(GetPatrolDistance(), GetPatrolDistance(), 1);
     }
 
 }

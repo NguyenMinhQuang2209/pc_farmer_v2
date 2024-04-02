@@ -42,6 +42,10 @@ public abstract class Health : MonoBehaviour
     {
         currentHealth = Mathf.Min(currentHealth + health, GetMaxHealth());
     }
+    public void RecoverAllHealth()
+    {
+        currentHealth = GetMaxHealth();
+    }
     public int GetCurrentHealth()
     {
         return currentHealth;

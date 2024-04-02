@@ -252,16 +252,18 @@ MonoBehaviour:
   recoverHealthPricePerUnit: 1
   firstExe: 10
   nextLevelRate: 1.2
+  mainSprite: {fileID: 21300000, guid: ffab8c588138ad64f8c460086975e203, type: 3}
   levels:
   - price: 20
     upgrades:
     - upgradeName: 0
       updateValue: 2
+    - upgradeName: 1
+      updateValue: 1
   - price: 20
     upgrades:
     - upgradeName: 3
       updateValue: 2
-  mainSprite: {fileID: 21300000, guid: ffab8c588138ad64f8c460086975e203, type: 3}
 --- !u!50 &107476291
 Rigidbody2D:
   serializedVersion: 4
