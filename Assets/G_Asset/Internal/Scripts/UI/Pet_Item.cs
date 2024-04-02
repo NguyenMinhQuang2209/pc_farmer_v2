@@ -40,7 +40,7 @@ public class Pet_Item : MonoBehaviour
         {
             return;
         }
-        pet_level_txt.text = currentPet.GetLevel();
+        pet_level_txt.text = "Level: " + currentPet.GetLevel();
         float currentFood = currentPet.GetCurrentFood();
         float maxFood = currentPet.GetMaxFood();
         pet_hungry_slider.maxValue = maxFood;

@@ -89,6 +89,8 @@ public class Pet : Health
         currentExe = 0f;
 
         HealthInit();
+
+        currentFood = GetMaxFood();
     }
     private void Update()
     {
