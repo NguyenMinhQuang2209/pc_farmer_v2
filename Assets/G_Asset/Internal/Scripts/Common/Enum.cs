@@ -56,7 +56,8 @@ public enum UpgradeName
 }
 public enum LogMode
 {
-    Lack_Coin
+    Lack_Coin,
+    Inventory_Full
 }
 public enum ItemName
 {

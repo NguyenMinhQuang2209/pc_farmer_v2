@@ -25,6 +25,9 @@ public class LogController : MonoBehaviour
             case LogMode.Lack_Coin:
                 Log("Thiếu vàng.");
                 break;
+            case LogMode.Inventory_Full:
+                Log("Túi đã đầy");
+                break;
 
         }
     }

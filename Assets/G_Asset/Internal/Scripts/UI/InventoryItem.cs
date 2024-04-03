@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [HideInInspector] public Transform rootParent;
-    private ItemInit item = null;
-    private Item rootItem = null;
+    private Item item = null;
+    private int currentQuantity = 1;
 
     [SerializeField] private Image img;
     [SerializeField] private TextMeshProUGUI quantityTxt;
@@ -31,39 +31,55 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (item != null && !areDrag)
         {
-            quantityTxt.text = isShopItem ? "" : item.UseStack() ? item.GetCurrentQuantity().ToString() : "";
+            quantityTxt.text = isShopItem ? "" : item.UseStack() ? currentQuantity.ToString() : "";
         }
     }
 
     public void InventoryItemInit(Item item, int quantity, bool isShopItem)
     {
-        rootItem = item;
-        this.item = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
+        this.item = item;
         img.sprite = item.sprite;
         this.isShopItem = isShopItem;
         buy_ui.SetActive(isShopItem);
-        this.item.ChangeItemQuantity(quantity);
+        currentQuantity = quantity;
         if (this.isShopItem)
         {
             sellPrice = this.item.GetBuyPricePerUnit();
             priceTxt.text = sellPrice.ToString();
         }
+    }
+    public int GetTotalPrice()
+    {
+        return currentQuantity * item.GetSellPricePerUnit();
+    }
+    public int GetCurrentQuantity()
+    {
+        return currentQuantity;
+    }
+    public void ChangeCurrentQuantity(int v)
+    {
+        currentQuantity = Mathf.Min(v, item.GetMaxQuantity());
+    }
+    public int Add(int v)
+    {
+        if (item != null)
+        {
+            int max = item.GetMaxQuantity();
+            int next = currentQuantity + v;
+            if (next > max)
+            {
+                currentQuantity = max;
+                return next - max;
+            }
+            else
+            {
+                currentQuantity = next;
+                return 0;
+            }
+        }
+        return v;
     }
 
-    public void InventoryItemInit(ItemInit item, int quantity, bool isShopItem)
-    {
-        this.item = item.Clone();
-        this.item.ChangeItemQuantity(quantity);
-        img.sprite = item.sprite;
-        this.isShopItem = isShopItem;
-        buy_ui.SetActive(isShopItem);
-        this.item.ChangeItemQuantity(quantity);
-        if (this.isShopItem)
-        {
-            sellPrice = this.item.GetBuyPricePerUnit();
-            priceTxt.text = sellPrice.ToString();
-        }
-    }
     public int GetSellPrice()
     {
         return sellPrice;
@@ -109,21 +125,19 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
         return null;
     }
-    public ItemInit GetItemInit()
-    {
-        return item;
-    }
 
     public Item GetItem()
     {
-        return rootItem;
+        return item;
     }
-
     public void UseItem()
     {
-        if (rootItem != null)
-        {
-            rootItem.UseItem();
-        }
+
+    }
+
+    public bool CanAdd(int v)
+    {
+        int max = item.GetMaxQuantity();
+        return currentQuantity + v <= max;
     }
 }

@@ -97,16 +97,16 @@ public class InventoryController : MonoBehaviour
     }
     public int PickupItem(Item item, int quantity)
     {
-        ItemInit itemInit = new(item.sprite, item.itemName, item.currentQuantity, item.maxQuantity, item.price, item.buyRate);
         for (int i = 0; i < currentInventorySlot; i++)
         {
             InventorySlot currentSlot = inventorySlotStores[i];
             if (currentSlot.ExistItem())
             {
-                ItemInit currentItem = currentSlot.GetInventoryItemInit();
-                if (itemInit.GetItemName() == currentItem.GetItemName())
+                InventoryItem inventoryItem = currentSlot.GetInventory();
+                Item currentItem = currentSlot.GetInventoryItem();
+                if (item.GetItemName() == currentItem.GetItemName())
                 {
-                    int remain = currentItem.Add(quantity);
+                    int remain = inventoryItem.Add(quantity);
                     if (remain == 0)
                     {
                         return 0;
@@ -116,7 +116,7 @@ public class InventoryController : MonoBehaviour
             }
             else
             {
-                int nextQuantity = quantity < itemInit.GetMaxQuantity() ? quantity : itemInit.GetMaxQuantity();
+                int nextQuantity = quantity < item.GetMaxQuantity() ? quantity : item.GetMaxQuantity();
                 InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
                 tempItem.InventoryItemInit(item, nextQuantity, false);
                 quantity -= nextQuantity;
@@ -128,6 +128,7 @@ public class InventoryController : MonoBehaviour
         }
         return quantity;
     }
+
 
     public void InteractWithInventory()
     {
