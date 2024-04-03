@@ -8,6 +8,11 @@ public class Plant : MonoBehaviour
     [SerializeField] private Vector2Int collects = new();
     [SerializeField] private List<Sprite> growingSprites = new();
 
+    [Space(5)]
+    [Header("Collecting")]
+    [SerializeField] private Item item;
+    [SerializeField] private int quantity;
+
     public float GetGrowingTime()
     {
         return growingTime;
@@ -36,6 +41,15 @@ public class Plant : MonoBehaviour
         }
         int ran = Random.Range(min, max + 1);
         return ran;
+    }
+
+    public Item CollectItem()
+    {
+        return item;
+    }
+    public int CollectQuantity()
+    {
+        return quantity;
     }
 }
 [System.Serializable]

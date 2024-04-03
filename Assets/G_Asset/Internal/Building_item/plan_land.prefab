@@ -871,7 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bd08b42593d8a48b29e5968127031c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: Plant Sand
+  promptMessage: "\u0110\u1EA5t tr\u1ED3ng"
   useTrigger: 0
   useAnimator: 0
   spriteRenderer: {fileID: 2123030128}

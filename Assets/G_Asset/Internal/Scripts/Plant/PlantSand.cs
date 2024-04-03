@@ -14,6 +14,11 @@ public class PlantSand : Interactible
     float currentGrowingTime = 0f;
 
     bool canCollect = false;
+    string defaultPromptMessage = "";
+    private void Start()
+    {
+        defaultPromptMessage = promptMessage;
+    }
 
     private void Update()
     {
@@ -28,7 +33,7 @@ public class PlantSand : Interactible
 
             float currentPeriodTime = periodTime * currentIndex;
 
-            promptMessage = Mathf.Floor(targetTime - currentGrowingTime).ToString() + "s";
+            promptMessage = Mathf.Ceil(targetTime - currentGrowingTime).ToString() + "s";
 
             if (currentPeriodTime <= currentGrowingTime)
             {
@@ -49,7 +54,12 @@ public class PlantSand : Interactible
         {
             if (canCollect)
             {
-                Debug.Log("Collecting");
+                Item collectItem = plant.CollectItem();
+                int collectQuantity = plant.CollectQuantity();
+                InventoryController.instance.CollectingFullItem(collectItem, collectQuantity, transform.position);
+                spriteRenderer.sprite = null;
+                plant = null;
+                promptMessage = defaultPromptMessage;
             }
         }
         else
@@ -64,13 +74,16 @@ public class PlantSand : Interactible
     }
     public void ChangePlant(Plant newPlant)
     {
+        canCollect = false;
         plant = newPlant;
         currentIndex = 1;
-        targetTime = plant.GetGrowingTime();
-        periodTime = plant.TotalPeriodPerTime();
         currentGrowingTime = 0f;
-        canCollect = false;
-        ChangeSprite(0);
+        if (plant != null)
+        {
+            targetTime = plant.GetGrowingTime();
+            periodTime = plant.TotalPeriodPerTime();
+            ChangeSprite(0);
+        }
     }
 
     public void ChangeSprite(int pos)

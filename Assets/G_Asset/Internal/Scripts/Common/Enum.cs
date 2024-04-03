@@ -65,5 +65,6 @@ public enum ItemName
     Egg,
     FarmTile,
     Wheat,
+    WheatCollect,
     Other
 }

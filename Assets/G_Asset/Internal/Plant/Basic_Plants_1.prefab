@@ -97,10 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1363914fe0bcd4bbc741503b6e5b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growingTime: 60
+  growingTime: 20
+  collects: {x: 0, y: 0}
   growingSprites:
   - {fileID: 1535682725, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
   - {fileID: -943646639, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
   - {fileID: -98689672, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
   - {fileID: -1881444792, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
   - {fileID: 213749513, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
+  item: {fileID: 3485965799608517480, guid: 0a9827890db779c41bec7e6e01f552a1, type: 3}
+  quantity: 10

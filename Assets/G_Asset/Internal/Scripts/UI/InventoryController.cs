@@ -407,4 +407,13 @@ public class InventoryController : MonoBehaviour
             twoSideChestItems[i] = currentItem;
         }
     }
+
+    public void CollectingFullItem(Item item, int quantity, Vector3 pos)
+    {
+        int remain = PickupItem(item, quantity);
+        if (remain > 0)
+        {
+            LogController.instance.Log(LogMode.Inventory_Full);
+        }
+    }
 }
