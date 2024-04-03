@@ -19,6 +19,10 @@ public class BuildingController : MonoBehaviour
 
     public void UseBuildingItem(BuildingItem buildingItem)
     {
+        if (buildingItem != null)
+        {
+            PlantController.instance.ChangePlantItem(null);
+        }
         currentItem = buildingItem;
         CursorController.instance.ChangeCursor("", new() { });
         Transform player = PreferenceController.instance.player;

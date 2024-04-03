@@ -54,7 +54,11 @@ public class PlantSand : Interactible
         }
         else
         {
-            //ChangePlant();
+            PlantItem plantItem = PlantController.instance.UsePlantItem();
+            if (plantItem != null)
+            {
+                ChangePlant(plantItem.plant);
+            }
         }
 
     }

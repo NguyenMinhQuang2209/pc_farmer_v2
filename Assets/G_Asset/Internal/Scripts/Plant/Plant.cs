@@ -38,3 +38,10 @@ public class Plant : MonoBehaviour
         return ran;
     }
 }
+[System.Serializable]
+public class PlantItem
+{
+    public Plant plant;
+    public Sprite seedSprite;
+    public ItemName itemName;
+}
