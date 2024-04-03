@@ -28,4 +28,8 @@ public class Shop : Interactible
             init = true;
         }
     }
+    public void SetListItems(List<InventoryItem> newItems)
+    {
+        inventoryItems = newItems;
+    }
 }

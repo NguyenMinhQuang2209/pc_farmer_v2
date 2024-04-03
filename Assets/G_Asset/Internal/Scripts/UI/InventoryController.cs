@@ -126,6 +126,10 @@ public class InventoryController : MonoBehaviour
                 }
             }
         }
+        if (quantity > 0)
+        {
+            LogController.instance.Log(LogMode.Inventory_Full);
+        }
         return quantity;
     }
 
@@ -171,16 +175,9 @@ public class InventoryController : MonoBehaviour
         {
             return;
         }
-        if (currentChest != null)
+        if (currentShop != null)
         {
-            if (currentChest.OneSideChest())
-            {
-                currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
-            }
-            else
-            {
-                StoringTwoSideChest(currentChest.GetCurrentSlot());
-            }
+            currentShop.SetListItems(GetChestListItem(maxShopSlot, shopSlotStores));
         }
         currentShop = shop;
 
@@ -212,7 +209,7 @@ public class InventoryController : MonoBehaviour
         {
             if (currentChest.OneSideChest())
             {
-                currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot()));
+                currentChest.SetListItems(GetChestListItem(currentChest.GetCurrentSlot(), chestSlotStores));
             }
             else
             {
@@ -237,12 +234,12 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
-    public List<InventoryItem> GetChestListItem(int slot)
+    public List<InventoryItem> GetChestListItem(int slot, Dictionary<int, InventorySlot> storings)
     {
         List<InventoryItem> list = new();
         for (int i = 0; i < slot; i++)
         {
-            InventorySlot current_slot = chestSlotStores[i];
+            InventorySlot current_slot = storings[i];
             InventoryItem currentItem = current_slot.GetInventory();
             if (currentItem != null)
             {
