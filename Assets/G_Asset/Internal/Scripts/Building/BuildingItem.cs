@@ -16,18 +16,27 @@ public class BuildingItem : MonoBehaviour
     [SerializeField] private List<Building_Position_Center_Item> center_positions_item = new();
     [SerializeField] private float raycastDistance = 0.12f;
 
+    [SerializeField] private bool useCollider = false;
     [SerializeField] private LayerMask checkMask;
     [SerializeField] private int buildMask = 7;
     [SerializeField] private LayerMask colliderMask;
+
 
     Dictionary<string, bool> raycastChecks = new();
     Dictionary<BuildingPositionName, GameObject> dic_positionItems = new();
     Dictionary<BuildingCenterPositionName, Sprite> dic_centerpositionItems = new();
 
-    bool canBuild = true;
+    private List<Collider2D> colliders = new();
 
     SpriteRenderer spriteRender;
 
+    [Space(5)]
+    [Header("After building")]
+    [SerializeField] private bool useTrigger = false;
+    [SerializeField] private Vector2 colliderSize = new(0.16f, 0.16f);
+    [SerializeField] private bool isStatic = true;
+
+    bool building = false;
 
     private void Start()
     {
@@ -40,6 +49,7 @@ public class BuildingItem : MonoBehaviour
 
     public void BuildingInit()
     {
+        building = true;
         gameObject.layer = buildMask;
         SetupCache();
 
@@ -53,6 +63,17 @@ public class BuildingItem : MonoBehaviour
             interact.enabled = true;
         }
 
+        if (TryGetComponent<BoxCollider2D>(out var boxCollider2d))
+        {
+            boxCollider2d.size = colliderSize;
+            boxCollider2d.isTrigger = useTrigger;
+        }
+
+        if (TryGetComponent<Rigidbody2D>(out var rb))
+        {
+            rb.bodyType = isStatic ? RigidbodyType2D.Static : RigidbodyType2D.Kinematic;
+        }
+
         ReloadSpineMain();
     }
     public ItemName GetItemName()
@@ -60,10 +81,34 @@ public class BuildingItem : MonoBehaviour
         return itemName;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        if (building)
+        {
+            return;
+        }
         int layer = collision.gameObject.layer;
-        canBuild = ((1 << layer) & colliderMask) == 0;
+        if (useCollider)
+        {
+            if (((1 << layer) & colliderMask) != 0)
+            {
+                if (!colliders.Contains(collision))
+                {
+                    colliders.Add(collision);
+                }
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (building)
+        {
+            return;
+        }
+        if (useCollider)
+        {
+            colliders.Remove(collision);
+        }
     }
 
     public void SetupCache()
@@ -89,7 +134,7 @@ public class BuildingItem : MonoBehaviour
 
     public bool CanBuild()
     {
-        return canBuild;
+        return !useCollider || (colliders.Count == 0);
     }
 
     public void ReloadSpine()

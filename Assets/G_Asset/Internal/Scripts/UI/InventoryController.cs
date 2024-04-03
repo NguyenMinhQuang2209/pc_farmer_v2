@@ -40,6 +40,9 @@ public class InventoryController : MonoBehaviour
     private Dictionary<int, InventorySlot> chestSlotStores = new();
     private Dictionary<int, InventorySlot> shopSlotStores = new();
 
+
+    private Dictionary<string, int> quantityStores = new();
+
     private Chest currentChest = null;
     private Shop currentShop = null;
 
@@ -78,6 +81,33 @@ public class InventoryController : MonoBehaviour
         ui_shop.SetActive(false);
     }
 
+    private void Update()
+    {
+        for (int i = 1; i <= 9; i++)
+        {
+            if (Input.GetKeyUp(KeyCode.Alpha0 + i))
+            {
+                ClickQuickslot(i - 1);
+            }
+        }
+
+    }
+    public void ClickQuickslot(int index)
+    {
+        if (currentQuickSlot >= index)
+        {
+            InventorySlot slot = quickSlotStores[index];
+            InventoryItem inventoryItem = slot.GetInventory();
+            if (inventoryItem != null)
+            {
+                inventoryItem.UseItem();
+            }
+        }
+    }
+
+
+
+
     public void SpawnItem(int current, int max, Transform spawnPosition, bool showQuickslot, Dictionary<int, InventorySlot> store, bool isShop)
     {
         foreach (Transform child in spawnPosition)
@@ -96,6 +126,12 @@ public class InventoryController : MonoBehaviour
         }
     }
     public int PickupItem(Item item, int quantity)
+    {
+        int remain = PickupItemInventory(item, quantity);
+        ReloadQuantityItem();
+        return remain;
+    }
+    private int PickupItemInventory(Item item, int quantity)
     {
         for (int i = 0; i < currentInventorySlot; i++)
         {
@@ -136,19 +172,77 @@ public class InventoryController : MonoBehaviour
 
     public void InteractWithInventory()
     {
+        ReloadQuantityItem();
         CursorController.instance.ChangeCursor("Inventory", new() { ui_container, b_inventory });
     }
     public void InteractWithChest(Chest current)
     {
+        ReloadQuantityItem();
         if (currentChest != current)
         {
             InteractWithSlot(current, current.GetCurrentSlot(), maxChestSlot, chestSlotStores);
         }
         CursorController.instance.ChangeCursor("Interact_Chest", new() { ui_container, b_inventory, ui_chest });
     }
+    public int GetQuantity(string itemName)
+    {
+        return quantityStores.ContainsKey(itemName) ? quantityStores[itemName] : 0;
+    }
+    public bool EnoughToRemove(string itemName, int quantity)
+    {
+        int remain = quantityStores.ContainsKey(itemName) ? quantityStores[itemName] : 0;
+        return remain >= quantity;
+    }
+    private int RemoveItemInventory(string itemName, int quantity)
+    {
+        for (int i = 0; i < currentInventorySlot; i++)
+        {
+            InventorySlot currentSlot = inventorySlotStores[i];
+            InventoryItem inventoryItem = currentSlot.GetInventory();
+            if (inventoryItem != null)
+            {
+                if (inventoryItem.GetItemName() == itemName)
+                {
+                    int remain = inventoryItem.Minus(quantity);
+                    inventoryItem.CheckQuantity();
+                    quantity = remain;
+                    if (quantity == 0)
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < currentQuickSlot; i++)
+        {
+            InventorySlot currentSlot = quickSlotStores[i];
+            InventoryItem inventoryItem = currentSlot.GetInventory();
+            if (inventoryItem != null)
+            {
+                if (inventoryItem.GetItemName() == itemName)
+                {
+                    int remain = inventoryItem.Minus(quantity);
+                    inventoryItem.CheckQuantity();
+                    quantity = remain;
+                    if (quantity == 0)
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+        return quantity;
+    }
+    public int RemoveItem(string itemName, int quantity)
+    {
+        int remain = RemoveItemInventory(itemName, quantity);
+        ReloadQuantityItem();
+        return remain;
+    }
 
     public void InteractWithShop(Shop shop)
     {
+        ReloadQuantityItem();
         if (currentShop != shop)
         {
             InteractWithSlotShop(shop, maxShopSlot, shopSlotStores);
@@ -164,6 +258,27 @@ public class InventoryController : MonoBehaviour
             Item item = items[i];
             InventoryItem tempItem = Instantiate(inventory_item, trash_store.transform);
             tempItem.InventoryItemInit(item, 1, true);
+            tempItems.Add(tempItem);
+        }
+        return tempItems;
+    }
+
+    public List<InventoryItem> InventoryInitItem(List<PickupItemDetail> items, bool isShop = false)
+    {
+        List<InventoryItem> tempItems = new();
+        for (int i = 0; i < items.Count; i++)
+        {
+            PickupItemDetail item = items[i];
+            if (item.useRandom)
+            {
+                int min = Mathf.Min(item.quantityRange.x, item.quantityRange.y);
+                int max = Mathf.Max(item.quantityRange.x, item.quantityRange.y);
+                int quan = Random.Range(min, max + 1);
+                item.quantity = quan;
+            }
+            InventoryItem tempItem = Instantiate(inventory_item, trash_store.transform);
+            int nextQuantity = item.quantity <= item.item.GetMaxQuantity() ? item.quantity : item.item.GetMaxQuantity();
+            tempItem.InventoryItemInit(item.item, nextQuantity, isShop);
             tempItems.Add(tempItem);
         }
         return tempItems;
@@ -195,6 +310,33 @@ public class InventoryController : MonoBehaviour
                     tempItem.gameObject.SetActive(true);
                     tempItem.transform.SetParent(currentSlot.GetItemContainer());
                 }
+            }
+        }
+    }
+
+    public void ReloadQuantityItem()
+    {
+        quantityStores?.Clear();
+        for (int i = 0; i < currentInventorySlot; i++)
+        {
+            InventorySlot currentSlot = inventorySlotStores[i];
+            InventoryItem inventoryItem = currentSlot.GetInventory();
+            if (inventoryItem != null)
+            {
+                int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
+                int next = remain + inventoryItem.GetCurrentQuantity();
+                quantityStores[inventoryItem.GetItemName()] = next;
+            }
+        }
+        for (int i = 0; i < currentQuickSlot; i++)
+        {
+            InventorySlot currentSlot = quickSlotStores[i];
+            InventoryItem inventoryItem = currentSlot.GetInventory();
+            if (inventoryItem != null)
+            {
+                int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
+                int next = remain + inventoryItem.GetCurrentQuantity();
+                quantityStores[inventoryItem.GetItemName()] = next;
             }
         }
     }

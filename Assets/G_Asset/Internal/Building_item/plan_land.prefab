@@ -682,8 +682,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5721459342366326804}
   - component: {fileID: 5721459342366326805}
-  - component: {fileID: 2063046430732762187}
   - component: {fileID: -1484870868807889892}
+  - component: {fileID: 8466535568681135688}
+  - component: {fileID: 2063046430732762187}
   - component: {fileID: 2368011488085643836}
   m_Layer: 0
   m_Name: plan_land
@@ -768,6 +769,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &-1484870868807889892
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721459342366326806}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1}
+  m_EdgeRadius: 0
+--- !u!50 &8466535568681135688
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721459342366326806}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &2063046430732762187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,6 +828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d308d08a4b033d9449bcc7c12788ca29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 2
   position_items:
   - item: {fileID: 5721459341914438132}
     name: 0
@@ -797,40 +846,19 @@ MonoBehaviour:
     name: 7
   - item: {fileID: 5721459342953033155}
     name: 6
+  center_positions_item: []
   raycastDistance: 0.09
+  useCollider: 1
   checkMask:
     serializedVersion: 2
     m_Bits: 128
   buildMask: 7
   colliderMask:
     serializedVersion: 2
-    m_Bits: 128
---- !u!61 &-1484870868807889892
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721459342366326806}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.000000014901161, y: 0.00025992095}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.14752421, y: 0.14804399}
-  m_EdgeRadius: 0
+    m_Bits: 640
+  useTrigger: 1
+  colliderSize: {x: 0.13, y: 0.13}
+  isStatic: 1
 --- !u!114 &2368011488085643836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,6 +872,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptMessage: Plant Sand
+  useTrigger: 0
+  useAnimator: 0
   spriteRenderer: {fileID: 2123030128}
 --- !u!1 &5721459342953033155
 GameObject:

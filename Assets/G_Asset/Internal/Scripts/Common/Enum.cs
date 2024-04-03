@@ -63,5 +63,6 @@ public enum ItemName
 {
     Fence,
     Egg,
+    FarmTile,
     Other
 }

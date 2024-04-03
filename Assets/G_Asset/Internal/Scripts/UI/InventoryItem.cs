@@ -80,6 +80,32 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         return v;
     }
 
+    public int Minus(int v)
+    {
+        if (item != null)
+        {
+            int next = currentQuantity - v;
+            if (next < 0)
+            {
+                currentQuantity = 0;
+                return next * -1;
+            }
+            else
+            {
+                currentQuantity = next;
+                return 0;
+            }
+        }
+        return v;
+    }
+    public void CheckQuantity()
+    {
+        if (currentQuantity == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public int GetSellPrice()
     {
         return sellPrice;
@@ -132,7 +158,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void UseItem()
     {
-
+        if (item != null && item.TryGetComponent<Use_Item>(out var useItem))
+        {
+            useItem.UseItem();
+        }
     }
 
     public bool CanAdd(int v)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3485965799608517480}
   - component: {fileID: -5247118245218375367}
   m_Layer: 0
-  m_Name: fence
+  m_Name: farmtile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cacf1195dcf1c4408bef6b3864c2428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: -913395805, guid: 20e2e955c748d294aae07f62944a0ced, type: 3}
-  itemName: 0
+  sprite: {fileID: -1362651880, guid: c6db7047a6ad44a4c816d9bcfd571853, type: 3}
+  itemName: 2
   maxQuantity: 5
   price: 30
   buyRate: 1.5
@@ -62,4 +62,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0ab98116bea254bbd7c99cbb13cdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingItem: {fileID: 8221290388237518154, guid: c177bf05ea1ae4346a320f105b393114, type: 3}
+  buildingItem: {fileID: 2063046430732762187, guid: 0b3c40b13cd22884dae2ec94f665f909, type: 3}

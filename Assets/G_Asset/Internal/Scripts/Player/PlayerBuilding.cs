@@ -70,6 +70,7 @@ public class PlayerBuilding : MonoBehaviour
                 building_item_poolings[name] = tempItem;
             }
             preview_item = building_item.transform;
+            preview_item.gameObject.SetActive(true);
         }
         else
         {
@@ -78,10 +79,16 @@ public class PlayerBuilding : MonoBehaviour
     }
     public void Building()
     {
-        if (store_item != null)
+        if (store_item != null && building_item.CanBuild())
         {
             BuildingItem buildingItem = Instantiate(store_item, pos, Quaternion.Euler(rot));
             buildingItem.BuildingInit();
+            InventoryController.instance.RemoveItem(buildingItem.GetItemName().ToString(), 1);
+            int remain = InventoryController.instance.GetQuantity(buildingItem.GetItemName().ToString());
+            if (remain <= 0)
+            {
+                ChangeBuildingItem(null);
+            }
         }
     }
 }
