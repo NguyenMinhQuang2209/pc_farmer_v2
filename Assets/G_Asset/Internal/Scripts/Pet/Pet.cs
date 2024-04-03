@@ -404,7 +404,7 @@ public class Pet : Health
 
     public int RecoverCoin()
     {
-        return RecoverCoin(GetMaxHealth() - GetCurrentHealth());
+        return RecoverCoin((int)Mathf.Ceil(GetMaxHealth() - GetCurrentHealth()));
     }
 
     public int RecoverCoin(int v)

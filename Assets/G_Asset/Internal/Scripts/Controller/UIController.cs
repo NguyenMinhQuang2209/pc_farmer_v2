@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
 
     public GameObject pet;
     public GameObject inventory;
+    public GameObject update_ui;
 
     public EventHandler ChangeCursor;
     private void Awake()
@@ -31,17 +32,28 @@ public class UIController : MonoBehaviour
     private void HandleChangeCursor(object sender, EventArgs e)
     {
         PetController.instance.ChoosePet(null);
+        inventory.SetActive(true);
         pet.SetActive(false);
+        update_ui.SetActive(false);
     }
 
     public void OpenInventory()
     {
         inventory.SetActive(true);
         pet.SetActive(false);
+        update_ui.SetActive(false);
     }
     public void OpenPet()
     {
         inventory.SetActive(false);
         pet.SetActive(true);
+        update_ui.SetActive(false);
+    }
+
+    public void OpenUpdate()
+    {
+        inventory.SetActive(false);
+        pet.SetActive(false);
+        update_ui.SetActive(true);
     }
 }

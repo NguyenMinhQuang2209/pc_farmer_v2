@@ -54,6 +54,13 @@ public enum UpgradeName
     TimeBwtAttack,
     PatrolDistance
 }
+public enum PlusItem
+{
+    Health,
+    Food,
+    Speed,
+    Recover
+}
 public enum LogMode
 {
     Lack_Coin,

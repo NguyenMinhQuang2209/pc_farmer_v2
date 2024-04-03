@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float plusSpeedRate = 0.1f;
+    int plusSpeed = 0;
     private Animator animator;
     private Animator toolAnimator;
 
@@ -33,6 +35,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         playerInteract = GetComponent<PlayerInteract>();
+    }
+    public float GetSpeed()
+    {
+        return moveSpeed + plusSpeed * plusSpeedRate;
+    }
+    public void ChangeSpeedPlus(int v)
+    {
+        plusSpeed = v;
     }
     public void Movement(Vector2 dir)
     {
@@ -70,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", dir.x);
             animator.SetFloat("Vertical", dir.y);
             animator.SetFloat("Idle_State", nextIdle_state);
-            rb.MovePosition(rb.position + moveSpeed * dir * Time.deltaTime);
+            rb.MovePosition(rb.position + GetSpeed() * dir * Time.deltaTime);
         }
         animator.SetFloat("Speed", dir.sqrMagnitude >= 0.1f ? 1f : 0f);
     }
