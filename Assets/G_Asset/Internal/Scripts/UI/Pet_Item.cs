@@ -38,6 +38,11 @@ public class Pet_Item : MonoBehaviour
 
         }
     }
+    public void AddExe(float v)
+    {
+        currentPet.AddExe(v);
+    }
+
     private void Update()
     {
         if (currentPet == null)

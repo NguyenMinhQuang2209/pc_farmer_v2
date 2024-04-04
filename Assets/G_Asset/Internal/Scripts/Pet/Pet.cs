@@ -490,7 +490,7 @@ public class Pet : Health
     {
         return far_damage + plusFarDamage;
     }
-    public string GetPetDetail()
+    public string GetPetDetail(bool showNextLevel = true)
     {
         StringBuilder builder = new();
 
@@ -501,7 +501,7 @@ public class Pet : Health
         string nextTimeBwtAttack = "";
         string nextPatrolDistance = "";
 
-        if (!IsMaxLevel())
+        if (!IsMaxLevel() && showNextLevel)
         {
             int p_nearDamage = 0;
             int p_farDamage = 0;
@@ -592,9 +592,8 @@ public class Pet : Health
             return;
         }
         current += 1;
-        currentExe = nextExe;
-        int current_level = current < levels.Count ? (current + 1) : levels.Count;
-        nextExe = firstExe * current_level * nextLevelRate;
+        currentExe = 0f;
+        nextExe *= nextLevelRate;
 
         LoadUpgradeDetail();
     }

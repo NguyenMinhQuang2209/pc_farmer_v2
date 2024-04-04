@@ -314,8 +314,8 @@ MonoBehaviour:
       updateValue: 2
     - upgradeName: 1
       updateValue: 1
-  targetFoodReduce: 2
-  reduceFoodRate: 0.5
+  targetFoodReduce: 5
+  reduceFoodRate: 0.1
 --- !u!50 &107476291
 Rigidbody2D:
   serializedVersion: 4

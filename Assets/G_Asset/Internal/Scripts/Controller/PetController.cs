@@ -6,7 +6,7 @@ public class PetController : MonoBehaviour
 {
     public static PetController instance;
 
-    private List<Pet_Item> pets = new();
+    private readonly List<Pet_Item> pets = new();
 
     [SerializeField] private Pet_Item pet_item;
     [SerializeField] private Transform pet_container;
@@ -35,17 +35,27 @@ public class PetController : MonoBehaviour
         }
         for (int i = 0; i < defaultPet.Count; i++)
         {
-            BuyPet(defaultPet[i]);
+            BuyPet(defaultPet[i], 0);
         }
     }
 
-    public void BuyPet(Pet newPet)
+    public void BuyPet(Pet newPet, int price)
     {
-        Transform player = PreferenceController.instance.GetPlayer();
-        Pet pet = Instantiate(newPet, player.transform.position, Quaternion.identity);
-        Pet_Item currentPetItem = Instantiate(pet_item, pet_container.transform);
-        currentPetItem.PetInit(pet);
-        pets.Add(currentPetItem);
+        bool isEnough = CoinController.instance.IsEnough(price);
+
+        if (isEnough)
+        {
+            CoinController.instance.MinusCoin(price);
+            Transform player = PreferenceController.instance.GetPlayer();
+            Pet pet = Instantiate(newPet, player.transform.position, Quaternion.identity);
+            Pet_Item currentPetItem = Instantiate(pet_item, pet_container.transform);
+            currentPetItem.PetInit(pet);
+            pets.Add(currentPetItem);
+        }
+        else
+        {
+            LogController.instance.Log(LogMode.Lack_Coin);
+        }
     }
     public void CheckPet()
     {
@@ -112,5 +122,18 @@ public class PetController : MonoBehaviour
     {
         current_pet.ChangePetMode(mode);
         pet_status.PetStatusInit(current_pet);
+    }
+
+    public List<Pet_Item> GetPets()
+    {
+        return pets;
+    }
+    public void AddExeToPets(float v)
+    {
+        for (int i = 0; i < pets.Count; i++)
+        {
+            Pet_Item pet = pets[i];
+            pet.AddExe(v);
+        }
     }
 }

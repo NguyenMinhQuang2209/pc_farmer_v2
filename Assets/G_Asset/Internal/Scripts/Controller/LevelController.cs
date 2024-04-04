@@ -121,6 +121,7 @@ public class LevelController : MonoBehaviour
         foodSlider.value = playerHealth.GetCurrentFood();
         healthShowTxt.text = Mathf.Round(playerHealth.GetCurrentHealth()) + "/" + Mathf.Round(playerHealth.GetMaxHealth());
         foodShowTxt.text = Mathf.Round(playerHealth.GetCurrentFood()) + "/" + Mathf.Round(playerHealth.GetMaxFood());
+
     }
 
     public void UpdateTxt()
@@ -189,5 +190,6 @@ public class LevelController : MonoBehaviour
     public void AddExeTotal(float v)
     {
         AddExe(v);
+        PetController.instance.AddExeToPets(v);
     }
 }
