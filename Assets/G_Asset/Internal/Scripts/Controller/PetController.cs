@@ -92,13 +92,31 @@ public class PetController : MonoBehaviour
 
     public void RecoverFood()
     {
-        current_pet.RecoverAllFood();
+        FeedPet();
         ChoosePet(current_pet);
+    }
+    public void FeedPet()
+    {
+        Vector3 v = FoodController.instance.FeedPet();
+        if (v != Vector3.zero)
+        {
+            current_pet.Feed(v.x, v.y, v.z);
+        }
     }
     public void RecoverHealth()
     {
-        current_pet.RecoverAllHealth();
-        ChoosePet(current_pet);
+        int coin = current_pet.RecoverCoin();
+        bool isEnough = CoinController.instance.IsEnough(coin);
+        if (isEnough)
+        {
+            CoinController.instance.MinusCoin(coin);
+            current_pet.RecoverAllHealth();
+            ChoosePet(current_pet);
+        }
+        else
+        {
+            LogController.instance.Log(LogMode.Lack_Coin);
+        }
     }
     public void ReleasePet()
     {

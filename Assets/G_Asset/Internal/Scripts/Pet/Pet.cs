@@ -580,6 +580,7 @@ public class Pet : Health
     {
         currentFood = GetMaxFood();
     }
+
     public bool IsMaxLevel()
     {
         return current >= levels.Count;

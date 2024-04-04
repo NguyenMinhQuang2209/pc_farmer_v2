@@ -28,6 +28,9 @@ public class LogController : MonoBehaviour
             case LogMode.Inventory_Full:
                 Log("Túi đã đầy");
                 break;
+            case LogMode.Lack_Item:
+                Log("Thiếu item");
+                break;
 
         }
     }

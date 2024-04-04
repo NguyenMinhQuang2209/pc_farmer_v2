@@ -22,7 +22,10 @@ public class Item : MonoBehaviour
     {
         return maxQuantity > 1;
     }
-
+    public ItemName GetName()
+    {
+        return itemName;
+    }
     public string GetItemName()
     {
         return itemName.ToString();

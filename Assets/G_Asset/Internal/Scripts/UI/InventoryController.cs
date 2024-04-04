@@ -43,6 +43,7 @@ public class InventoryController : MonoBehaviour
 
     private Dictionary<string, int> quantityStores = new();
     private Dictionary<ItemType, int> typeQuantityStores = new();
+    private Dictionary<ItemType, List<string>> typeAndNameQuantityStores = new();
 
     private Chest currentChest = null;
     private Shop currentShop = null;
@@ -319,6 +320,7 @@ public class InventoryController : MonoBehaviour
     {
         quantityStores?.Clear();
         typeQuantityStores?.Clear();
+        typeAndNameQuantityStores?.Clear();
         for (int i = 0; i < currentInventorySlot; i++)
         {
             InventorySlot currentSlot = inventorySlotStores[i];
@@ -327,10 +329,18 @@ public class InventoryController : MonoBehaviour
             {
                 ItemType type = inventoryItem.GetItem().GetItemType();
                 int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
+
+                List<string> remainNameList = typeAndNameQuantityStores.ContainsKey(type) ? typeAndNameQuantityStores[type] : new();
+                remainNameList.Add(inventoryItem.GetItemName());
+                typeAndNameQuantityStores[type] = remainNameList;
+
                 int remainType = typeQuantityStores.ContainsKey(type) ? typeQuantityStores[type] : 0;
+
                 int next = remain + inventoryItem.GetCurrentQuantity();
+                int nextType = remainType + inventoryItem.GetCurrentQuantity();
+
                 quantityStores[inventoryItem.GetItemName()] = next;
-                typeQuantityStores[type] = remainType;
+                typeQuantityStores[type] = nextType;
             }
         }
         for (int i = 0; i < currentQuickSlot; i++)
@@ -342,9 +352,16 @@ public class InventoryController : MonoBehaviour
                 ItemType type = inventoryItem.GetItem().GetItemType();
                 int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
                 int remainType = typeQuantityStores.ContainsKey(type) ? typeQuantityStores[type] : 0;
+
                 int next = remain + inventoryItem.GetCurrentQuantity();
                 quantityStores[inventoryItem.GetItemName()] = next;
-                typeQuantityStores[type] = remainType;
+
+                int nextType = remainType + inventoryItem.GetCurrentQuantity();
+                typeQuantityStores[type] = nextType;
+
+                List<string> remainNameList = typeAndNameQuantityStores.ContainsKey(type) ? typeAndNameQuantityStores[type] : new();
+                remainNameList.Add(inventoryItem.GetItemName());
+                typeAndNameQuantityStores[type] = remainNameList;
             }
         }
     }
@@ -355,6 +372,16 @@ public class InventoryController : MonoBehaviour
             return typeQuantityStores[type];
         }
         return 0;
+    }
+
+    public string GetInventoryItemNameByType(ItemType type)
+    {
+        if (typeAndNameQuantityStores.ContainsKey(type))
+        {
+            List<string> names = typeAndNameQuantityStores[type];
+            return names[0];
+        }
+        return "";
     }
 
     public void InteractWithSlot(Chest current, int slot, int maxSlot, Dictionary<int, InventorySlot> stores)

@@ -64,13 +64,14 @@ public enum PlusItem
 public enum LogMode
 {
     Lack_Coin,
-    Inventory_Full
+    Inventory_Full,
+    Lack_Item
 }
 
 public enum ItemType
 {
+    Other,
     Food,
-    Other
 }
 
 public enum ItemName

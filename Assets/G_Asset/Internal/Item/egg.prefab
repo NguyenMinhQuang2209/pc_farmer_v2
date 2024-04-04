@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5466850648579262513}
   - component: {fileID: 3485965799608517480}
+  - component: {fileID: -9216836400689548515}
   m_Layer: 0
   m_Name: egg
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: e0edc0072350239448ae29d24c8a79d1, type: 3}
   itemName: 1
+  itemType: 1
   maxQuantity: 2
   price: 20
   buyRate: 1.2
+--- !u!114 &-9216836400689548515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4771231278513597773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a56cb52adba40458b5e2dacd74cdf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 10
+  plusDurationEffect: 1

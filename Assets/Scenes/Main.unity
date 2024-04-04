@@ -3073,9 +3073,10 @@ GameObject:
   m_Component:
   - component: {fileID: 153893240}
   - component: {fileID: 153893241}
-  - component: {fileID: 153893242}
   - component: {fileID: 153893243}
   - component: {fileID: 153893244}
+  - component: {fileID: 153893245}
+  - component: {fileID: 153893242}
   m_Layer: 0
   m_Name: controller
   m_TagString: Untagged
@@ -3131,6 +3132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  items:
+  - item: {fileID: 3485965799608517480, guid: 6ef2ee992cfb29e46a69d6ffe5b59503, type: 3}
+    itemName: 1
 --- !u!114 &153893243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3153,6 +3157,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24c7b625de583e24daa11e04bfa18a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &153893245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153893239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281194bc3d9b25a44a7671bd05b2d3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &157186064
@@ -3324,7 +3340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.5140991, y: 31.5867}
+  m_AnchoredPosition: {x: -0.5140991, y: 31.586731}
   m_SizeDelta: {x: -87.9393, y: 24.1014}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &227084777
@@ -6660,7 +6676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3391bad6bc0201949b4cf63eea243a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCoin: 50
+  currentCoin: 100
   coinTxt: {fileID: 1619449038}
 --- !u!1 &691344769
 GameObject:
@@ -10106,7 +10122,7 @@ MonoBehaviour:
   waitToRecoverTimer: 8
   maxFood: 30
   plusFoodRate: 3
-  targetFoodReduce: 7
+  targetFoodReduce: 8
   reduceFoodRate: 0.1
 --- !u!1 &1115618591
 GameObject:
@@ -21108,7 +21124,7 @@ PrefabInstance:
     - target: {fileID: 8573040838385703233, guid: 5bf59c82e02203d4ea0a85e55dbb4e89, type: 3}
       propertyPath: items.Array.data[2].item
       value: 
-      objectReference: {fileID: 3485965799608517480, guid: 8c4b6d0a42435e344baf26deb988a0de, type: 3}
+      objectReference: {fileID: 3485965799608517480, guid: 6ef2ee992cfb29e46a69d6ffe5b59503, type: 3}
     - target: {fileID: 8573040838385703233, guid: 5bf59c82e02203d4ea0a85e55dbb4e89, type: 3}
       propertyPath: items.Array.data[0].quantity
       value: 3
@@ -21119,7 +21135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8573040838385703233, guid: 5bf59c82e02203d4ea0a85e55dbb4e89, type: 3}
       propertyPath: items.Array.data[2].quantity
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8573040838385703233, guid: 5bf59c82e02203d4ea0a85e55dbb4e89, type: 3}
       propertyPath: items.Array.data[0].useRandom

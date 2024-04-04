@@ -32,10 +32,10 @@ public class Pet_Item : MonoBehaviour
     }
     public void FeedPet()
     {
-        int quantity = InventoryController.instance.GetRemainTypeQuantity(ItemType.Food);
-        if (quantity > 0f)
+        Vector3 v = FoodController.instance.FeedPet();
+        if (v != Vector3.zero)
         {
-
+            currentPet.Feed(v.x, v.y, v.z);
         }
     }
     public void AddExe(float v)
