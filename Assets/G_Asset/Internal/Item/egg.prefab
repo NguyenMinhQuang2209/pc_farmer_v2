@@ -64,4 +64,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 10
-  plusDurationEffect: 1
+  plusDuration: 0
+  duractionEffectTimer: 0

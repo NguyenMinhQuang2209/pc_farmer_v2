@@ -8,6 +8,9 @@ public class Chest : Interactible
     [SerializeField]
     private int currentSlot = 1;
 
+    [SerializeField]
+    [Range(0f, 100f)] private float twoSideChestRate = 10f;
+
     [Tooltip("One side chest is storing in the difference place not the same place")]
     [SerializeField] private bool oneSideChest = true;
     private List<InventoryItem> items = new();
@@ -17,7 +20,7 @@ public class Chest : Interactible
     private void Start()
     {
         animator = GetComponent<Animator>();
-        promptMessage += oneSideChest ? " one side" : " two side";
+        promptMessage += oneSideChest ? " 1 chiều" : " 2 chiều";
     }
     public override void Interact()
     {
@@ -28,6 +31,18 @@ public class Chest : Interactible
         animator.SetBool("Open", true);
         InteractController.instance.InteractItem(this);
         InventoryController.instance.InteractWithChest(this);
+    }
+    public override void InteractInit()
+    {
+        float ran = Random.Range(0f, 100f);
+        if (ran <= twoSideChestRate)
+        {
+            oneSideChest = false;
+        }
+        else
+        {
+            oneSideChest = true;
+        }
     }
 
     public void ChestInit()

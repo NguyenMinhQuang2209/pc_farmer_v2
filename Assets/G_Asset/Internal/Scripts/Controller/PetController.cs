@@ -16,6 +16,9 @@ public class PetController : MonoBehaviour
     [SerializeField] private List<Pet> defaultPet = new();
 
     private Pet current_pet = null;
+    int index = 0;
+
+    int choosePetIndex = -1;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -49,7 +52,8 @@ public class PetController : MonoBehaviour
             Transform player = PreferenceController.instance.GetPlayer();
             Pet pet = Instantiate(newPet, player.transform.position, Quaternion.identity);
             Pet_Item currentPetItem = Instantiate(pet_item, pet_container.transform);
-            currentPetItem.PetInit(pet);
+            currentPetItem.PetInit(pet, index);
+            index++;
             pets.Add(currentPetItem);
         }
         else
@@ -79,8 +83,9 @@ public class PetController : MonoBehaviour
         }
     }
 
-    public void ChoosePet(Pet newPet)
+    public void ChoosePet(Pet newPet, int index)
     {
+        choosePetIndex = index;
         current_pet = newPet;
         CheckCurrentPet();
         if (current_pet != null)
@@ -93,7 +98,7 @@ public class PetController : MonoBehaviour
     public void RecoverFood()
     {
         FeedPet();
-        ChoosePet(current_pet);
+        ChoosePet(current_pet, choosePetIndex);
     }
     public void FeedPet()
     {
@@ -111,7 +116,7 @@ public class PetController : MonoBehaviour
         {
             CoinController.instance.MinusCoin(coin);
             current_pet.RecoverAllHealth();
-            ChoosePet(current_pet);
+            ChoosePet(current_pet, choosePetIndex);
         }
         else
         {
@@ -120,8 +125,12 @@ public class PetController : MonoBehaviour
     }
     public void ReleasePet()
     {
+        Pet_Item currentPetItem = pets[choosePetIndex];
+
+        pets.RemoveAt(choosePetIndex);
+        Destroy(currentPetItem.gameObject);
         Destroy(current_pet.gameObject);
-        ChoosePet(null);
+        ChoosePet(null, -1);
         CheckCurrentPet();
         CheckPet();
     }
@@ -133,7 +142,7 @@ public class PetController : MonoBehaviour
     public void UpgradePet()
     {
         current_pet.Upgrade();
-        ChoosePet(current_pet);
+        ChoosePet(current_pet, choosePetIndex);
     }
 
     public void ChangetPetMode(PetMode mode)

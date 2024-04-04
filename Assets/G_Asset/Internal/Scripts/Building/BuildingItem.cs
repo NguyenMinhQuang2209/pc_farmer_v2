@@ -11,6 +11,8 @@ public class BuildingItem : MonoBehaviour
     public static string Down = "Down";
 
     [SerializeField] private ItemName itemName;
+    [SerializeField]
+    private bool checkRayCast = true;
 
     [SerializeField] private List<Building_Position_Item> position_items = new();
     [SerializeField] private List<Building_Position_Center_Item> center_positions_item = new();
@@ -61,6 +63,7 @@ public class BuildingItem : MonoBehaviour
         if (TryGetComponent<Interactible>(out var interact))
         {
             interact.enabled = true;
+            interact.InteractInit();
         }
 
         if (TryGetComponent<BoxCollider2D>(out var boxCollider2d))
@@ -74,7 +77,11 @@ public class BuildingItem : MonoBehaviour
             rb.bodyType = isStatic ? RigidbodyType2D.Static : RigidbodyType2D.Kinematic;
         }
 
-        ReloadSpineMain();
+
+        if (checkRayCast)
+        {
+            ReloadSpineMain();
+        }
     }
     public ItemName GetItemName()
     {

@@ -81,5 +81,8 @@ public enum ItemName
     FarmTile,
     Wheat,
     WheatCollect,
+    Chest,
+    CaTim,
+    CatimCollect,
     Other
 }

@@ -14,6 +14,8 @@ public class Pet_Item : MonoBehaviour
     [SerializeField] private Button detail_btn;
     [SerializeField] private Button feed_btn;
     private Pet currentPet;
+
+    int index;
     private void Start()
     {
         detail_btn.onClick.AddListener(() =>
@@ -28,7 +30,7 @@ public class Pet_Item : MonoBehaviour
 
     public void ShowDetail()
     {
-        PetController.instance.ChoosePet(currentPet);
+        PetController.instance.ChoosePet(currentPet, index);
     }
     public void FeedPet()
     {
@@ -61,8 +63,9 @@ public class Pet_Item : MonoBehaviour
         return currentPet;
     }
 
-    public void PetInit(Pet newPet)
+    public void PetInit(Pet newPet, int index)
     {
+        this.index = index;
         currentPet = newPet;
         pet_img.sprite = currentPet.GetSprite();
         pet_name_txt.text = currentPet.PetName();

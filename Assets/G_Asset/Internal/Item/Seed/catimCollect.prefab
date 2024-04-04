@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3485965799608517480}
   - component: {fileID: 796687643929452375}
   m_Layer: 0
-  m_Name: WheatCollect
+  m_Name: catimCollect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cacf1195dcf1c4408bef6b3864c2428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 213749513, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
-  itemName: 4
+  sprite: {fileID: 665139040, guid: 695c523fc23fe3d4986ce00f39df0337, type: 3}
+  itemName: 7
   itemType: 1
   maxQuantity: 10
   price: 30
@@ -63,6 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a56cb52adba40458b5e2dacd74cdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 15
+  value: 20
   plusDuration: 1
-  duractionEffectTimer: 5
+  duractionEffectTimer: 3

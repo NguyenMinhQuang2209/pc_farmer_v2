@@ -30,7 +30,10 @@ public class InteractTarget : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Interactible>(out var interactible))
         {
-            interactTarget = interactible;
+            if (interactible.enabled)
+            {
+                interactTarget = interactible;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

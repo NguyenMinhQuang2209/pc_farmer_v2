@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
 
     private void HandleChangeCursor(object sender, EventArgs e)
     {
-        PetController.instance.ChoosePet(null);
+        PetController.instance.ChoosePet(null, -1);
         inventory.SetActive(true);
         pet.SetActive(false);
         update_ui.SetActive(false);
