@@ -6,6 +6,7 @@ public class Item : MonoBehaviour
 {
     public Sprite sprite;
     public ItemName itemName;
+    public ItemType itemType;
     public int maxQuantity = 1;
     public int price = 1;
     public float buyRate = 1;
@@ -26,6 +27,11 @@ public class Item : MonoBehaviour
     {
         return itemName.ToString();
     }
+    public ItemType GetItemType()
+    {
+        return itemType;
+    }
+
     public int GetSellPricePerUnit()
     {
         return price;

@@ -22,35 +22,40 @@ public abstract class Health : MonoBehaviour
         currentHealth = maxHealth + plusHealth;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         if (isDealth)
         {
             return;
         }
+        currentRecoverTimer = 0f;
         currentHealth = Mathf.Max(0, currentHealth - damage);
         if (currentHealth == 0)
         {
             Dealth();
         }
     }
-    public virtual void TakeDamage(int damage, GameObject target)
+    public virtual void TakeDamage(float damage, GameObject target)
     {
-        currentRecoverTimer = 0f;
         TakeDamage(damage);
     }
 
-    public void RecoverHealthInit()
+    public virtual void RecoverHealthInit()
     {
         if (currentHealth < GetMaxHealth())
         {
             currentRecoverTimer += Time.deltaTime;
             if (currentRecoverTimer >= waitToRecoverTimer)
             {
+                currentRecoverTimer = waitToRecoverTimer;
                 float hp = GetRecoverRate() * Time.deltaTime;
                 RecoverHealth(hp);
             }
         }
+    }
+    public void ResetTime()
+    {
+        currentRecoverTimer = 0f;
     }
 
     public virtual void Dealth()
@@ -64,6 +69,10 @@ public abstract class Health : MonoBehaviour
     public void RecoverHealth(float health)
     {
         currentHealth = Mathf.Min(currentHealth + health, GetMaxHealth());
+        if (currentHealth == GetMaxHealth())
+        {
+            ResetTime();
+        }
     }
     public void RecoverAllHealth()
     {

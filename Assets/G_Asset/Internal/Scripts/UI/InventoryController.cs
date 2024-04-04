@@ -42,6 +42,7 @@ public class InventoryController : MonoBehaviour
 
 
     private Dictionary<string, int> quantityStores = new();
+    private Dictionary<ItemType, int> typeQuantityStores = new();
 
     private Chest currentChest = null;
     private Shop currentShop = null;
@@ -317,15 +318,19 @@ public class InventoryController : MonoBehaviour
     public void ReloadQuantityItem()
     {
         quantityStores?.Clear();
+        typeQuantityStores?.Clear();
         for (int i = 0; i < currentInventorySlot; i++)
         {
             InventorySlot currentSlot = inventorySlotStores[i];
             InventoryItem inventoryItem = currentSlot.GetInventory();
             if (inventoryItem != null)
             {
+                ItemType type = inventoryItem.GetItem().GetItemType();
                 int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
+                int remainType = typeQuantityStores.ContainsKey(type) ? typeQuantityStores[type] : 0;
                 int next = remain + inventoryItem.GetCurrentQuantity();
                 quantityStores[inventoryItem.GetItemName()] = next;
+                typeQuantityStores[type] = remainType;
             }
         }
         for (int i = 0; i < currentQuickSlot; i++)
@@ -334,11 +339,22 @@ public class InventoryController : MonoBehaviour
             InventoryItem inventoryItem = currentSlot.GetInventory();
             if (inventoryItem != null)
             {
+                ItemType type = inventoryItem.GetItem().GetItemType();
                 int remain = quantityStores.ContainsKey(inventoryItem.GetItemName()) ? quantityStores[inventoryItem.GetItemName()] : 0;
+                int remainType = typeQuantityStores.ContainsKey(type) ? typeQuantityStores[type] : 0;
                 int next = remain + inventoryItem.GetCurrentQuantity();
                 quantityStores[inventoryItem.GetItemName()] = next;
+                typeQuantityStores[type] = remainType;
             }
         }
+    }
+    public int GetRemainTypeQuantity(ItemType type)
+    {
+        if (typeQuantityStores.ContainsKey(type))
+        {
+            return typeQuantityStores[type];
+        }
+        return 0;
     }
 
     public void InteractWithSlot(Chest current, int slot, int maxSlot, Dictionary<int, InventorySlot> stores)

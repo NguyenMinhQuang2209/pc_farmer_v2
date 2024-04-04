@@ -66,6 +66,13 @@ public enum LogMode
     Lack_Coin,
     Inventory_Full
 }
+
+public enum ItemType
+{
+    Food,
+    Other
+}
+
 public enum ItemName
 {
     Fence,

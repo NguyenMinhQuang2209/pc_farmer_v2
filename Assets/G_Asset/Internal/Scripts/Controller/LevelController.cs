@@ -41,6 +41,12 @@ public class LevelController : MonoBehaviour
 
     private PlayerHealth playerHealth = null;
 
+    [Header("Health Food UI")]
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI healthShowTxt;
+    [SerializeField] private Slider foodSlider;
+    [SerializeField] private TextMeshProUGUI foodShowTxt;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -85,32 +91,42 @@ public class LevelController : MonoBehaviour
         if (player.TryGetComponent<PlayerHealth>(out playerHealth))
         {
             UpdateTxt();
+            healthSlider.maxValue = playerHealth.GetMaxHealth();
+            foodSlider.maxValue = playerHealth.GetMaxFood();
+
+            healthShowTxt.text = Mathf.Round(playerHealth.GetCurrentHealth()) + "/" + Mathf.Round(playerHealth.GetMaxHealth());
+            foodShowTxt.text = Mathf.Round(playerHealth.GetCurrentFood()) + "/" + Mathf.Round(playerHealth.GetMaxFood());
         }
 
         healthPlusTxt.text = "+" + plusHealth;
         hungryPlusTxt.text = "+" + plusHungry;
         speedPlusTxt.text = "+" + plusSpeed;
         recoverHealthPlusTxt.text = "+" + plusRecoverHealth;
+
+        healthSlider.minValue = 0f;
+        foodSlider.minValue = 0f;
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            AddExe(1);
-        }
         string cursor = CursorController.instance.CurrentCursor();
         if (cursor != "")
         {
             healthTxt.text = "Máu: " + Mathf.Round(playerHealth.GetCurrentHealth()) + "/" + Mathf.Round(playerHealth.GetMaxHealth());
-            hungryTxt.text = "Đói: " + playerHealth.GetCurrentFood() + "/" + playerHealth.GetMaxFood();
+            hungryTxt.text = "Đói: " + Mathf.Round(playerHealth.GetCurrentFood()) + "/" + Mathf.Round(playerHealth.GetMaxFood());
         }
+
+        healthSlider.value = playerHealth.GetCurrentHealth();
+        foodSlider.value = playerHealth.GetCurrentFood();
+        healthShowTxt.text = Mathf.Round(playerHealth.GetCurrentHealth()) + "/" + Mathf.Round(playerHealth.GetMaxHealth());
+        foodShowTxt.text = Mathf.Round(playerHealth.GetCurrentFood()) + "/" + Mathf.Round(playerHealth.GetMaxFood());
     }
 
     public void UpdateTxt()
     {
         healthTxt.text = "Máu: " + Mathf.Round(playerHealth.GetCurrentHealth()) + "/" + Mathf.Round(playerHealth.GetMaxHealth());
-        hungryTxt.text = "Đói: " + playerHealth.GetCurrentFood() + "/" + playerHealth.GetMaxFood();
+        hungryTxt.text = "Đói: " + Mathf.Round(playerHealth.GetCurrentFood()) + "/" + Mathf.Round(playerHealth.GetMaxFood());
         speedTxt.text = "Tốc độ:" + playerHealth.GetSpeed();
         recoverHealthTxt.text = "Tốc độ hồi phục: " + playerHealth.GetRecoverRate();
     }
@@ -148,6 +164,9 @@ public class LevelController : MonoBehaviour
         remainPointTxt.text = "Điểm tiềm năng: " + remainPoint.ToString();
         playerHealth.ChangePlus(plusHealth, plusHungry, plusSpeed, plusRecoverHealth);
 
+        healthSlider.maxValue = playerHealth.GetMaxHealth();
+        foodSlider.maxValue = playerHealth.GetMaxFood();
+
         UpdateTxt();
     }
     public void AddExe(float v)
@@ -165,5 +184,10 @@ public class LevelController : MonoBehaviour
         }
         exeTxt.text = currentExe + "/" + targetExe;
         exeSlider.value = currentExe;
+    }
+
+    public void AddExeTotal(float v)
+    {
+        AddExe(v);
     }
 }

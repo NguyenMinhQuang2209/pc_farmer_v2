@@ -60,9 +60,9 @@ public class Pet : Health
     [Space(5)]
     [Header("Pet upgrade")]
     [SerializeField] private string pet_name = "";
-    [SerializeField] private int maxFood = 100;
+    [SerializeField] private float maxFood = 100f;
     int plusFood = 0;
-    int currentFood = 0;
+    float currentFood = 0f;
     [SerializeField] private int near_damage = 1;
     int plusNearDamage = 0;
     [SerializeField] private int far_damage = 1;
@@ -81,6 +81,12 @@ public class Pet : Health
 
     float currentExe = 0f;
     float nextExe = 0f;
+
+    [Header("Food")]
+    [SerializeField] private float targetFoodReduce = 1f;
+    [SerializeField] private float reduceFoodRate = 1f;
+    float plusFoodReduceTimer = 0f;
+    float currentFoodReduce = 0f;
 
     private void Start()
     {
@@ -119,6 +125,8 @@ public class Pet : Health
         }
         currentTimeBwtAttack = Mathf.Min(currentTimeBwtAttack + Time.deltaTime, timeBwtAttack);
         StateMachine();
+
+        ComsumeFood();
     }
 
 
@@ -356,7 +364,7 @@ public class Pet : Health
         }
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         animator.SetTrigger(HURT);
         base.TakeDamage(damage);
@@ -385,14 +393,77 @@ public class Pet : Health
     {
         return mainSprite;
     }
-    public int GetCurrentFood()
+    public float GetMaxFood()
     {
-        return currentFood;
+        return Mathf.Ceil(maxFood + plusFood);
     }
-    public int GetMaxFood()
+    public float GetCurrentFood()
     {
-        return maxFood + plusFood;
+        return Mathf.Ceil(currentFood);
     }
+    public override void RecoverHealthInit()
+    {
+        if (GetCurrentFood() == 0f)
+        {
+            ResetTime();
+            return;
+        }
+        base.RecoverHealthInit();
+    }
+    public void ChangePlusReduceTimer(float newTime, float duration)
+    {
+        currentFoodReduce = 0f;
+        plusFoodReduceTimer = newTime;
+        Invoke(nameof(ResetPlusTime), duration);
+    }
+
+    public void ChangePlusReduceTimer(float newTime)
+    {
+        currentFoodReduce = 0f;
+        plusFoodReduceTimer = newTime;
+    }
+    public void Feed(float v)
+    {
+        currentFood = Mathf.Min(currentFood + v, GetMaxFood());
+        currentFoodReduce = 0f;
+    }
+    public void Feed(float v, float newTime)
+    {
+        currentFood = Mathf.Min(currentFood + v, GetMaxFood());
+        ChangePlusReduceTimer(newTime);
+    }
+    public void Feed(float v, float newTime, float duration)
+    {
+        currentFood = Mathf.Min(currentFood + v, GetMaxFood());
+        ChangePlusReduceTimer(newTime, duration);
+    }
+
+    private void ResetPlusTime()
+    {
+        plusFoodReduceTimer = 0f;
+    }
+
+    public void ComsumeFood()
+    {
+        if (currentFood > 0f)
+        {
+            currentFoodReduce += Time.deltaTime;
+            if (currentFoodReduce >= targetFoodReduce + plusFoodReduceTimer)
+            {
+                currentFoodReduce = targetFoodReduce + plusFoodReduceTimer;
+                UseFood();
+            }
+        }
+    }
+    public void UseFood()
+    {
+        currentFood = Mathf.Max(0f, currentFood - Time.deltaTime * reduceFoodRate);
+        if (currentFood == 0f)
+        {
+            currentFoodReduce = 0f;
+        }
+    }
+
     public float GetMaxTimeBwtAttack()
     {
         return timeBwtAttack + plusTimeBwtAttack;
@@ -494,8 +565,8 @@ public class Pet : Health
 
         builder.Append("Sức mạnh đánh gần: ").Append(GetNearDamage()).Append(nextNearDamage).AppendLine();
         builder.Append("Sức mạnh đánh xa: ").Append(GetFarDamage()).Append(nextFarDamage).AppendLine();
-        builder.Append("Đói: ").Append(currentFood).Append("/").Append(GetMaxFood()).Append(nextFood).AppendLine();
-        builder.Append("Máu: ").Append(GetCurrentHealth()).Append("/").Append(GetMaxHealth()).Append(nextHealth).AppendLine();
+        builder.Append("Đói: ").Append(GetMaxFood()).Append(nextFood).AppendLine();
+        builder.Append("Máu: ").Append(Mathf.Round(GetCurrentHealth())).Append("/").Append(GetMaxHealth()).Append(nextHealth).AppendLine();
         builder.Append("Thời gian tấn công: ").Append(GetMaxTimeBwtAttack()).Append(nextTimeBwtAttack).AppendLine();
         builder.Append("Khoảng cách tuần tra: ").Append(GetPatrolDistance()).Append(nextPatrolDistance).AppendLine();
 
@@ -507,7 +578,7 @@ public class Pet : Health
     }
     public void RecoverAllFood()
     {
-        current = GetMaxFood();
+        currentFood = GetMaxFood();
     }
     public bool IsMaxLevel()
     {

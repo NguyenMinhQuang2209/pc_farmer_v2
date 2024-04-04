@@ -262,6 +262,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  plusHealthRate: 1
+  currentHealth: 0
+  recoverHealthDefault: 1
+  recoverHealthRate: 1
+  waitToRecoverTimer: 2
   moveSpeed: 0.1
   runSpeed: 0.2
   stopDistance: 0.1
@@ -290,7 +295,7 @@ MonoBehaviour:
   pet_name: "V\u1EB9t"
   maxFood: 100
   near_damage: 1
-  far_damage: 1
+  far_damage: 0
   timeBwtAttack: 3
   recoverHealthPricePerUnit: 1
   firstExe: 10
@@ -309,6 +314,8 @@ MonoBehaviour:
       updateValue: 2
     - upgradeName: 1
       updateValue: 1
+  targetFoodReduce: 2
+  reduceFoodRate: 0.5
 --- !u!50 &107476291
 Rigidbody2D:
   serializedVersion: 4
