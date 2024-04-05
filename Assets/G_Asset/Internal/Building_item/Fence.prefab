@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 0
+  checkRayCast: 1
   position_items: []
   center_positions_item:
   - sprite: {fileID: -913395805, guid: 20e2e955c748d294aae07f62944a0ced, type: 3}
@@ -189,7 +190,7 @@ MonoBehaviour:
   buildMask: 9
   colliderMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 1664
   useTrigger: 0
   colliderSize: {x: 0.16, y: 0.1}
   isStatic: 1

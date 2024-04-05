@@ -829,6 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 2
+  checkRayCast: 1
   position_items:
   - item: {fileID: 5721459341914438132}
     name: 0
@@ -855,7 +856,7 @@ MonoBehaviour:
   buildMask: 7
   colliderMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 1664
   useTrigger: 1
   colliderSize: {x: 0.13, y: 0.13}
   isStatic: 1

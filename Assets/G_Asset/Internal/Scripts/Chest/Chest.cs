@@ -7,6 +7,7 @@ public class Chest : Interactible
     private Animator animator;
     [SerializeField]
     private int currentSlot = 1;
+    [SerializeField] private int maxSlot = 16;
 
     [SerializeField]
     [Range(0f, 100f)] private float twoSideChestRate = 10f;
@@ -21,6 +22,9 @@ public class Chest : Interactible
     {
         animator = GetComponent<Animator>();
         promptMessage += oneSideChest ? " 1 chiều" : " 2 chiều";
+
+        int randomSlot = Random.Range(1, maxSlot + 1);
+        currentSlot = randomSlot;
     }
     public override void Interact()
     {

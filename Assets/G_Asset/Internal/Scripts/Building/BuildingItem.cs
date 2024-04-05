@@ -11,6 +11,7 @@ public class BuildingItem : MonoBehaviour
     public static string Down = "Down";
 
     [SerializeField] private ItemName itemName;
+    [SerializeField] private bool isWorldItem = false;
     [SerializeField]
     private bool checkRayCast = true;
 
@@ -46,6 +47,11 @@ public class BuildingItem : MonoBehaviour
         if (TryGetComponent<SpriteRenderer>(out spriteRender))
         {
 
+        }
+
+        if (isWorldItem)
+        {
+            BuildingInit();
         }
     }
 

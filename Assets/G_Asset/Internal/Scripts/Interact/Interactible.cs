@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Interactible : MonoBehaviour
 {
-    public string promptMessage = "";
+    public string promptMessage = "F để tương tác";
     [SerializeField] protected bool useTrigger = false;
     public bool useAnimator = false;
     public void BaseInteract()
