@@ -15,7 +15,10 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInteract playerInteract;
 
 
+
     [SerializeField] private Transform tool_store;
+    [SerializeField] private Transform boat;
+    [SerializeField] private bool isBoat = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Movement(Vector2 dir)
     {
+        animator.SetBool("IsBoat", isBoat);
+        boat.gameObject.SetActive(isBoat);
         if (dir.sqrMagnitude >= 0.1f)
         {
             int nextIdle_state = 0;
@@ -77,16 +82,22 @@ public class PlayerMovement : MonoBehaviour
             }
 
             tool_store.transform.rotation = Quaternion.Euler(0f, rot, 0f);
+            boat.rotation = Quaternion.Euler(0f, rot, 0f);
             animator.SetFloat("Horizontal", dir.x);
             animator.SetFloat("Vertical", dir.y);
             animator.SetFloat("Idle_State", nextIdle_state);
             rb.MovePosition(rb.position + GetSpeed() * dir * Time.deltaTime);
         }
-        animator.SetFloat("Speed", dir.sqrMagnitude >= 0.1f ? 1f : 0f);
+        float sp = isBoat ? 0f : dir.sqrMagnitude >= 0.1f ? 1f : 0f;
+        animator.SetFloat("Speed", sp);
     }
 
     public Animator ToolAnimator()
     {
         return toolAnimator;
+    }
+    public void InteractWithBoat(bool v)
+    {
+        isBoat = v;
     }
 }
