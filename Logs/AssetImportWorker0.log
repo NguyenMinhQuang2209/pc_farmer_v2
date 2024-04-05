@@ -1,0 +1,411 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.33f1 (ee5a2aa03ab2) revision 15620650'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit CoreSingleLanguage' Language: 'en' Physical Memory: 16163 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+E:\UnityEditor\2021.3.33f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+F:/Unity_Project/Editor/PC/Offline/2D/pc_farmer_v2
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+51801
+Successfully changed project path to: F:/Unity_Project/Editor/PC/Offline/2D/pc_farmer_v2
+F:/Unity_Project/Editor/PC/Offline/2D/pc_farmer_v2
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [16292] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 2086072565 [EditorId] 2086072565 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [16292] Host "[IP] 192.168.0.102 [Port] 0 [Flags] 2 [Guid] 2086072565 [EditorId] 2086072565 [Version] 1048832 [Id] WindowsEditor(7,MQuang) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
+Refreshing native plugins compatible for Editor in 113.63 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.33f1 (ee5a2aa03ab2)
+[Subsystems] Discovering subsystems at path E:/UnityEditor/2021.3.33f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path F:/Unity_Project/Editor/PC/Offline/2D/pc_farmer_v2/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1650 (ID=0x1f9d)
+    Vendor:   NVIDIA
+    VRAM:     3962 MB
+    Driver:   31.0.15.1748
+Initialize mono
+Mono path[0] = 'E:/UnityEditor/2021.3.33f1/Editor/Data/Managed'
+Mono path[1] = 'E:/UnityEditor/2021.3.33f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'E:/UnityEditor/2021.3.33f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56884
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: E:/UnityEditor/2021.3.33f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001651 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 200 ms
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 129.77 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.862 seconds
+Domain Reload Profiling:
+	ReloadAssembly (862ms)
+		BeginReloadAssembly (76ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (715ms)
+			LoadAssemblies (76ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (94ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (27ms)
+			SetupLoadedEditorAssemblies (557ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (295ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (130ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (92ms)
+				ProcessInitializeOnLoadMethodAttributes (38ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003152 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 128.25 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Completed reload, in  1.843 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1844ms)
+		BeginReloadAssembly (111ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (19ms)
+		EndReloadAssembly (1647ms)
+			LoadAssemblies (96ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (424ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (84ms)
+			SetupLoadedEditorAssemblies (1010ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (18ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (128ms)
+				BeforeProcessingInitializeOnLoad (115ms)
+				ProcessInitializeOnLoadAttributes (647ms)
+				ProcessInitializeOnLoadMethodAttributes (100ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.20 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5932 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 57 unused Assets / (0.8 MB). Loaded Objects now: 6387.
+Memory consumption went from 238.7 MB to 237.9 MB.
+Total: 4.520000 ms (FindLiveObjects: 0.611600 ms CreateObjectMapping: 0.367000 ms MarkObjects: 3.161900 ms  DeleteObjects: 0.377600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:CustomObjectIndexerAttribute: 6b0e35c9178b02a6363f3721b7b8e397 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 5898.382826 seconds.
+  path: Assets/G_Asset/Local/characters/sprite/free_chests.png
+  artifactKey: Guid(098cdacf5dd62a844a0c9482bbb02d5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/characters/sprite/free_chests.png using Guid(098cdacf5dd62a844a0c9482bbb02d5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '243355fcd7c55ac5d14ee32a7ff46ba5') in 0.111378 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-Regular SDF.asset
+  artifactKey: Guid(971522d502d18ff40823e7f081606aa6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-Regular SDF.asset using Guid(971522d502d18ff40823e7f081606aa6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b25c43fd9c31540ab6e5228f0eb09e27') in 0.210261 seconds 
+Number of asset objects unloaded after import = 17
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-Medium.ttf
+  artifactKey: Guid(6a06c5222b9d55a4a87b448e97e1a1a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-Medium.ttf using Guid(6a06c5222b9d55a4a87b448e97e1a1a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb5a62e35dba6364dcc5cec760a5c6ce') in 0.034465 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/G_Asset/Local/characters/sprite/free_icons2.png
+  artifactKey: Guid(03a61d1f7955d1146a35a51bc5afcbfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/characters/sprite/free_icons2.png using Guid(03a61d1f7955d1146a35a51bc5afcbfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e93afbda410331ce026695ab411f4af1') in 0.025159 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-MediumItalic.ttf
+  artifactKey: Guid(b411ab079af104e4fb7aa67463d835dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-MediumItalic.ttf using Guid(b411ab079af104e4fb7aa67463d835dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '759ab6e1097be9bfc677cdfbd40e316f') in 0.024844 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-SemiBold SDF.asset
+  artifactKey: Guid(6b4a68c3b0cd27f4fbfd4b42b44974d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-SemiBold SDF.asset using Guid(6b4a68c3b0cd27f4fbfd4b42b44974d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07c65d8d608240784fa167e2d4e72a6d') in 0.037950 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-BlackItalic.ttf
+  artifactKey: Guid(07460e93b941d3a49b831e513d9c0486) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-BlackItalic.ttf using Guid(07460e93b941d3a49b831e513d9c0486) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a5d492f223b7244c46d7f4c4de065ba') in 0.023327 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-MediumItalic.ttf
+  artifactKey: Guid(0150f28e33a7b424fb6e3ccdf07e7d00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-MediumItalic.ttf using Guid(0150f28e33a7b424fb6e3ccdf07e7d00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abb5560f6a1bedfab8e0b085a3ab67ec') in 0.024802 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-Black.ttf
+  artifactKey: Guid(ab761e4859415964494b884c09870090) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-Black.ttf using Guid(ab761e4859415964494b884c09870090) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ddc74f9d3a55aceb6579fc66aa51f79') in 0.023177 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/G_Asset/Local/Icon/diet.png
+  artifactKey: Guid(f58b1d20490c9b545b1d00187699010d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Icon/diet.png using Guid(f58b1d20490c9b545b1d00187699010d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df4310de63366e81dabe295ad33d57c3') in 0.035104 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-Medium SDF.asset
+  artifactKey: Guid(7afad06ecda908e41b7e8511239bde9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-Medium SDF.asset using Guid(7afad06ecda908e41b7e8511239bde9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c8286acb4525228d39304ed226a5478') in 0.036050 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-SemiBold.ttf
+  artifactKey: Guid(148c91ffa273c6842a3311c755ba699e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-SemiBold.ttf using Guid(148c91ffa273c6842a3311c755ba699e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1df2af68c7ee5488299cd52dda5700e') in 0.022061 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-Bold.ttf
+  artifactKey: Guid(9318b7a4f01f83546a046f313191ec6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-Bold.ttf using Guid(9318b7a4f01f83546a046f313191ec6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8f4c47e535a91d966ab4c656cda6a93') in 0.027326 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-SemiBoldItalic SDF.asset
+  artifactKey: Guid(81ce625a7b7b8f6438736d1061015179) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-SemiBoldItalic SDF.asset using Guid(81ce625a7b7b8f6438736d1061015179) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9d72fd73ad36e25e73725b67b6e33d9') in 0.031779 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/G_Asset/Local/Font/Lora-Bold SDF.asset
+  artifactKey: Guid(80b54041759e9c84e9e3f012cf30de39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/Lora-Bold SDF.asset using Guid(80b54041759e9c84e9e3f012cf30de39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3d9a8fabd21bec9e617f899c2d19810') in 0.031873 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/G_Asset/Local/Icons/target-square-sign-inside-a-circle.png
+  artifactKey: Guid(adaf603fad3517b45965e1e90e40443d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Icons/target-square-sign-inside-a-circle.png using Guid(adaf603fad3517b45965e1e90e40443d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cfaf16dc4341925da38ea77abc2a6ea') in 0.020137 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/G_Asset/Local/characters/sprite/free_character_1-3.png
+  artifactKey: Guid(abcbc9487050a8b469c881c4a93c63c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/characters/sprite/free_character_1-3.png using Guid(abcbc9487050a8b469c881c4a93c63c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f230b7f8adb6987ae9ebbe569af98122') in 0.026186 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/G_Asset/Local/Font/PlayfairDisplay-ExtraBoldItalic SDF.asset
+  artifactKey: Guid(e42dbf1bd3840f84d8ae5a3565595b5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Font/PlayfairDisplay-ExtraBoldItalic SDF.asset using Guid(e42dbf1bd3840f84d8ae5a3565595b5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fb998193fa21b8c42f9ab19e8636c29') in 0.035500 seconds 
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 5.043107 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/Font/Planes_ValMore.ttf
+  artifactKey: Guid(2e5e8d60e0312124ba87494c2ed7f20d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/Font/Planes_ValMore.ttf using Guid(2e5e8d60e0312124ba87494c2ed7f20d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4da1b0000e493503bc320b800b052485') in 0.017752 seconds 
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 1.564269 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster.png
+  artifactKey: Guid(2f79173ab5920db45a6e5c35297b80e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster.png using Guid(2f79173ab5920db45a6e5c35297b80e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '593fb70888aa9e03440763def30957df') in 0.018086 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Throw_4.png
+  artifactKey: Guid(9d237e8716aec62468051e19a1c6424f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Throw_4.png using Guid(9d237e8716aec62468051e19a1c6424f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46d56351e0de9a01151271046d758966') in 0.020748 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000071 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Push_6.png
+  artifactKey: Guid(d1500ba9b9af3714d8e28b82c67d944c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Push_6.png using Guid(d1500ba9b9af3714d8e28b82c67d944c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c00dd561c4b3d935f9fc1bebee1dbab2') in 0.029814 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Idle_4.png
+  artifactKey: Guid(16f50f28b5f016d41802bbe92d0490c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Idle_4.png using Guid(16f50f28b5f016d41802bbe92d0490c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4db2269968f74dbb6f9f5af9a7310f25') in 0.023476 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Attack2_6.png
+  artifactKey: Guid(1ac5053c9326bc845947f8ac8770d20b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Pink_Monster_Attack2_6.png using Guid(1ac5053c9326bc845947f8ac8770d20b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03c47ed78d3eb8e93dbf65ecd1464226') in 0.021850 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Rock1.png
+  artifactKey: Guid(71620bd0e92a71840960c4b21e244628) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Pet/pet/1 Pink_Monster/Rock1.png using Guid(71620bd0e92a71840960c4b21e244628) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37003eb45ab64ee4f4ac3c501e74f67a') in 0.020000 seconds 
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 13.855497 seconds.
+  path: Assets/G_Asset/Local/characters/rpgmaker/MV/characters/$_srw_free_character_nude.png
+  artifactKey: Guid(577a69f0e9cd86743aefde92efdc3cba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/characters/rpgmaker/MV/characters/$_srw_free_character_nude.png using Guid(577a69f0e9cd86743aefde92efdc3cba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad72ffd4414d4b5c15a2c89e3bdb6e7f') in 0.049182 seconds 
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/G_Asset/Local/characters/rpgmaker/MV/characters/_srw_free_chests.png
+  artifactKey: Guid(ab6548300685afe4b94505724e728eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/characters/rpgmaker/MV/characters/_srw_free_chests.png using Guid(ab6548300685afe4b94505724e728eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1731b418e926e1f12711142d9a5d02b') in 0.199578 seconds 
+Number of asset objects unloaded after import = 91
+========================================================================
+Received Import Request.
+  Time since last request: 14.269283 seconds.
+  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png
+  artifactKey: Guid(e90e6a93a4182b24b856a6a1ab079226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Basic_Grass_Biom_things.png using Guid(e90e6a93a4182b24b856a6a1ab079226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2eec2974ac37786b569b1bfdc9e02dfa') in 0.135248 seconds 
+Number of asset objects unloaded after import = 37
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Paths.png
+  artifactKey: Guid(baa4ce80042f0dc41ab19898dc3871f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/G_Asset/Local/Sprout Lands - Sprites - Basic pack/Objects/Paths.png using Guid(baa4ce80042f0dc41ab19898dc3871f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df5de2d70689fdf25ecdb78cacc2e3d1') in 0.021372 seconds 
+Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -6,7 +6,10 @@ public abstract class Interactible : MonoBehaviour
 {
     public string promptMessage = "F để tương tác";
     [SerializeField] protected bool useTrigger = false;
-    public bool useAnimator = false;
+    [SerializeField] protected bool canDestroy = false;
+
+    public string interact_name = "";
+    //public bool useAnimator = false;
     public void BaseInteract()
     {
         Interact();
@@ -23,5 +26,12 @@ public abstract class Interactible : MonoBehaviour
     public virtual void InteractInit()
     {
 
+    }
+    public virtual void InteractDestroy()
+    {
+        if (canDestroy)
+        {
+            InteractController.instance.DestroyItem(this);
+        }
     }
 }

@@ -48,4 +48,11 @@ public class InteractTarget : MonoBehaviour
             interactTarget.BaseInteract();
         }
     }
+    public void InteractDestroy()
+    {
+        if (interactTarget != null)
+        {
+            interactTarget.InteractDestroy();
+        }
+    }
 }

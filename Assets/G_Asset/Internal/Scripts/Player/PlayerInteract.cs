@@ -47,6 +47,11 @@ public class PlayerInteract : MonoBehaviour
             interactTarget.Interact();
         }
 
+        if (playerInput.onFoot.Destroy.triggered)
+        {
+            interactTarget.InteractDestroy();
+        }
+
     }
     public void ChangePlayerToward(PlayerToward toward)
     {
