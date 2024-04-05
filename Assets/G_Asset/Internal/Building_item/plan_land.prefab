@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 2368011488085643836}
   m_Layer: 0
   m_Name: plan_land
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -829,6 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 2
+  isWorldItem: 0
   checkRayCast: 1
   position_items:
   - item: {fileID: 5721459341914438132}
