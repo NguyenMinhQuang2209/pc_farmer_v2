@@ -47,6 +47,10 @@ public class Plant : MonoBehaviour
     {
         return item;
     }
+    public ItemName GetItemName()
+    {
+        return item.GetName();
+    }
     public int CollectQuantity()
     {
         return quantity;

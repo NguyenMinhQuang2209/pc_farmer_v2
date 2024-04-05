@@ -9,7 +9,9 @@ public class PreferenceController : MonoBehaviour
     public static string PLAYER_TAG = "Player";
 
     [HideInInspector] public Transform player;
-    [SerializeField] private List<PreferenceItem> items = new();
+    [SerializeField] private List<Pet> petItems = new();
+    [SerializeField] private List<Item> items = new();
+    [SerializeField] private List<DataSaveItem> worldItems = new();
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,10 +33,10 @@ public class PreferenceController : MonoBehaviour
     {
         for (int i = 0; i < items.Count; i++)
         {
-            PreferenceItem item = items[i];
-            if (item.item.GetItemName() == itemName)
+            Item item = items[i];
+            if (item.GetItemName() == itemName)
             {
-                return item.item;
+                return item;
             }
         }
         return null;
@@ -44,18 +46,64 @@ public class PreferenceController : MonoBehaviour
     {
         for (int i = 0; i < items.Count; i++)
         {
-            PreferenceItem item = items[i];
-            if (item.item.GetName() == itemName)
+            Item item = items[i];
+            if (item.GetName() == itemName)
             {
-                return item.item;
+                return item;
             }
         }
         return null;
     }
-}
-[System.Serializable]
-public class PreferenceItem
-{
-    public Item item;
-    public ItemName itemName;
+
+    public DataSaveItem GetWorldItem(string itemName)
+    {
+        for (int i = 0; i < worldItems.Count; i++)
+        {
+            DataSaveItem item = worldItems[i];
+            if (item.GetItemName().ToString() == itemName)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public DataSaveItem GetWorldItem(WorldItemName itemName)
+    {
+        for (int i = 0; i < worldItems.Count; i++)
+        {
+            DataSaveItem item = worldItems[i];
+            if (item.GetItemName() == itemName)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Pet GetPet(string petName)
+    {
+        for (int i = 0; i < petItems.Count; i++)
+        {
+            Pet item = petItems[i];
+            if (item.GetPetName().ToString() == petName)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public Pet GetPet(PetName petName)
+    {
+        for (int i = 0; i < petItems.Count; i++)
+        {
+            Pet item = petItems[i];
+            if (item.GetPetName() == petName)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
 }

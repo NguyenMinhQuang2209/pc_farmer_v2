@@ -73,6 +73,17 @@ public enum ItemType
     Other,
     Food,
 }
+public enum PetName
+{
+    Owl,
+}
+
+public enum WorldItemName
+{
+    Chest,
+    Fence,
+    FarmTile
+}
 
 public enum ItemName
 {

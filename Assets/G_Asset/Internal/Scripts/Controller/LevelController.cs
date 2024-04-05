@@ -131,12 +131,36 @@ public class LevelController : MonoBehaviour
         speedTxt.text = "Tốc độ:" + playerHealth.GetSpeed();
         recoverHealthTxt.text = "Tốc độ hồi phục: " + playerHealth.GetRecoverRate();
     }
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+    public float GetCurrentExe()
+    {
+        return currentExe;
+    }
+    public int GetPlusHealth()
+    {
+        return plusHealth;
+    }
+    public int GetPlusFood()
+    {
+        return plusHungry;
+    }
+    public int GetPlusSpeed()
+    {
+        return plusSpeed;
+    }
+    public int GetPlusRecover()
+    {
+        return plusRecoverHealth;
+    }
 
     public void Plus(string v)
     {
         if (remainPoint == 0)
         {
-            Debug.Log("Lack of point");
+            LogController.instance.Log(LogMode.Lack_Coin);
             return;
         }
         switch (v)

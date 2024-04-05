@@ -85,6 +85,14 @@ public class PlantSand : Interactible
             ChangeSprite(0);
         }
     }
+    public string PlantName()
+    {
+        if (plant != null)
+        {
+            return plant.GetItemName().ToString();
+        }
+        return "";
+    }
 
     public void ChangeSprite(int pos)
     {

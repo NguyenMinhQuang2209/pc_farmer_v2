@@ -12,6 +12,7 @@ public class Pet : Health
     public static string ATTACK_INDEX = "Attack_index";
     public static string HURT = "Hurt";
 
+    [SerializeField] private PetName petName;
     [SerializeField] private float moveSpeed = 0.15f;
     [SerializeField] private float runSpeed = 0.2f;
     [SerializeField] private float stopDistance = 0.2f;
@@ -128,7 +129,10 @@ public class Pet : Health
 
         ComsumeFood();
     }
-
+    public PetName GetPetName()
+    {
+        return petName;
+    }
 
     public void ChangePetMode(PetMode newMode)
     {
@@ -389,6 +393,10 @@ public class Pet : Health
         }
         return "";
     }
+    public PetMode GetCurrentMode()
+    {
+        return petMode;
+    }
     public Sprite GetSprite()
     {
         return mainSprite;
@@ -575,6 +583,10 @@ public class Pet : Health
     public string GetLevel()
     {
         return current < levels.Count ? (current + 1).ToString() : "Max";
+    }
+    public int GetCurrentLevel()
+    {
+        return current;
     }
     public void RecoverAllFood()
     {

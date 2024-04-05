@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3985537472672569595}
   - component: {fileID: 2429037995509900687}
   - component: {fileID: 7475602666509626157}
+  - component: {fileID: 8689165433293564429}
   m_Layer: 0
   m_Name: chest_0
   m_TagString: Store
@@ -206,3 +207,16 @@ MonoBehaviour:
   twoSideChestRate: 40
   oneSideChest: 1
   defaultItems: []
+--- !u!114 &8689165433293564429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177812736104518834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a14655877a0834ab0897378bf50826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 0

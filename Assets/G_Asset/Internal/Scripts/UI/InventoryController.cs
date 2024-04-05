@@ -92,8 +92,27 @@ public class InventoryController : MonoBehaviour
                 ClickQuickslot(i - 1);
             }
         }
-
     }
+    public List<InventorySlot> GetInventorySlots()
+    {
+        return GetSlot(inventorySlotStores);
+    }
+    public List<InventorySlot> GetQuickSlots()
+    {
+        return GetSlot(quickSlotStores);
+    }
+
+    public List<InventorySlot> GetSlot(Dictionary<int, InventorySlot> slotContainer)
+    {
+        List<InventorySlot> getSlots = new();
+        for (int i = 0; i < currentInventorySlot; i++)
+        {
+            InventorySlot currentSlot = slotContainer[i];
+            getSlots.Add(currentSlot);
+        }
+        return getSlots;
+    }
+
     public void ClickQuickslot(int index)
     {
         if (currentQuickSlot >= index)
