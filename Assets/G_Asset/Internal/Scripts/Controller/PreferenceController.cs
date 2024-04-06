@@ -9,6 +9,7 @@ public class PreferenceController : MonoBehaviour
     public static string PLAYER_TAG = "Player";
 
     [HideInInspector] public Transform player;
+    [SerializeField] private List<NestItem> nestItems = new();
     [SerializeField] private List<Pet> petItems = new();
     [SerializeField] private List<Item> items = new();
     [SerializeField] private List<DataSaveItem> worldItems = new();
@@ -37,6 +38,18 @@ public class PreferenceController : MonoBehaviour
             if (item.GetItemName() == itemName)
             {
                 return item;
+            }
+        }
+        return null;
+    }
+    public Transform GetNest(NestName name)
+    {
+        for (int i = 0; i < nestItems.Count; i++)
+        {
+            NestItem nestItem = nestItems[i];
+            if (nestItem.nestName == name)
+            {
+                return nestItem.nest;
             }
         }
         return null;
@@ -106,4 +119,10 @@ public class PreferenceController : MonoBehaviour
         }
         return null;
     }
+}
+[System.Serializable]
+public class NestItem
+{
+    public NestName nestName;
+    public Transform nest;
 }
