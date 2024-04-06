@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
@@ -13,11 +11,13 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     [SerializeField] private TextMeshProUGUI quickslotTxt;
 
     [SerializeField] private bool isShop = false;
+    bool isInventorySlot = false;
 
-    public void InventorySlotInit(string quickslot, bool isShop = false)
+    public void InventorySlotInit(string quickslot, bool isShop = false, bool isInventorySlot = false)
     {
         quickslotTxt.text = quickslot;
         this.isShop = isShop;
+        this.isInventorySlot = isInventorySlot;
     }
 
 
@@ -43,6 +43,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                     else
                     {
                         item.rootParent = container;
+                        item.ChangeIsInventoryItem(IsInventorySlot());
                     }
                 }
                 else
@@ -92,6 +93,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 }
             }
         }
+    }
+    public bool IsInventorySlot()
+    {
+        return isInventorySlot;
     }
 
     public void BuyInventoryItem(InventoryItem item, Item nextItem)

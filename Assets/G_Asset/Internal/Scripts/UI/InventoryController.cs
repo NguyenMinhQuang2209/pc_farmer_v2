@@ -67,10 +67,10 @@ public class InventoryController : MonoBehaviour
         ui_chest.SetActive(true);
         ui_shop.SetActive(true);
 
-        SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores, false);
-        SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores, false);
-        SpawnItem(currentChestSlot, maxChestSlot, chestslot_container, false, chestSlotStores, false);
-        SpawnItem(maxShopSlot, maxShopSlot, shopslot_container, false, shopSlotStores, true);
+        SpawnItem(currentInventorySlot, maxSlot, inventory_container, false, inventorySlotStores, false, true);
+        SpawnItem(currentQuickSlot, maxQuickSlot, quickslot_container, true, quickSlotStores, false, true);
+        SpawnItem(currentChestSlot, maxChestSlot, chestslot_container, false, chestSlotStores, false, false);
+        SpawnItem(maxShopSlot, maxShopSlot, shopslot_container, false, shopSlotStores, true, false);
 
         for (int i = 0; i < maxChestSlot; i++)
         {
@@ -129,7 +129,7 @@ public class InventoryController : MonoBehaviour
 
 
 
-    public void SpawnItem(int current, int max, Transform spawnPosition, bool showQuickslot, Dictionary<int, InventorySlot> store, bool isShop)
+    public void SpawnItem(int current, int max, Transform spawnPosition, bool showQuickslot, Dictionary<int, InventorySlot> store, bool isShop, bool isInventory)
     {
         foreach (Transform child in spawnPosition)
         {
@@ -138,7 +138,7 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < max; i++)
         {
             InventorySlot tempSlot = Instantiate(slot, spawnPosition.transform);
-            tempSlot.InventorySlotInit(showQuickslot ? (i + 1).ToString() : "", isShop);
+            tempSlot.InventorySlotInit(showQuickslot ? (i + 1).ToString() : "", isShop, isInventory);
             store[i] = tempSlot;
             if (i >= current)
             {
@@ -175,7 +175,37 @@ public class InventoryController : MonoBehaviour
             {
                 int nextQuantity = quantity < item.GetMaxQuantity() ? quantity : item.GetMaxQuantity();
                 InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
-                tempItem.InventoryItemInit(item, nextQuantity, false);
+                tempItem.InventoryItemInit(item, nextQuantity, false, true);
+                quantity -= nextQuantity;
+                if (quantity <= 0)
+                {
+                    return 0;
+                }
+            }
+        }
+
+        for (int i = 0; i < currentQuickSlot; i++)
+        {
+            InventorySlot currentSlot = quickSlotStores[i];
+            if (currentSlot.ExistItem())
+            {
+                InventoryItem inventoryItem = currentSlot.GetInventory();
+                Item currentItem = currentSlot.GetInventoryItem();
+                if (item.GetItemName() == currentItem.GetItemName())
+                {
+                    int remain = inventoryItem.Add(quantity);
+                    if (remain == 0)
+                    {
+                        return 0;
+                    }
+                    quantity = remain;
+                }
+            }
+            else
+            {
+                int nextQuantity = quantity < item.GetMaxQuantity() ? quantity : item.GetMaxQuantity();
+                InventoryItem tempItem = Instantiate(inventory_item, currentSlot.GetItemContainer().transform);
+                tempItem.InventoryItemInit(item, nextQuantity, false, true);
                 quantity -= nextQuantity;
                 if (quantity <= 0)
                 {
@@ -284,7 +314,7 @@ public class InventoryController : MonoBehaviour
         return tempItems;
     }
 
-    public List<InventoryItem> InventoryInitItem(List<PickupItemDetail> items, bool isShop = false)
+    public List<InventoryItem> InventoryInitItem(List<PickupItemDetail> items, bool isShop = false, bool isChest = false)
     {
         List<InventoryItem> tempItems = new();
         for (int i = 0; i < items.Count; i++)
@@ -299,7 +329,7 @@ public class InventoryController : MonoBehaviour
             }
             InventoryItem tempItem = Instantiate(inventory_item, trash_store.transform);
             int nextQuantity = item.quantity <= item.item.GetMaxQuantity() ? item.quantity : item.item.GetMaxQuantity();
-            tempItem.InventoryItemInit(item.item, nextQuantity, isShop);
+            tempItem.InventoryItemInit(item.item, nextQuantity, isShop, !isShop && !isChest);
             tempItems.Add(tempItem);
         }
         return tempItems;

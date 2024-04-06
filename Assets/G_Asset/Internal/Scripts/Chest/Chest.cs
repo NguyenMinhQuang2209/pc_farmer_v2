@@ -54,7 +54,7 @@ public class Chest : Interactible
         init = true;
         if (defaultItems.Count > 0)
         {
-            items = InventoryController.instance.InventoryInitItem(defaultItems);
+            items = InventoryController.instance.InventoryInitItem(defaultItems, false, true);
         }
     }
 

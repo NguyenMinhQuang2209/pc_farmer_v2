@@ -19,6 +19,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     [SerializeField] private int sellPrice = 0;
     [SerializeField] private bool isShopItem = false;
 
+    private bool isInventory = false;
+
 
     bool areDrag = false;
 
@@ -35,8 +37,9 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
         }
     }
 
-    public void InventoryItemInit(Item item, int quantity, bool isShopItem)
+    public void InventoryItemInit(Item item, int quantity, bool isShopItem, bool isInventory = false)
     {
+        this.isInventory = isInventory;
         this.item = item;
         img.sprite = item.sprite;
         this.isShopItem = isShopItem;
@@ -59,6 +62,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     public void ChangeCurrentQuantity(int v)
     {
         currentQuantity = Mathf.Min(v, item.GetMaxQuantity());
+    }
+    public void ChangeIsInventoryItem(bool v)
+    {
+        isInventory = v;
     }
     public int Add(int v)
     {
@@ -158,7 +165,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public void UseItem()
     {
-        if (item != null && item.TryGetComponent<Use_Item>(out var useItem))
+        if (item != null && isInventory && item.TryGetComponent<Use_Item>(out var useItem))
         {
             useItem.UseItem();
         }
