@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CursorController : MonoBehaviour
@@ -9,6 +10,8 @@ public class CursorController : MonoBehaviour
     public static string Interactible_Str = "Interact";
 
     [HideInInspector] public string currentCursor = "";
+    [SerializeField] private GameObject txt_container;
+    [SerializeField] private TextMeshProUGUI txt;
     private List<GameObject> currents = new();
     private void Awake()
     {
@@ -18,6 +21,10 @@ public class CursorController : MonoBehaviour
             return;
         }
         instance = this;
+    }
+    private void Start()
+    {
+        txt_container.SetActive(false);
     }
 
     public void ChangeCursor(string newCursor, List<GameObject> newList)
@@ -43,9 +50,21 @@ public class CursorController : MonoBehaviour
         {
             currentCursor = "";
             currents = null;
+            txt_container.SetActive(false);
             return;
         }
         currentCursor = newCursor;
+
+        if (currentCursor != "Inventory")
+        {
+            txt.text = "Nhấn F để tắt túi đồ";
+        }
+        else
+        {
+            txt.text = "Nhấn Tab để tắt túi đồ";
+        }
+        txt_container.SetActive(currentCursor != "");
+
         currents = newList;
         if (currents != null)
         {
