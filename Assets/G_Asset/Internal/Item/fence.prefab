@@ -47,9 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: -913395805, guid: 20e2e955c748d294aae07f62944a0ced, type: 3}
   itemName: 0
+  itemType: 0
   maxQuantity: 5
   price: 30
   buyRate: 1.5
+  showName: "H\xE0ng r\xE0o"
 --- !u!114 &-5247118245218375367
 MonoBehaviour:
   m_ObjectHideFlags: 0

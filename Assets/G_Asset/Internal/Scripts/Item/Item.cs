@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
     public int maxQuantity = 1;
     public int price = 1;
     public float buyRate = 1;
+
+    public string showName = "";
     public void UseItem()
     {
         if (TryGetComponent<Use_Item>(out var useItem))

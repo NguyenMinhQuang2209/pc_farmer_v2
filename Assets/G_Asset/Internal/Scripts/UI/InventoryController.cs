@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryController : MonoBehaviour
 {
@@ -314,7 +315,7 @@ public class InventoryController : MonoBehaviour
         return tempItems;
     }
 
-    public List<InventoryItem> InventoryInitItem(List<PickupItemDetail> items, bool isShop = false, bool isChest = false)
+    public List<InventoryItem> InventoryInitItem(List<PickupItemDetail> items, int currentSlot, bool isShop = false, bool isChest = false)
     {
         List<InventoryItem> tempItems = new();
         for (int i = 0; i < items.Count; i++)
@@ -328,9 +329,25 @@ public class InventoryController : MonoBehaviour
                 item.quantity = quan;
             }
             InventoryItem tempItem = Instantiate(inventory_item, trash_store.transform);
-            int nextQuantity = item.quantity <= item.item.GetMaxQuantity() ? item.quantity : item.item.GetMaxQuantity();
+            int maxQuantity = item.item.GetMaxQuantity();
+            int nextQuantity = item.quantity <= maxQuantity ? item.quantity : maxQuantity;
+
             tempItem.InventoryItemInit(item.item, nextQuantity, isShop, !isShop && !isChest);
-            tempItems.Add(tempItem);
+
+            item.quantity -= nextQuantity;
+            if (item.quantity > 0)
+            {
+                i--;
+            }
+
+            if (tempItems.Count <= currentSlot)
+            {
+                tempItems.Add(tempItem);
+            }
+            else
+            {
+                return tempItems;
+            }
         }
         return tempItems;
     }

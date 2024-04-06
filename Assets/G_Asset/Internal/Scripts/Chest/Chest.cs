@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chest : Interactible
 {
     private Animator animator;
+    [SerializeField] private bool useRandomSlot = true;
     [SerializeField]
     private int currentSlot = 1;
     [SerializeField] private int maxSlot = 16;
@@ -23,8 +24,15 @@ public class Chest : Interactible
         animator = GetComponent<Animator>();
         promptMessage += oneSideChest ? " 1 chiều" : " 2 chiều";
 
-        int randomSlot = Random.Range(1, maxSlot + 1);
-        currentSlot = randomSlot;
+        if (useRandomSlot)
+        {
+            int randomSlot = Random.Range(1, maxSlot + 1);
+            if (defaultItems.Count > 0)
+            {
+                randomSlot = randomSlot >= defaultItems.Count ? randomSlot : defaultItems.Count;
+            }
+            currentSlot = randomSlot;
+        }
     }
     public override void Interact()
     {
@@ -54,7 +62,7 @@ public class Chest : Interactible
         init = true;
         if (defaultItems.Count > 0)
         {
-            items = InventoryController.instance.InventoryInitItem(defaultItems, false, true);
+            items = InventoryController.instance.InventoryInitItem(defaultItems, currentSlot, false, true);
         }
     }
 

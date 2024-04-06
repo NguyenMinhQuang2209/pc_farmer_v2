@@ -51,6 +51,7 @@ MonoBehaviour:
   maxQuantity: 10
   price: 30
   buyRate: 1.5
+  showName: "Qu\u1EA3 c\xE0 t\xEDm"
 --- !u!114 &796687643929452375
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,13 @@ public class UIController : MonoBehaviour
     public GameObject inventory;
     public GameObject update_ui;
 
+    public RectTransform detail_ui;
+    public TextMeshProUGUI detail_ui_txt;
+
+    private InventoryItem currentItem = null;
+
     public EventHandler ChangeCursor;
+    private RectTransform rect;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -27,8 +34,28 @@ public class UIController : MonoBehaviour
         pet.SetActive(true);
         pet.SetActive(false);
         ChangeCursor += HandleChangeCursor;
+        ChangeShowDetail(null);
     }
+    private void Update()
+    {
+        if (currentItem != null)
+        {
+            Debug.Log(rect.anchoredPosition);
+        }
+    }
+    public void ChangeShowDetail(InventoryItem nextItem)
+    {
+        currentItem = nextItem;
+        if (currentItem != null)
+        {
+            detail_ui_txt.text = currentItem.GetShowName();
+            if (currentItem.TryGetComponent<RectTransform>(out rect))
+            {
 
+            }
+        }
+        detail_ui.gameObject.SetActive(currentItem != null);
+    }
     private void HandleChangeCursor(object sender, EventArgs e)
     {
         PetController.instance.ChoosePet(null, -1);

@@ -51,6 +51,7 @@ MonoBehaviour:
   maxQuantity: 2
   price: 20
   buyRate: 1.2
+  showName: "Tr\u1EE9ng"
 --- !u!114 &-9216836400689548515
 MonoBehaviour:
   m_ObjectHideFlags: 0

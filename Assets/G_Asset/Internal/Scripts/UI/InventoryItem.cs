@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector] public Transform rootParent;
     private Item item = null;
@@ -66,6 +66,14 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     public void ChangeIsInventoryItem(bool v)
     {
         isInventory = v;
+    }
+    public string GetShowName()
+    {
+        if (item != null)
+        {
+            return item.showName;
+        }
+        return "";
     }
     public int Add(int v)
     {
@@ -175,5 +183,15 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         int max = item.GetMaxQuantity();
         return currentQuantity + v <= max;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UIController.instance.ChangeShowDetail(this);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIController.instance.ChangeShowDetail(null);
     }
 }
