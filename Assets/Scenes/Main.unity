@@ -42963,6 +42963,7 @@ MonoBehaviour:
   update_ui: {fileID: 3177461}
   detail_ui: {fileID: 583708839}
   detail_ui_txt: {fileID: 469217683}
+  offset: {x: 0, y: 90}
 --- !u!4 &1336202187
 Transform:
   m_ObjectHideFlags: 0

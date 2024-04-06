@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
 
     public EventHandler ChangeCursor;
     private RectTransform rect;
+    [SerializeField] private Vector2 offset = new();
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -36,13 +37,6 @@ public class UIController : MonoBehaviour
         ChangeCursor += HandleChangeCursor;
         ChangeShowDetail(null);
     }
-    private void Update()
-    {
-        if (currentItem != null)
-        {
-            Debug.Log(rect.anchoredPosition);
-        }
-    }
     public void ChangeShowDetail(InventoryItem nextItem)
     {
         currentItem = nextItem;
@@ -51,7 +45,7 @@ public class UIController : MonoBehaviour
             detail_ui_txt.text = currentItem.GetShowName();
             if (currentItem.TryGetComponent<RectTransform>(out rect))
             {
-
+                detail_ui.position = new(rect.position.x + offset.x, rect.position.y + offset.y, rect.position.z);
             }
         }
         detail_ui.gameObject.SetActive(currentItem != null);
