@@ -5,6 +5,17 @@ using UnityEngine.AI;
 
 public class FarmPet : MonoBehaviour
 {
+    [Header("Pet item init")]
+    public Sprite img;
+    [HideInInspector] public string petName = "";
+    [SerializeField] private List<PetFarmGrow> petFarmGrows = new();
+    public int currentIndex = 0;
+    float targetTime = 0f;
+    float targetChangeTime = 0f;
+    float currentGrowingTime = 0f;
+
+    [Space(5)]
+    [Header("Pet world config")]
     private NavMeshAgent agent;
     [SerializeField] private float moveSpeed = 1f;
     private Animator animator;
@@ -27,6 +38,17 @@ public class FarmPet : MonoBehaviour
         currentWaitTimer = waitTimer;
 
         nest = PreferenceController.instance.GetNest(nestName);
+        targetTime = 0f;
+        currentIndex = 0;
+        for (int i = 0; i < petFarmGrows.Count; i++)
+        {
+            PetFarmGrow petItem = petFarmGrows[i];
+            petName = petItem.petName;
+            targetTime += petItem.growingTime;
+            transform.localScale = petItem.size;
+        }
+        targetChangeTime = petFarmGrows[currentIndex].growingTime;
+
     }
     private void Update()
     {
@@ -42,6 +64,8 @@ public class FarmPet : MonoBehaviour
             speed = 0f;
         }
         animator.SetFloat("Speed", speed);
+
+        GrowingTime();
     }
     public void RandomPosition()
     {
@@ -52,4 +76,47 @@ public class FarmPet : MonoBehaviour
 
         agent.SetDestination(newPos);
     }
+    public float GetGrowingTime()
+    {
+        return currentGrowingTime;
+    }
+    public string GetGrowingRemainTime()
+    {
+        return Mathf.Ceil(targetTime - currentGrowingTime) + "s";
+    }
+    public void GrowingTime()
+    {
+        currentGrowingTime = Mathf.Min(currentGrowingTime + Time.deltaTime, targetTime);
+        if (currentGrowingTime < targetTime)
+        {
+            if (currentGrowingTime >= targetChangeTime)
+            {
+                currentIndex += 1;
+                if (currentIndex < petFarmGrows.Count)
+                {
+                    PetFarmGrow petItem = petFarmGrows[currentIndex];
+                    petName = petItem.petName;
+                    transform.localScale = petItem.size;
+                    targetChangeTime += petFarmGrows[currentIndex].growingTime;
+                }
+            }
+        }
+        else
+        {
+            if (currentIndex != petFarmGrows.Count - 1)
+            {
+                currentIndex = petFarmGrows.Count - 1;
+                PetFarmGrow petItem = petFarmGrows[currentIndex];
+                petName = petItem.petName;
+                transform.localScale = petItem.size;
+            }
+        }
+    }
+}
+[System.Serializable]
+public class PetFarmGrow
+{
+    public Vector3 size = new();
+    public string petName = "";
+    public float growingTime = 0f;
 }

@@ -160,6 +160,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d676879561045ab47889dba28c28b502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  img: {fileID: -1692376736, guid: b5add0122644aa74482e94bc921433bc, type: 3}
+  petName: 
+  petFarmGrows:
+  - size: {x: 0.2, y: 0.2, z: 0.2}
+    petName: "G\xE0 con"
+    growingTime: 10
+  - size: {x: 0.4, y: 0.4, z: 0.4}
+    petName: "G\xE0 con"
+    growingTime: 10
+  - size: {x: 0.6, y: 0.6, z: 0.6}
+    petName: "G\xE0 con"
+    growingTime: 10
+  - size: {x: 0.8, y: 0.8, z: 0.8}
+    petName: "G\xE0 con"
+    growingTime: 10
+  - size: {x: 1, y: 1, z: 1}
+    petName: "G\xE0 tr\u01B0\u1EDFng th\xE0nh"
+    growingTime: 10
   moveSpeed: 0.1
   waitTimer: 5
   randomX: {x: -1, y: 1}
