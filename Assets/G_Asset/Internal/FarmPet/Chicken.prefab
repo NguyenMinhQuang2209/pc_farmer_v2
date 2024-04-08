@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7309886011507867194}
   - component: {fileID: 7309886011507867193}
   - component: {fileID: 7309886011507867195}
-  - component: {fileID: 7309886011507867199}
+  - component: {fileID: -8601353935555690750}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -160,30 +160,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d676879561045ab47889dba28c28b502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFood: 30
+  reduceFoodRate: 0.05
+  waitFoodTimer: 5
   img: {fileID: -1692376736, guid: b5add0122644aa74482e94bc921433bc, type: 3}
   petName: 
   petFarmGrows:
   - size: {x: 0.2, y: 0.2, z: 0.2}
     petName: "G\xE0 con"
-    growingTime: 10
+    growingTime: 5
+    priceRate: 0.2
   - size: {x: 0.4, y: 0.4, z: 0.4}
     petName: "G\xE0 con"
-    growingTime: 10
+    growingTime: 5
+    priceRate: 0.4
   - size: {x: 0.6, y: 0.6, z: 0.6}
     petName: "G\xE0 con"
-    growingTime: 10
+    growingTime: 5
+    priceRate: 0.6
   - size: {x: 0.8, y: 0.8, z: 0.8}
     petName: "G\xE0 con"
-    growingTime: 10
+    growingTime: 3
+    priceRate: 0.8
   - size: {x: 1, y: 1, z: 1}
     petName: "G\xE0 tr\u01B0\u1EDFng th\xE0nh"
-    growingTime: 10
+    growingTime: 0
+    priceRate: 1
   moveSpeed: 0.1
   waitTimer: 5
   randomX: {x: -1, y: 1}
   randomY: {x: -1, y: 1}
-  nestName: 0
---- !u!114 &7309886011507867199
+  sellPrice: 20
+  quantity: {x: 10, y: 20}
+  waitProduceTimer: 3
+  producePerTime: {x: 1, y: 3}
+  currentQuantity: 0
+--- !u!114 &-8601353935555690750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0f5cbf3ddea5479571620eaeeea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: "G\xE0"
+  promptMessage: "F \u0111\u1EC3 t\u01B0\u01A1ng t\xE1c"
   useTrigger: 0
   canDestroy: 0
   interact_name: 

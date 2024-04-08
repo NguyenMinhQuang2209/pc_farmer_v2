@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
         if (onFoot.Hit.IsPressed())
         {
             string cursor = CursorController.instance.CurrentCursor();
-            if(cursor == "")
+            if (cursor == "")
             {
                 if (toolAnimator == null)
                 {
@@ -35,6 +35,10 @@ public class PlayerInput : MonoBehaviour
 
                 toolAnimator.SetTrigger("Hit");
             }
+        }
+        if (onFoot.Close.triggered)
+        {
+            CursorController.instance.ChangeCursor("", null);
         }
     }
     private void FixedUpdate()

@@ -408,6 +408,7 @@ MonoBehaviour:
   foodSlider: {fileID: 2431324315304859316}
   feedBtn: {fileID: 2431324315236942244}
   sellBtn: {fileID: 2431324314966421551}
+  sellTxt: {fileID: 2431324314947755594}
 --- !u!1 &2431324314531583633
 GameObject:
   m_ObjectHideFlags: 0

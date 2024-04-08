@@ -102,7 +102,7 @@ public class PetController : MonoBehaviour
     }
     public void FeedPet()
     {
-        Vector3 v = FoodController.instance.FeedPet();
+        Vector3 v = FoodController.instance.FeedPet(ItemType.Food);
         if (v != Vector3.zero)
         {
             current_pet.Feed(v.x, v.y, v.z);

@@ -30,13 +30,13 @@ public class FoodController : MonoBehaviour
         playerHealth.Feed(v, plusTime, duration);
     }
 
-    public Vector3 FeedPet()
+    public Vector3 FeedPet(ItemType foodType)
     {
         Vector3 value = Vector3.zero;
-        int quantity = InventoryController.instance.GetRemainTypeQuantity(ItemType.Food);
+        int quantity = InventoryController.instance.GetRemainTypeQuantity(foodType);
         if (quantity > 0f)
         {
-            string itemName = InventoryController.instance.GetInventoryItemNameByType(ItemType.Food);
+            string itemName = InventoryController.instance.GetInventoryItemNameByType(foodType);
             if (itemName != null)
             {
                 Item item = PreferenceController.instance.GetItem(itemName);

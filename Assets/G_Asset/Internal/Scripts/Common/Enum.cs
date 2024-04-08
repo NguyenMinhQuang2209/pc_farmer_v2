@@ -10,12 +10,6 @@
     Bottom_Center
 }
 
-public enum NestName
-{
-    Chicken,
-    Cow
-}
-
 public enum BuildingCenterPositionName
 {
     Not_All,

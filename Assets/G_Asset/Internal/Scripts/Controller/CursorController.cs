@@ -55,14 +55,7 @@ public class CursorController : MonoBehaviour
         }
         currentCursor = newCursor;
 
-        if (currentCursor != "Inventory")
-        {
-            txt.text = "Nhấn F để tắt túi đồ";
-        }
-        else
-        {
-            txt.text = "Nhấn Tab để tắt túi đồ";
-        }
+        txt.text = "Nhấn Esc để tắt túi đồ";
         txt_container.SetActive(currentCursor != "");
 
         currents = newList;

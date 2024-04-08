@@ -80,6 +80,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0c8fe4c-6626-4ac0-b2c5-d432b83c8b2d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -245,6 +254,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Destroy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d5b0bf9-64f8-4fbb-837b-8f50d4b8ec6c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -777,6 +797,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_onFoot_UI = m_onFoot.FindAction("UI", throwIfNotFound: true);
         m_onFoot_Hit = m_onFoot.FindAction("Hit", throwIfNotFound: true);
         m_onFoot_Destroy = m_onFoot.FindAction("Destroy", throwIfNotFound: true);
+        m_onFoot_Close = m_onFoot.FindAction("Close", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -856,6 +877,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_onFoot_UI;
     private readonly InputAction m_onFoot_Hit;
     private readonly InputAction m_onFoot_Destroy;
+    private readonly InputAction m_onFoot_Close;
     public struct OnFootActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -866,6 +888,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @UI => m_Wrapper.m_onFoot_UI;
         public InputAction @Hit => m_Wrapper.m_onFoot_Hit;
         public InputAction @Destroy => m_Wrapper.m_onFoot_Destroy;
+        public InputAction @Close => m_Wrapper.m_onFoot_Close;
         public InputActionMap Get() { return m_Wrapper.m_onFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -893,6 +916,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Destroy.started += instance.OnDestroy;
             @Destroy.performed += instance.OnDestroy;
             @Destroy.canceled += instance.OnDestroy;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -915,6 +941,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Destroy.started -= instance.OnDestroy;
             @Destroy.performed -= instance.OnDestroy;
             @Destroy.canceled -= instance.OnDestroy;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -1058,6 +1087,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnUI(InputAction.CallbackContext context);
         void OnHit(InputAction.CallbackContext context);
         void OnDestroy(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

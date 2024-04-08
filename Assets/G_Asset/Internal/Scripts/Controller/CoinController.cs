@@ -26,6 +26,16 @@ public class CoinController : MonoBehaviour
     {
         return currentCoin >= v;
     }
+    public bool IsEnoughAndMinus(int v)
+    {
+        if (currentCoin >= v)
+        {
+            currentCoin -= v;
+            coinTxt.text = currentCoin.ToString();
+            return true;
+        }
+        return false;
+    }
     public void MinusCoin(int v)
     {
         currentCoin = Mathf.Max(currentCoin - v, 0);
