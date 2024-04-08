@@ -95,5 +95,6 @@ public enum ItemName
     Chest,
     CaTim,
     CatimCollect,
+    Milk,
     Other
 }

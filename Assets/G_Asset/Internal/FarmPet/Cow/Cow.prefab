@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4421723880546710648
+--- !u!1 &6062404149474429106
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3824091681879532949}
-  - component: {fileID: 8867456464044038465}
-  - component: {fileID: -6803202004255500834}
-  - component: {fileID: 7309886011507867194}
-  - component: {fileID: 7309886011507867193}
-  - component: {fileID: 7309886011507867195}
-  - component: {fileID: -8601353935555690750}
+  - component: {fileID: 6659985036171450719}
+  - component: {fileID: 1329523589154088331}
+  - component: {fileID: 5254233842377435412}
+  - component: {fileID: 868364167375733488}
+  - component: {fileID: 868364167375733491}
+  - component: {fileID: 868364167375733489}
   m_Layer: 0
-  m_Name: Chicken
+  m_Name: Cow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3824091681879532949
+--- !u!4 &6659985036171450719
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43051094, y: -0.50499976, z: 0}
+  m_LocalPosition: {x: -0.05229327, y: -0.25639406, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8867456464044038465
+--- !u!212 &1329523589154088331
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -78,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: -1692376736, guid: b5add0122644aa74482e94bc921433bc, type: 3}
+  m_Sprite: {fileID: -1167749441, guid: a89b744a05b5af0439b898cfc28c3139, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,17 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &-6803202004255500834
+--- !u!95 &5254233842377435412
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ed94dbe98416c04b922cc974db4c257, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3df67c46f86144649a7553de71888062, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -110,29 +109,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &7309886011507867194
+--- !u!70 &868364167375733488
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0104364455, y: -0.013045646}
   m_Size: {x: 0.10781783, y: 0.12347247}
   m_Direction: 0
---- !u!195 &7309886011507867193
+--- !u!195 &868364167375733491
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
@@ -148,42 +147,42 @@ NavMeshAgent:
   m_BaseOffset: 0.08
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7309886011507867195
+--- !u!114 &868364167375733489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
+  m_GameObject: {fileID: 6062404149474429106}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d676879561045ab47889dba28c28b502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxFood: 30
-  reduceFoodRate: 0.05
-  waitFoodTimer: 5
-  img: {fileID: -1692376736, guid: b5add0122644aa74482e94bc921433bc, type: 3}
+  reduceFoodRate: 1
+  waitFoodTimer: 2
+  img: {fileID: -1167749441, guid: a89b744a05b5af0439b898cfc28c3139, type: 3}
   petName: 
   petFarmGrows:
   - size: {x: 0.2, y: 0.2, z: 0.2}
-    petName: "G\xE0 con"
-    growingTime: 5
+    petName: "B\xF2 con"
+    growingTime: 1
     priceRate: 0.2
   - size: {x: 0.4, y: 0.4, z: 0.4}
-    petName: "G\xE0 con"
-    growingTime: 5
+    petName: "B\xF2 con"
+    growingTime: 1
     priceRate: 0.4
   - size: {x: 0.6, y: 0.6, z: 0.6}
-    petName: "G\xE0 con"
-    growingTime: 5
+    petName: "B\xF2 con"
+    growingTime: 1
     priceRate: 0.6
   - size: {x: 0.8, y: 0.8, z: 0.8}
-    petName: "G\xE0 con"
-    growingTime: 3
+    petName: "B\xF2 con"
+    growingTime: 1
     priceRate: 0.8
   - size: {x: 1, y: 1, z: 1}
-    petName: "G\xE0 tr\u01B0\u1EDFng th\xE0nh"
+    petName: "B\xF2 tr\u01B0\u1EDFng th\xE0nh"
     growingTime: 0
     priceRate: 1
   moveSpeed: 0.1
@@ -192,21 +191,5 @@ MonoBehaviour:
   randomY: {x: -1, y: 1}
   sellPrice: 20
   quantity: {x: 10, y: 20}
-  waitProduceTimer: 15
+  waitProduceTimer: 2
   producePerTime: {x: 1, y: 2}
---- !u!114 &-8601353935555690750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421723880546710648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bf0f5cbf3ddea5479571620eaeeea14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  promptMessage: "F \u0111\u1EC3 t\u01B0\u01A1ng t\xE1c"
-  useTrigger: 0
-  canDestroy: 0
-  interact_name: 
