@@ -192,9 +192,8 @@ MonoBehaviour:
   randomY: {x: -1, y: 1}
   sellPrice: 20
   quantity: {x: 10, y: 20}
-  waitProduceTimer: 3
-  producePerTime: {x: 1, y: 3}
-  currentQuantity: 0
+  waitProduceTimer: 15
+  producePerTime: {x: 1, y: 2}
 --- !u!114 &-8601353935555690750
 MonoBehaviour:
   m_ObjectHideFlags: 0

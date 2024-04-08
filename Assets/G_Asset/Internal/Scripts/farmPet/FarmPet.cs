@@ -83,7 +83,6 @@ public class FarmPet : Food
     }
     public void Produce()
     {
-        Debug.Log(isEndGrowing);
         if (isEndGrowing && currentQuantity > 0)
         {
             currentWaitProduceTimer = Mathf.Min(currentWaitProduceTimer + Time.deltaTime, waitProduceTimer);

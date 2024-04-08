@@ -114,7 +114,7 @@ public class NestController : MonoBehaviour
         }
         BuyFarmPetItem buyPet = currentNest.GetBuyPet();
         buyPetImg.sprite = buyPet.img;
-        growingTimeTxt.text = "Thời gian lớn: " + buyPet.GetTotalGrowingTime();
+        growingTimeTxt.text = "Thời gian lớn: " + buyPet.GetTotalGrowingTime() + "s";
         buyPriceTxt.text = "Mua " + buyPet.price.ToString();
 
         collectImg.sprite = currentNest.collectSprite;
