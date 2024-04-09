@@ -9,11 +9,11 @@ public class UseFood : Use_Item
     [SerializeField] private float duractionEffectTimer = 0f;
 
 
-    public override void UseItem()
+    public override void UseItem(InventoryItem inventoryItem)
     {
-        if (TryGetComponent<Item>(out var item))
+        if (inventoryItem != null)
         {
-            FoodController.instance.UseFoodItem(item.GetName(), value, plusDuration, duractionEffectTimer);
+            FoodController.instance.UseFoodItem(inventoryItem, value, plusDuration, duractionEffectTimer);
         }
     }
 

@@ -77,6 +77,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     }
     public int Add(int v)
     {
+        int returnValue = v;
         if (item != null)
         {
             int max = item.GetMaxQuantity();
@@ -84,34 +85,37 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
             if (next > max)
             {
                 currentQuantity = max;
-                return next - max;
+                returnValue = next - max;
             }
             else
             {
                 currentQuantity = next;
-                return 0;
+                returnValue = 0;
             }
         }
-        return v;
+        InventoryController.instance.ReloadQuantityItem();
+        return returnValue;
     }
 
     public int Minus(int v)
     {
+        int returnValue = v;
         if (item != null)
         {
             int next = currentQuantity - v;
             if (next < 0)
             {
                 currentQuantity = 0;
-                return next * -1;
+                returnValue = next * -1;
             }
             else
             {
                 currentQuantity = next;
-                return 0;
+                returnValue = 0;
             }
         }
-        return v;
+        InventoryController.instance.ReloadQuantityItem();
+        return returnValue;
     }
     public void CheckQuantity()
     {
@@ -175,7 +179,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, 
     {
         if (item != null && isInventory && item.TryGetComponent<Use_Item>(out var useItem))
         {
-            useItem.UseItem();
+            useItem.UseItem(this);
         }
     }
 

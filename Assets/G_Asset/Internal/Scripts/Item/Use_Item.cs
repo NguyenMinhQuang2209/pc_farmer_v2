@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Use_Item : MonoBehaviour
 {
-    public virtual void UseItem()
+    public virtual void UseItem(InventoryItem item = null)
     {
 
     }

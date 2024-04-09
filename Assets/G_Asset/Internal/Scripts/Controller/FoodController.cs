@@ -16,9 +16,10 @@ public class FoodController : MonoBehaviour
         }
         instance = this;
     }
-    public void UseFoodItem(ItemName itemName, float v, float plusTime, float duration)
+    public void UseFoodItem(InventoryItem item, float v, float plusTime, float duration)
     {
-        InventoryController.instance.RemoveItem(itemName.ToString(), 1);
+        item.Minus(1);
+        item.CheckQuantity();
         if (playerHealth == null)
         {
             Transform player = PreferenceController.instance.GetPlayer();
