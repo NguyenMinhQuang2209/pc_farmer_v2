@@ -18,7 +18,15 @@ public class MapItem : MonoBehaviour
     }
     public void MovePosition()
     {
-        Debug.Log(item.mapName);
+        if (item.spawnPosition != null)
+        {
+            Transform player = PreferenceController.instance.GetPlayer();
+            if (player != null)
+            {
+                player.transform.position = item.spawnPosition.position;
+                CursorController.instance.ChangeCursor("", null);
+            }
+        }
     }
     public void MapItemInit(MapItemInit item)
     {

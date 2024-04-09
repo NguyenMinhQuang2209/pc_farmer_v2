@@ -11,8 +11,10 @@ public class MapController : MonoBehaviour
     public Scrollbar map_slider;
     public float defaultMapValue = 0f;
     public MapItem mapItem;
+    public int defaultIndex = 0;
 
     [SerializeField] private List<MapItemInit> mapItems = new();
+    private Dictionary<int, GameObject> storeObjects = new();
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -28,8 +30,11 @@ public class MapController : MonoBehaviour
         SpawnMapItem();
         map_ui_container.SetActive(false);
     }
-    public void InteractWithMap()
+    public void InteractWithMap(int currentIndex)
     {
+        storeObjects[defaultIndex].SetActive(true);
+        defaultIndex = currentIndex;
+        storeObjects[defaultIndex].SetActive(false);
         CursorController.instance.ChangeCursor("Map", new() { map_ui_container });
     }
     public void SpawnMapItem()
@@ -42,7 +47,9 @@ public class MapController : MonoBehaviour
         {
             MapItem tempItem = Instantiate(mapItem, map_content.transform, false);
             tempItem.MapItemInit(mapItems[i]);
+            storeObjects[i] = tempItem.gameObject;
         }
+
         map_slider.value = defaultMapValue;
     }
 }
@@ -65,6 +72,9 @@ public class MapItemInit
                 break;
             case MapMode.Hard:
                 returnValue += "khó";
+                break;
+            case MapMode.Nope:
+                returnValue += "không có";
                 break;
             default:
                 returnValue += "không xác định";

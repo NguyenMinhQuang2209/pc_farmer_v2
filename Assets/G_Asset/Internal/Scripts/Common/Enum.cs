@@ -82,7 +82,8 @@ public enum MapMode
     Easy,
     Medium,
     Hard,
-    Other
+    Other,
+    Nope
 }
 
 public enum WorldItemName
