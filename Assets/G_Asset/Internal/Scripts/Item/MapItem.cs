@@ -8,7 +8,7 @@ public class MapItem : MonoBehaviour
 {
     public TextMeshProUGUI nameTxt;
     public Button clickBtn;
-    private MapItemInit item = null;
+    private CaveInteract item = null;
     private void Start()
     {
         clickBtn.onClick.AddListener(() =>
@@ -28,7 +28,7 @@ public class MapItem : MonoBehaviour
             }
         }
     }
-    public void MapItemInit(MapItemInit item)
+    public void MapItemInit(CaveInteract item)
     {
         this.item = item;
         nameTxt.text = item.mapName + "\n" + "(" + item.GetMode() + ")";

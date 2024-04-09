@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7741946859067539236}
   - component: {fileID: 2484094349267479629}
   - component: {fileID: 2115956692}
+  - component: {fileID: 7923505816198188666}
   m_Layer: 0
   m_Name: nude_character
   m_TagString: Untagged
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_Sprite: {fileID: -860732973, guid: 31d3204774b5e3448a052f2fd7ee3f6a, type: 3}
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 70588825, guid: 577a69f0e9cd86743aefde92efdc3cba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,6 +109,18 @@ Animator:
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2115956692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741946859067539234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d85e0ab03837b1438c83f2007324170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7923505816198188666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

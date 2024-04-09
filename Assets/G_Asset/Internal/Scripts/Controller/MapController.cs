@@ -11,9 +11,9 @@ public class MapController : MonoBehaviour
     public Scrollbar map_slider;
     public float defaultMapValue = 0f;
     public MapItem mapItem;
-    public int defaultIndex = 0;
+    public int previousCaveIndex = 0;
 
-    [SerializeField] private List<MapItemInit> mapItems = new();
+    [SerializeField] private List<CaveInteract> mapItems = new();
     private Dictionary<int, GameObject> storeObjects = new();
     private void Awake()
     {
@@ -30,11 +30,11 @@ public class MapController : MonoBehaviour
         SpawnMapItem();
         map_ui_container.SetActive(false);
     }
-    public void InteractWithMap(int currentIndex)
+    public void InteractWithMap(int index)
     {
-        storeObjects[defaultIndex].SetActive(true);
-        defaultIndex = currentIndex;
-        storeObjects[defaultIndex].SetActive(false);
+        storeObjects[previousCaveIndex].SetActive(true);
+        previousCaveIndex = index;
+        storeObjects[previousCaveIndex].SetActive(false);
         CursorController.instance.ChangeCursor("Map", new() { map_ui_container });
     }
     public void SpawnMapItem()
@@ -48,38 +48,9 @@ public class MapController : MonoBehaviour
             MapItem tempItem = Instantiate(mapItem, map_content.transform, false);
             tempItem.MapItemInit(mapItems[i]);
             storeObjects[i] = tempItem.gameObject;
+            mapItems[i].ChangeCaveIndex(i);
         }
 
         map_slider.value = defaultMapValue;
-    }
-}
-[System.Serializable]
-public class MapItemInit
-{
-    public string mapName;
-    public MapMode mapMode;
-    public Transform spawnPosition;
-    public string GetMode()
-    {
-        string returnValue = "Độ khó: ";
-        switch (mapMode)
-        {
-            case MapMode.Easy:
-                returnValue += "dễ";
-                break;
-            case MapMode.Medium:
-                returnValue += "trung bình";
-                break;
-            case MapMode.Hard:
-                returnValue += "khó";
-                break;
-            case MapMode.Nope:
-                returnValue += "không có";
-                break;
-            default:
-                returnValue += "không xác định";
-                break;
-        }
-        return returnValue;
     }
 }
