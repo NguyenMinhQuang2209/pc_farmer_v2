@@ -48,8 +48,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: e0edc0072350239448ae29d24c8a79d1, type: 3}
   itemName: 1
   itemType: 1
-  maxQuantity: 10
-  price: 20
+  maxQuantity: 20
+  price: 3
   buyRate: 1.2
   showName: "Tr\u1EE9ng"
 --- !u!114 &-9216836400689548515

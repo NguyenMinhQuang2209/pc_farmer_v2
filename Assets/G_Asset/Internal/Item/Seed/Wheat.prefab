@@ -49,7 +49,7 @@ MonoBehaviour:
   itemName: 3
   itemType: 0
   maxQuantity: 5
-  price: 30
+  price: 3
   buyRate: 1.5
   showName: "Th\xF3c gi\u1ED1ng"
 --- !u!114 &6357162283268305912

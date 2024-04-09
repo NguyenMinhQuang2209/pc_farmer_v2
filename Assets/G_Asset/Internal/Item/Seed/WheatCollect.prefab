@@ -49,7 +49,7 @@ MonoBehaviour:
   itemName: 4
   itemType: 1
   maxQuantity: 10
-  price: 30
+  price: 5
   buyRate: 1.5
   showName: "G\u1EA1o"
 --- !u!114 &796687643929452375
@@ -64,6 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a56cb52adba40458b5e2dacd74cdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 15
-  plusDuration: 1
-  duractionEffectTimer: 5
+  value: 5
+  plusDuration: 0
+  duractionEffectTimer: 0

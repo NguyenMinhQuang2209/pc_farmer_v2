@@ -77,6 +77,13 @@ public enum PetName
 {
     Owl,
 }
+public enum MapMode
+{
+    Easy,
+    Medium,
+    Hard,
+    Other
+}
 
 public enum WorldItemName
 {

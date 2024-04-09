@@ -167,19 +167,19 @@ MonoBehaviour:
   petFarmGrows:
   - size: {x: 0.2, y: 0.2, z: 0.2}
     petName: "G\xE0 con"
-    growingTime: 5
+    growingTime: 20
     priceRate: 0.2
   - size: {x: 0.4, y: 0.4, z: 0.4}
     petName: "G\xE0 con"
-    growingTime: 5
+    growingTime: 20
     priceRate: 0.4
   - size: {x: 0.6, y: 0.6, z: 0.6}
     petName: "G\xE0 con"
-    growingTime: 5
+    growingTime: 20
     priceRate: 0.6
   - size: {x: 0.8, y: 0.8, z: 0.8}
     petName: "G\xE0 con"
-    growingTime: 3
+    growingTime: 20
     priceRate: 0.8
   - size: {x: 1, y: 1, z: 1}
     petName: "G\xE0 tr\u01B0\u1EDFng th\xE0nh"
@@ -189,7 +189,7 @@ MonoBehaviour:
   waitTimer: 5
   randomX: {x: -1, y: 1}
   randomY: {x: -1, y: 1}
-  sellPrice: 20
-  quantity: {x: 10, y: 20}
+  sellPrice: 8
+  quantity: {x: 8, y: 15}
   waitProduceTimer: 15
-  producePerTime: {x: 1, y: 2}
+  producePerTime: {x: 1, y: 3}

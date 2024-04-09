@@ -49,7 +49,7 @@ MonoBehaviour:
   itemName: 6
   itemType: 0
   maxQuantity: 5
-  price: 30
+  price: 3
   buyRate: 1.5
   showName: "H\u1EA1t c\xE0 t\xEDm"
 --- !u!114 &6357162283268305912

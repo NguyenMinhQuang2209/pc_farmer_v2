@@ -48,9 +48,9 @@ MonoBehaviour:
   sprite: {fileID: 1093579322, guid: 6f5059c70385a0748b13df77f7ac4cd9, type: 3}
   itemName: 8
   itemType: 1
-  maxQuantity: 5
-  price: 20
-  buyRate: 1.2
+  maxQuantity: 10
+  price: 8
+  buyRate: 1.5
   showName: "S\u1EEFa b\xF2"
 --- !u!114 &-9216836400689548515
 MonoBehaviour:
@@ -64,6 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a56cb52adba40458b5e2dacd74cdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10
+  value: 30
   plusDuration: 0
   duractionEffectTimer: 0
