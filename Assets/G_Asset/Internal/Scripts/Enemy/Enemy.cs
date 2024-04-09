@@ -10,13 +10,14 @@ public class Enemy : Health
 
     [Header("Attack")]
     [SerializeField] private LayerMask attackMask;
-    [SerializeField] private float stopDistance = 0.1f;
+    [SerializeField] private float stopAttackDistance = 0.1f;
     [SerializeField] private float sawDistance = 10f;
 
     [SerializeField] private float stopChasingDistance = 15f;
 
     [Header("Patrol")]
     [SerializeField] private Vector2 wanderX = Vector2.zero;
+    [SerializeField] private float stopDistance = 0.1f;
     [SerializeField] private Vector2 wanderY = Vector2.zero;
     [SerializeField] private float waitTimer = 10f;
 
@@ -24,11 +25,11 @@ public class Enemy : Health
     private Animator animator;
     private State currentState;
 
-    private GameObject target = null;
+    private Health target = null;
     private Vector3 defaultPosition = new();
     [SerializeField] private bool patrolInPosition = false;
 
-    public enum EnemyState
+    public enum StateName
     {
         Patrol,
         Attack,
@@ -60,7 +61,15 @@ public class Enemy : Health
 
     public bool CanSeeTarget()
     {
-
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, sawDistance, attackMask);
+        if (hit != null)
+        {
+            if (hit.gameObject.TryGetComponent<Health>(out var targetObject))
+            {
+                target = targetObject;
+                return true;
+            }
+        }
         return false;
     }
     public float GetWaitTime()
@@ -89,8 +98,28 @@ public class Enemy : Health
     {
         return stopDistance;
     }
+    public float GetStopChasingDistance()
+    {
+        return stopChasingDistance;
+    }
+    public Health GetTarget()
+    {
+        return target;
+    }
     public Animator GetAnimator()
     {
         return animator;
+    }
+    public State SawTargetState()
+    {
+        return new AttackState();
+    }
+    public void StopChasing()
+    {
+        target = null;
+    }
+    public float GetStopAttackDistance()
+    {
+        return stopAttackDistance;
     }
 }

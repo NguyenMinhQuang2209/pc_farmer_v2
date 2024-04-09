@@ -9,6 +9,7 @@ public class PatrolState : State
     NavMeshAgent agent;
     Animator animator;
     Vector3 targetPosition = new();
+
     public override void Enter(Enemy enemy)
     {
         this.enemy = enemy;
@@ -17,7 +18,6 @@ public class PatrolState : State
         agent = enemy.GetAgent();
         stopDistance = enemy.GetStopDistance();
         animator = enemy.GetAnimator();
-
         targetPosition = enemy.GetNewPosition();
         agent.SetDestination(targetPosition);
     }
@@ -29,24 +29,32 @@ public class PatrolState : State
 
     public override void Perform()
     {
-        float speed = 1f;
-        if (agent.remainingDistance <= stopDistance)
+        bool sawPlayer = enemy.CanSeeTarget();
+        if (!sawPlayer)
         {
-            speed = 0f;
-            currentWaitTimer += Time.deltaTime;
-            if (currentWaitTimer >= targetTimer)
+            float speed = 1f;
+            if (agent.remainingDistance <= stopDistance)
             {
-                currentWaitTimer = 0f;
-                targetPosition = enemy.GetNewPosition();
-                agent.SetDestination(targetPosition);
+                speed = 0f;
+                currentWaitTimer += Time.deltaTime;
+                if (currentWaitTimer >= targetTimer)
+                {
+                    currentWaitTimer = 0f;
+                    targetPosition = enemy.GetNewPosition();
+                    agent.SetDestination(targetPosition);
+                }
             }
+            else
+            {
+                float x = targetPosition.x - enemy.transform.position.x;
+                float yAxis = x < 0 ? 180f : 0f;
+                enemy.transform.rotation = Quaternion.Euler(new(0f, yAxis, 0f));
+            }
+            animator.SetFloat("Speed", speed);
         }
         else
         {
-            float x = targetPosition.x - enemy.transform.position.x;
-            float yAxis = x < 0 ? 180f : 0f;
-            enemy.transform.rotation = Quaternion.Euler(new(0f, yAxis, 0f));
+            enemy.ChangeState(enemy.SawTargetState());
         }
-        animator.SetFloat("Speed", speed);
     }
 }
