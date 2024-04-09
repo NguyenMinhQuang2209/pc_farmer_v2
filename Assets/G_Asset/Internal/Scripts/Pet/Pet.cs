@@ -138,6 +138,7 @@ public class Pet : Health
     {
         //agent.isStopped = true;
         watchPosition = transform.position;
+        target = transform.position;
         rb.velocity = new(0f, 0f);
         enemy = null;
         petMode = newMode;
