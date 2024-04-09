@@ -840,7 +840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 132139169}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: tool_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2863,7 +2863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 348666710}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: check_pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56177,7 +56177,7 @@ GameObject:
   - component: {fileID: 746634294}
   - component: {fileID: 746634296}
   - component: {fileID: 746634295}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: interact_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57912,7 +57912,7 @@ GameObject:
   m_Component:
   - component: {fileID: 869163339}
   - component: {fileID: 869163340}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60131,7 +60131,7 @@ GameObject:
   - component: {fileID: 1114335504}
   - component: {fileID: 1114335505}
   - component: {fileID: 1114335506}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -60654,7 +60654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1126764065}
   - component: {fileID: 1126764066}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69568,7 +69568,7 @@ GameObject:
   - component: {fileID: 1595167841}
   - component: {fileID: 1595167843}
   - component: {fileID: 1595167842}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70450,7 +70450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1695274261}
   - component: {fileID: 1695274262}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sailing-boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88100,7 +88100,7 @@ GameObject:
   - component: {fileID: 1848964964}
   - component: {fileID: 1848964963}
   - component: {fileID: 1848964962}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95117,7 +95117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2048721538}
   - component: {fileID: 2048721539}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96404,6 +96404,83 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 870e5a136f8fe214eae0fde96d6e2631, type: 3}
+--- !u!1001 &5575940332788517185
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_RootOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.030085042
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.9987445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924203896988295597, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498071015487356095, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: m_Name
+      value: Enemy_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575940332788517187, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: wanderX.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575940332788517187, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: wanderX.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575940332788517187, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: wanderY.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575940332788517187, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: wanderY.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575940332788517187, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
+      propertyPath: patrolInPosition
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98d637fff2388ab4bb85793b524d5e63, type: 3}
 --- !u!1001 &6104274036940672052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96600,6 +96677,10 @@ PrefabInstance:
     - target: {fileID: 7741946859067539234, guid: 193b9d13ace9af64a8eca54ba42adc2a, type: 3}
       propertyPath: m_Name
       value: nude_character
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741946859067539234, guid: 193b9d13ace9af64a8eca54ba42adc2a, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7741946859067539235, guid: 193b9d13ace9af64a8eca54ba42adc2a, type: 3}
       propertyPath: m_RootOrder

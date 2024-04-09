@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 41777828}
   - component: {fileID: 41777829}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564148490}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: shoot_place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 107476286}
   - component: {fileID: 107476291}
   - component: {fileID: 8797285015953835715}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Owl
   m_TagString: Pet
   m_Icon: {fileID: 0}
@@ -267,6 +267,7 @@ MonoBehaviour:
   recoverHealthDefault: 1
   recoverHealthRate: 1
   waitToRecoverTimer: 2
+  petName: 0
   moveSpeed: 0.1
   runSpeed: 0.2
   stopDistance: 0.1
