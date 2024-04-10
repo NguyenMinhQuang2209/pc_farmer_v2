@@ -296,9 +296,10 @@ MonoBehaviour:
   maxHealth: 100
   plusHealthRate: 1
   currentHealth: 0
-  recoverHealthDefault: 1
+  recoverHealthDefaultRate: 1
   recoverHealthRate: 1
   waitToRecoverTimer: 2
+  timeBwtPerRecover: 0.4
   petName: 0
   moveSpeed: 0.1
   runSpeed: 0.2
@@ -315,7 +316,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hasFarAttack: 1
-  useFarAttackInDefault: 1
+  useFarAttackInDefault: 0
   farAttackDistance: 0.5
   farAttackIndex: {x: 2, y: 2}
   bullet: {fileID: 4947400914834318588, guid: 65784c2bb91b66c4f8313621f3b655fb, type: 3}
@@ -334,6 +335,15 @@ MonoBehaviour:
   firstExe: 10
   nextLevelRate: 1.2
   mainSprite: {fileID: 21300000, guid: ffab8c588138ad64f8c460086975e203, type: 3}
+  levelsUpgradeList:
+    timer: 5
+    pos: -1
+    increasePriceRate: 2
+    items:
+    - price: 10
+      upgrades:
+      - upgradeName: 0
+        updateValue: 1
   levels:
   - price: 20
     upgrades:

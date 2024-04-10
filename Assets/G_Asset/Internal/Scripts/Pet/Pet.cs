@@ -77,6 +77,8 @@ public class Pet : Health
     [SerializeField] private float nextLevelRate = 1.2f;
     public Sprite mainSprite;
 
+    [Tooltip("For upgrade list instead of add by hand")]
+    [SerializeField] private Pet_Level_Item_List levelsUpgradeList = new();
     [SerializeField] private List<Pet_Level_Item> levels = new();
     int current = 0;
 
@@ -122,6 +124,43 @@ public class Pet : Health
 
         farAttack = hasFarAttack && useFarAttackInDefault;
         nearAttack = hasNearAttack && useNearAttackInDefault;
+
+
+        List<Pet_Level_Item> addList = new();
+
+        if (levelsUpgradeList != null)
+        {
+            Pet_Level_Item_List currentItem = levelsUpgradeList;
+            List<Pet_Level_Item> tempList = currentItem.items;
+            for (int i = 1; i <= currentItem.timer; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++)
+                {
+                    Pet_Level_Item currentLevelItem = tempList[j];
+                    currentLevelItem.price = (int)Mathf.Ceil(currentLevelItem.price * currentItem.increasePriceRate * i);
+                    addList.Add(currentLevelItem);
+                }
+            }
+            int pos = currentItem.pos;
+            if (pos >= levels.Count)
+            {
+                pos = -1;
+            }
+            if (pos < 0)
+            {
+                pos = -1;
+            }
+            if (pos == -1)
+            {
+                levels.AddRange(addList);
+            }
+            else
+            {
+                levels.InsertRange(pos, addList);
+            }
+        }
+
+
     }
     private void Update()
     {
@@ -749,6 +788,15 @@ public class Pet_Level_Item
 {
     public int price = 1;
     public List<Pet_Level_Item_Upgrade> upgrades = new();
+}
+[System.Serializable]
+public class Pet_Level_Item_List
+{
+    [Tooltip("-1 for last and the other for position")]
+    public int timer = 1;
+    public int pos = -1;
+    public float increasePriceRate = 1f;
+    public List<Pet_Level_Item> items = new();
 }
 [System.Serializable]
 public class Pet_Level_Item_Upgrade
