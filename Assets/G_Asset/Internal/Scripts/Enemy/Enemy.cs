@@ -28,6 +28,13 @@ public class Enemy : Health
     private Health target = null;
     private Vector3 defaultPosition = new();
     [SerializeField] private bool patrolInPosition = false;
+    [Header("Run away state")]
+    [SerializeField] private bool useRunAway = false;
+
+    [SerializeField][Range(0f, 1f)] private float runAwayHealthRate = 0f;
+    [SerializeField] private float runAwayTimer = 10f;
+
+    [SerializeField] private string currentStateName = "";
 
     public enum StateName
     {
@@ -47,16 +54,23 @@ public class Enemy : Health
         currentState = new PatrolState();
         currentState.Enter(this);
         defaultPosition = transform.position;
+        currentStateName = "Patrol";
     }
     private void Update()
     {
         currentState.Perform();
+        RecoverHealthInit();
     }
-    public void ChangeState(State newState)
+    public void ChangeState(State newState, string newStateName)
     {
+        currentStateName = newStateName;
         currentState.Exit();
         currentState = newState;
         currentState.Enter(this);
+    }
+    public override void Dealth()
+    {
+        animator.SetTrigger("Dead");
     }
 
     public bool CanSeeTarget()
@@ -64,9 +78,8 @@ public class Enemy : Health
         Collider2D hit = Physics2D.OverlapCircle(transform.position, sawDistance, attackMask);
         if (hit != null)
         {
-            if (hit.gameObject.TryGetComponent<Health>(out var targetObject))
+            if (hit.gameObject.TryGetComponent<Health>(out target))
             {
-                target = targetObject;
                 return true;
             }
         }
@@ -121,5 +134,14 @@ public class Enemy : Health
     public float GetStopAttackDistance()
     {
         return stopAttackDistance;
+    }
+    public bool RunAway()
+    {
+        float healthRate = GetCurrentHealth() / GetMaxHealth();
+        return useRunAway && healthRate <= runAwayHealthRate;
+    }
+    public float RunAwayTimer()
+    {
+        return runAwayTimer;
     }
 }

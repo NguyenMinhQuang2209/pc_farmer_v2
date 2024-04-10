@@ -54,7 +54,7 @@ public class PatrolState : State
         }
         else
         {
-            enemy.ChangeState(enemy.SawTargetState());
+            enemy.ChangeState(enemy.SawTargetState(), "Attack");
         }
     }
 }

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 9192583578441997830}
   - component: {fileID: -4842878356161417363}
   - component: {fileID: 5575940332788517188}
-  - component: {fileID: 5575940332788517187}
   - component: {fileID: 5575940332788517189}
+  - component: {fileID: 5575940332788517187}
   m_Layer: 8
   m_Name: Enemy_0
   m_TagString: Untagged
@@ -125,36 +125,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.035117336, y: 0.035117008}
   m_Size: {x: 0.6287591, y: 0.6287593}
   m_Direction: 0
---- !u!114 &5575940332788517187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5498071015487356095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef40e20f1d57e4041ad047ab8201a767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  plusHealthRate: 1
-  currentHealth: 0
-  recoverHealthDefault: 1
-  recoverHealthRate: 1
-  waitToRecoverTimer: 2
-  moveSpeed: 0.1
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 6144
-  stopAttackDistance: 0.1
-  sawDistance: 1
-  stopChasingDistance: 1.2
-  wanderX: {x: -1, y: 1}
-  stopDistance: 0.1
-  wanderY: {x: -1, y: 1}
-  waitTimer: 10
-  patrolInPosition: 1
 --- !u!195 &5575940332788517189
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -177,3 +147,37 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5575940332788517187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498071015487356095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef40e20f1d57e4041ad047ab8201a767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  plusHealthRate: 1
+  currentHealth: 0
+  recoverHealthDefault: 0.1
+  recoverHealthRate: 0.1
+  waitToRecoverTimer: 15
+  moveSpeed: 0.1
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 6144
+  stopAttackDistance: 0.1
+  sawDistance: 1
+  stopChasingDistance: 1.2
+  wanderX: {x: -1, y: 1}
+  stopDistance: 0.1
+  wanderY: {x: -1, y: 1}
+  waitTimer: 10
+  patrolInPosition: 1
+  useRunAway: 1
+  runAwayHealthRate: 0.3
+  runAwayTimer: 10
+  currentStateName: 
