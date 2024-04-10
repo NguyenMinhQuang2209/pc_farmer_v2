@@ -208,9 +208,12 @@ public class Enemy : Health
     }
     public override void TakeDamage(float damage, GameObject targetObject)
     {
-        if (targetObject.TryGetComponent<Health>(out target))
+        if (target == null)
         {
+            if (targetObject.TryGetComponent<Health>(out target))
+            {
 
+            }
         }
         TakeDamage(damage);
     }

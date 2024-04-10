@@ -330,6 +330,11 @@ public class Pet : Health
                         rb.velocity = new(0f, 0f);
                         isStop = true;
                     }
+                    else
+                    {
+                        Vector2 targetDir = enemy.position - transform.position;
+                        rb.velocity = targetDir * runSpeed;
+                    }
                 }
                 else
                 {
@@ -388,7 +393,7 @@ public class Pet : Health
             {
                 if (hit.gameObject.TryGetComponent<Health>(out var health))
                 {
-                    health.TakeDamage(GetNearDamage());
+                    health.TakeDamage(GetNearDamage(), gameObject);
                 }
             }
         }

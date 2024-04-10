@@ -12,14 +12,19 @@ public abstract class Health : MonoBehaviour
     bool isDealth = false;
 
     [Header("Recover config")]
-    [SerializeField] protected float recoverHealthDefault = 1f;
+    [SerializeField] protected float recoverHealthDefaultRate = 1f;
     [SerializeField] protected float recoverHealthRate = 1f;
     [SerializeField] protected float waitToRecoverTimer = 2f;
     float currentRecoverTimer = 0f;
 
+
+    [SerializeField] protected float timeBwtPerRecover = 0.4f;
+    float currentTimeBwtPerRecover = 0f;
+
     public void HealthInit()
     {
         currentHealth = maxHealth + plusHealth;
+        currentTimeBwtPerRecover = timeBwtPerRecover;
     }
 
     public virtual void TakeDamage(float damage)
@@ -28,8 +33,9 @@ public abstract class Health : MonoBehaviour
         {
             return;
         }
-        currentRecoverTimer = 0f;
+        ResetTime();
         currentHealth = Mathf.Max(0, currentHealth - damage);
+        ShowUIWorldController.instance.ShowWorldDamageTextItem(transform.position, damage.ToString());
         if (currentHealth == 0)
         {
             Dealth();
@@ -42,14 +48,22 @@ public abstract class Health : MonoBehaviour
 
     public virtual void RecoverHealthInit()
     {
+        if (isDealth)
+        {
+            return;
+        }
         if (currentHealth < GetMaxHealth())
         {
             currentRecoverTimer += Time.deltaTime;
             if (currentRecoverTimer >= waitToRecoverTimer)
             {
-                currentRecoverTimer = waitToRecoverTimer;
-                float hp = GetRecoverRate() * Time.deltaTime;
-                RecoverHealth(hp);
+                currentTimeBwtPerRecover += Time.deltaTime;
+                if (currentTimeBwtPerRecover >= timeBwtPerRecover)
+                {
+                    currentTimeBwtPerRecover = 0f;
+                    float hp = GetRecoverRate() * Time.deltaTime;
+                    RecoverHealth(hp);
+                }
             }
         }
     }
@@ -88,6 +102,6 @@ public abstract class Health : MonoBehaviour
 
     public float GetRecoverRate()
     {
-        return recoverHealthDefault + plusRecoverHealth * recoverHealthRate;
+        return recoverHealthDefaultRate + plusRecoverHealth * recoverHealthRate;
     }
 }
