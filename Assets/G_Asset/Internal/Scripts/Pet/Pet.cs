@@ -89,6 +89,11 @@ public class Pet : Health
     float plusFoodReduceTimer = 0f;
     float currentFoodReduce = 0f;
 
+
+    [Header("Attack State")]
+    [SerializeField] private Transform attackPos;
+    [SerializeField] private float attackRadious = 0.2f;
+
     private void Start()
     {
         /*agent = GetComponent<NavMeshAgent>();
@@ -365,6 +370,26 @@ public class Pet : Health
             if (!nearAttack)
             {
                 Shoot();
+            }
+            else
+            {
+                PetAttack();
+            }
+        }
+    }
+
+    public void PetAttack()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos.position, attackRadious, enemyMask);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Collider2D hit = hits[i];
+            if (hit.gameObject != gameObject)
+            {
+                if (hit.gameObject.TryGetComponent<Health>(out var health))
+                {
+                    health.TakeDamage(GetNearDamage());
+                }
             }
         }
     }
@@ -702,6 +727,15 @@ public class Pet : Health
     {
         Bullet tempBullet = Instantiate(bullet, bullet_shoot.transform.position, Quaternion.identity);
         tempBullet.BulletInit(transform, bullet_shoot.up, bulletSpeed, GetFarDamage(), bulletDelayDieTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (attackPos != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(attackPos.position, attackRadious);
+        }
     }
 
 }

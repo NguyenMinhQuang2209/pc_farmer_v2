@@ -12,7 +12,10 @@ public class Enemy : Health
     [SerializeField] private LayerMask attackMask;
     [SerializeField] private float stopAttackDistance = 0.1f;
     [SerializeField] private float sawDistance = 10f;
-
+    [SerializeField] private Transform attackPos;
+    [SerializeField] private float attackRadious = 0.1f;
+    [SerializeField] private float timeBwtAttack = 1f;
+    [SerializeField] private float attackDamage = 1f;
     [SerializeField] private float stopChasingDistance = 15f;
 
     [Header("Patrol")]
@@ -143,5 +146,36 @@ public class Enemy : Health
     public float RunAwayTimer()
     {
         return runAwayTimer;
+    }
+    public override void TakeDamage(float damage)
+    {
+        animator.SetTrigger("Hit");
+        base.TakeDamage(damage);
+    }
+    public float GetTimeBwtAttack()
+    {
+        return timeBwtAttack;
+    }
+    public void Attack()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos.position, attackRadious, attackMask);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Collider2D hit = hits[i];
+            if (hit.gameObject != gameObject)
+            {
+                if (hit.gameObject.TryGetComponent<Health>(out var health))
+                {
+                    health.TakeDamage(attackDamage);
+                }
+            }
+        }
+    }
+    public void OnDrawGizmos()
+    {
+        if (attackPos != null)
+        {
+            Gizmos.DrawWireSphere(attackPos.position, attackRadious);
+        }
     }
 }

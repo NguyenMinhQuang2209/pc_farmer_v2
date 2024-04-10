@@ -7,6 +7,8 @@ public class AttackState : State
     Health target = null;
     NavMeshAgent agent = null;
     float stopAttackDistance = 0f;
+    float timeBwtAttack = 0f;
+    float currentTimeBwtAttack = 0f;
     Animator animator = null;
     public override void Enter(Enemy enemy)
     {
@@ -16,6 +18,8 @@ public class AttackState : State
         agent = enemy.GetAgent();
         stopAttackDistance = enemy.GetStopAttackDistance();
         animator = enemy.GetAnimator();
+        timeBwtAttack = enemy.GetTimeBwtAttack();
+        currentTimeBwtAttack = 0f;
     }
 
     public override void Exit()
@@ -29,6 +33,7 @@ public class AttackState : State
         if (!runAway)
         {
             float distance = Vector2.Distance(enemy.transform.position, target.transform.position);
+            currentTimeBwtAttack += Time.deltaTime;
             if (distance > stopChasingDistance)
             {
                 agent.isStopped = true;
@@ -48,6 +53,11 @@ public class AttackState : State
                     agent.SetDestination(enemy.transform.position);
                     agent.isStopped = false;
                     speed = 0f;
+                    if (currentTimeBwtAttack >= timeBwtAttack)
+                    {
+                        currentTimeBwtAttack = 0f;
+                        enemy.Attack();
+                    }
                 }
                 else
                 {
