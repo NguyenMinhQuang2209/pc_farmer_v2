@@ -700,7 +700,7 @@ public class Pet : Health
 
     public int GetNextPrice()
     {
-        return levels[current].price;
+        return current < levels.Count ? levels[current].price : 0;
     }
 
     public void LoadUpgradeDetail()

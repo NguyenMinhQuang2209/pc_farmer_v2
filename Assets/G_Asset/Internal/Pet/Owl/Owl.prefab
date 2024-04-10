@@ -328,7 +328,7 @@ MonoBehaviour:
   wanderYAxis: {x: -1, y: 1}
   pet_name: "V\u1EB9t"
   maxFood: 100
-  near_damage: 3
+  near_damage: 5
   far_damage: 0
   timeBwtAttack: 3
   recoverHealthPricePerUnit: 1

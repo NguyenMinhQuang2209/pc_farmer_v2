@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -2699394885709506593}
   - component: {fileID: 8221290388237518154}
   - component: {fileID: -7662001341397251986}
+  - component: {fileID: -1881582683412146503}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Store
@@ -209,3 +210,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 1
+--- !u!114 &-1881582683412146503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783608732608815644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf0f5cbf3ddea5479571620eaeeea14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptMessage: "H\xE0ng r\xE0o"
+  useTrigger: 0
+  canDestroy: 1
+  interact_name: 

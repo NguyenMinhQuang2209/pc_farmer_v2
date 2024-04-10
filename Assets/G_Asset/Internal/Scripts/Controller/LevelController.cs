@@ -198,7 +198,7 @@ public class LevelController : MonoBehaviour
     {
         currentExe += v;
         Transform player = PreferenceController.instance.GetPlayer();
-        ShowUIWorldController.instance.ShowWorldTextItem(player.position, v.ToString(), new(1.0f, 0.5f, 0.0f));
+        ShowUIWorldController.instance.ShowWorldTextItem(player.position, "+" + v.ToString(), new(1.0f, 0.5f, 0.0f));
         if (currentExe >= targetExe)
         {
             currentLevel++;

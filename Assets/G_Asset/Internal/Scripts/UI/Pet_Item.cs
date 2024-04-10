@@ -43,7 +43,7 @@ public class Pet_Item : MonoBehaviour
     public void AddExe(float v)
     {
         currentPet.AddExe(v);
-        ShowUIWorldController.instance.ShowWorldTextItem(currentPet.transform.position, v.ToString(), new(1.0f, 0.5f, 0.0f));
+        ShowUIWorldController.instance.ShowWorldTextItem(currentPet.transform.position, "+" + v.ToString(), new(1.0f, 0.5f, 0.0f));
     }
 
     private void Update()
