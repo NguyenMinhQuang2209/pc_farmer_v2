@@ -315,7 +315,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hasFarAttack: 1
-  useFarAttackInDefault: 0
+  useFarAttackInDefault: 1
   farAttackDistance: 0.5
   farAttackIndex: {x: 2, y: 2}
   bullet: {fileID: 4947400914834318588, guid: 65784c2bb91b66c4f8313621f3b655fb, type: 3}

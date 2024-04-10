@@ -6,9 +6,9 @@ public class Bullet : MonoBehaviour
 {
     private Transform parent;
     private Rigidbody2D rb;
-    private int damage = 0;
+    private float damage = 0;
 
-    public void BulletInit(Transform parent, Vector2 dir, float speed, int damage, float bulletDelayDieTime)
+    public void BulletInit(Transform parent, Vector2 dir, float speed, float damage, float bulletDelayDieTime)
     {
         rb = GetComponent<Rigidbody2D>();
         this.damage = damage;

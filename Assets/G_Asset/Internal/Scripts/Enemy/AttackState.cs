@@ -6,20 +6,29 @@ public class AttackState : State
     float stopChasingDistance = 0f;
     Health target = null;
     NavMeshAgent agent = null;
-    float stopAttackDistance = 0f;
-    float timeBwtAttack = 0f;
+    float nearStopAttackDistance = 0f;
+    float farAttackDistance = 0f;
+    float farTimeBwtAttack = 0f;
+    float nearTimeBwtAttack = 0f;
     float currentTimeBwtAttack = 0f;
     Animator animator = null;
+
+    bool nearAttack = false;
+    bool farAttack = false;
     public override void Enter(Enemy enemy)
     {
         this.enemy = enemy;
         stopChasingDistance = enemy.GetStopChasingDistance();
         target = enemy.GetTarget();
         agent = enemy.GetAgent();
-        stopAttackDistance = enemy.GetStopAttackDistance();
+        nearStopAttackDistance = enemy.GetNearStopAttackDistance();
         animator = enemy.GetAnimator();
-        timeBwtAttack = enemy.GetTimeBwtAttack();
+        nearTimeBwtAttack = enemy.GetNearTimeBwtAttack();
+        farTimeBwtAttack = enemy.GetTimeBwtAttackFarAttack();
+        farAttackDistance = enemy.GetFarAttackDistance();
         currentTimeBwtAttack = 0f;
+        nearAttack = enemy.UseNearAttack();
+        farAttack = enemy.UseFarAttack();
     }
 
     public override void Exit()
@@ -29,6 +38,11 @@ public class AttackState : State
 
     public override void Perform()
     {
+        if (!farAttack && !nearAttack)
+        {
+            enemy.ChangeState(new RunAwayState(), "RunAway");
+            return;
+        }
         bool runAway = enemy.RunAway();
         if (!runAway)
         {
@@ -47,21 +61,46 @@ public class AttackState : State
                 float x = target.transform.position.x - enemy.transform.position.x;
                 float yAxis = x < 0 ? 180f : 0f;
                 enemy.transform.rotation = Quaternion.Euler(new(0f, yAxis, 0f));
-                if (distance <= stopAttackDistance)
+                if (distance <= nearStopAttackDistance)
                 {
-                    agent.isStopped = true;
-                    agent.SetDestination(enemy.transform.position);
-                    agent.isStopped = false;
-                    speed = 0f;
-                    if (currentTimeBwtAttack >= timeBwtAttack)
+                    if (nearAttack)
                     {
-                        currentTimeBwtAttack = 0f;
-                        enemy.Attack();
+                        agent.isStopped = true;
+                        agent.SetDestination(enemy.transform.position);
+                        agent.isStopped = false;
+                        speed = 0f;
+                        if (currentTimeBwtAttack >= nearTimeBwtAttack)
+                        {
+                            currentTimeBwtAttack = 0f;
+                            enemy.Attack();
+                        }
                     }
                 }
                 else
                 {
-                    agent.SetDestination(target.transform.position);
+                    if (farAttack)
+                    {
+                        if (distance <= farAttackDistance)
+                        {
+                            agent.isStopped = true;
+                            agent.SetDestination(enemy.transform.position);
+                            agent.isStopped = false;
+                            speed = 0f;
+                            if (currentTimeBwtAttack >= farTimeBwtAttack)
+                            {
+                                currentTimeBwtAttack = 0f;
+                                enemy.FarAttack();
+                            }
+                        }
+                        else
+                        {
+                            agent.SetDestination(target.transform.position);
+                        }
+                    }
+                    else
+                    {
+                        agent.SetDestination(target.transform.position);
+                    }
                 }
                 animator.SetFloat("Speed", speed);
             }

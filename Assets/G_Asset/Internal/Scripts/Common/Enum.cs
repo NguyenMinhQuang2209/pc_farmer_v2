@@ -85,7 +85,6 @@ public enum MapMode
     Other,
     Nope
 }
-
 public enum WorldItemName
 {
     Chest,

@@ -64,10 +64,10 @@ public class Pet : Health
     [SerializeField] private float maxFood = 100f;
     int plusFood = 0;
     float currentFood = 0f;
-    [SerializeField] private int near_damage = 1;
-    int plusNearDamage = 0;
-    [SerializeField] private int far_damage = 1;
-    int plusFarDamage = 0;
+    [SerializeField] private float near_damage = 1;
+    float plusNearDamage = 0;
+    [SerializeField] private float far_damage = 1;
+    float plusFarDamage = 0;
     [SerializeField] private float timeBwtAttack = 1f;
     float plusTimeBwtAttack = 0f;
 
@@ -516,11 +516,11 @@ public class Pet : Health
     {
         return recoverHealthPricePerUnit * v;
     }
-    public int GetNearDamage()
+    public float GetNearDamage()
     {
         return near_damage + plusNearDamage;
     }
-    public int GetFarDamage()
+    public float GetFarDamage()
     {
         return far_damage + plusFarDamage;
     }
