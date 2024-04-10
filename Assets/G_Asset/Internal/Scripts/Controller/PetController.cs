@@ -141,8 +141,11 @@ public class PetController : MonoBehaviour
     }
     public void UpgradePet()
     {
-        current_pet.Upgrade();
-        ChoosePet(current_pet, choosePetIndex);
+        if (CoinController.instance.IsEnoughAndMinus(current_pet.GetNextPrice()))
+        {
+            current_pet.Upgrade();
+            ChoosePet(current_pet, choosePetIndex);
+        }
     }
 
     public void ChangetPetMode(PetMode mode)

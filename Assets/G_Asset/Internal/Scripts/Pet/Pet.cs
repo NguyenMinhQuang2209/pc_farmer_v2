@@ -137,8 +137,9 @@ public class Pet : Health
                 for (int j = 0; j < tempList.Count; j++)
                 {
                     Pet_Level_Item currentLevelItem = tempList[j];
-                    currentLevelItem.price = (int)Mathf.Ceil(currentLevelItem.price * currentItem.increasePriceRate * i);
-                    addList.Add(currentLevelItem);
+                    int nextPrice = (int)Mathf.Ceil(currentLevelItem.price * currentItem.increasePriceRate * i);
+                    Pet_Level_Item tempItem = currentLevelItem.Clone(nextPrice);
+                    addList.Add(tempItem);
                 }
             }
             int pos = currentItem.pos;
@@ -788,6 +789,16 @@ public class Pet_Level_Item
 {
     public int price = 1;
     public List<Pet_Level_Item_Upgrade> upgrades = new();
+    public Pet_Level_Item(int price, List<Pet_Level_Item_Upgrade> upgrades)
+    {
+        this.upgrades = upgrades;
+        this.price = price;
+    }
+
+    public Pet_Level_Item Clone(int newPrice)
+    {
+        return new(newPrice, upgrades);
+    }
 }
 [System.Serializable]
 public class Pet_Level_Item_List

@@ -319,7 +319,7 @@ MonoBehaviour:
   useFarAttackInDefault: 0
   farAttackDistance: 0.5
   farAttackIndex: {x: 2, y: 2}
-  bullet: {fileID: 4947400914834318588, guid: 65784c2bb91b66c4f8313621f3b655fb, type: 3}
+  bullet: {fileID: 4947400914834318588, guid: f3ced9dea9139cb408546d0dfe9fb500, type: 3}
   bulletSpeed: 0.9
   bulletDelayDieTime: 0.7
   bullet_shoot: {fileID: 564148490}
@@ -328,7 +328,7 @@ MonoBehaviour:
   wanderYAxis: {x: -1, y: 1}
   pet_name: "V\u1EB9t"
   maxFood: 100
-  near_damage: 1
+  near_damage: 3
   far_damage: 0
   timeBwtAttack: 3
   recoverHealthPricePerUnit: 1
@@ -336,14 +336,28 @@ MonoBehaviour:
   nextLevelRate: 1.2
   mainSprite: {fileID: 21300000, guid: ffab8c588138ad64f8c460086975e203, type: 3}
   levelsUpgradeList:
-    timer: 5
+    timer: 2
     pos: -1
-    increasePriceRate: 2
+    increasePriceRate: 1.2
     items:
     - price: 10
       upgrades:
       - upgradeName: 0
         updateValue: 1
+      - upgradeName: 2
+        updateValue: 10
+    - price: 20
+      upgrades:
+      - upgradeName: 0
+        updateValue: 1
+      - upgradeName: 3
+        updateValue: 10
+    - price: 50
+      upgrades:
+      - upgradeName: 5
+        updateValue: 1
+      - upgradeName: 3
+        updateValue: 10
   levels:
   - price: 20
     upgrades:

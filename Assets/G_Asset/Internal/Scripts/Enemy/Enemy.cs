@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class Enemy : Health
 
     [Header("Default")]
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float totalExe = 100f;
 
 
     [Header("Patrol")]
@@ -104,7 +106,10 @@ public class Enemy : Health
     {
         animator.SetTrigger("Dead");
     }
-
+    public float GetExe(float damage)
+    {
+        return damage * totalExe / GetMaxHealth();
+    }
     public bool CanSeeTarget()
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, sawDistance, attackMask);
@@ -208,11 +213,23 @@ public class Enemy : Health
     }
     public override void TakeDamage(float damage, GameObject targetObject)
     {
+        int layer = targetObject.layer;
+        bool isObjectInLayer = ((1 << layer) & attackMask) != 0;
         if (target == null)
         {
-            if (targetObject.TryGetComponent<Health>(out target))
+            if (isObjectInLayer)
             {
-
+                if (targetObject.TryGetComponent<Health>(out target))
+                {
+                    LevelController.instance.AddExeTotal(GetExe(damage));
+                }
+            }
+        }
+        else
+        {
+            if (isObjectInLayer)
+            {
+                LevelController.instance.AddExeTotal(GetExe(damage));
             }
         }
         TakeDamage(damage);
